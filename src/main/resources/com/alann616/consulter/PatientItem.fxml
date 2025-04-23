@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<HBox id="boxPatientItem" fx:id="boxPatientItem" spacing="15.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <StackPane id="avatar" fx:id="avatar" prefHeight="0.0" prefWidth="0.0">
+      <children>
+         <!-- Círculo para las iniciales -->
+         <Circle id="circleInitials" fx:id="circleInitials" radius="24" strokeLineCap="ROUND" />
+         <Label id="lblPatientInitials" fx:id="lblPatientInitials" alignment="CENTER" contentDisplay="CENTER" prefHeight="59.0" prefWidth="47.0" textAlignment="CENTER">
+         </Label>
+      </children>
+   </StackPane>
+   <VBox id="boxNameAndPhone" fx:id="boxNameAndPhone">
+      <children>
+         <Label id="lblPatientName" fx:id="lblPatientName" VBox.vgrow="ALWAYS" />
+         <Label id="lblPatientPhone" fx:id="lblPatientPhone" VBox.vgrow="ALWAYS">
+            <font>
+               <Font size="10.0" />
+            </font></Label>
+      </children>
+      <HBox.margin>
+         <Insets />
+      </HBox.margin>
+   </VBox>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>

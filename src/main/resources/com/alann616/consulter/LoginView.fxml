@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="backgroundPane" fx:id="backgroundPane" maxHeight="450.0" maxWidth="350.0" minHeight="450.0" minWidth="350.0" prefHeight="450.0" prefWidth="350.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alann616.consulter.controller.LoginViewController">
+    <children>
+        <HBox id="customBar" fx:id="customBar" alignment="CENTER_RIGHT" layoutY="2.0" prefHeight="14.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.topAnchor="0.0">
+            <children>
+                <Button id="btnMinimize" fx:id="btnMinimize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="25.0">
+                    <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/minimize_White.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button id="btnClose" fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="25.0">
+                    <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/close_white.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <HBox.margin>
+                        <Insets right="0.5" />
+                    </HBox.margin></Button>
+            </children>
+            <padding>
+                <Insets right="1.0" />
+            </padding>
+        </HBox>
+        <Label id="lblInstruction" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="73.0" text="¿Quién usará el sistema hoy?" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0">
+        </Label>
+        <AnchorPane id="usersPane" fx:id="usersPane" layoutX="17.0" layoutY="185.0" prefHeight="230.0" prefWidth="318.0" style="-fx-background-radius: 8;" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="195.0">
+            <children>
+                <Button id="btnLogin" fx:id="btnLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="156.0" style="-fx-background-radius: 20;" text="INICIAR SESIÓN">
+                    <padding>
+                        <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                    </padding>
+                </Button>
+                <VBox alignment="CENTER" fillWidth="false" layoutX="11.0" layoutY="14.0" prefHeight="161.0" prefWidth="290.0" AnchorPane.bottomAnchor="100.0" AnchorPane.topAnchor="14.0">
+                    <children>
+                        <RadioButton id="btnCarlos" fx:id="btnCarlos" mnemonicParsing="false" prefHeight="35.0" prefWidth="135.0" styleClass="radio-button" text="Dr. Carlos">
+                            <font>
+                                <Font name="SansSerif Regular" size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="14.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" top="5.0" />
+                            </padding>
+                        </RadioButton>
+                        <RadioButton id="btnVicente" fx:id="btnVicente" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="136.0" styleClass="radio-button" text="Dr. Vicente" textAlignment="CENTER">
+                            <font>
+                                <Font name="SansSerif Regular" size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="14.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" top="5.0" />
+                            </padding>
+                        </RadioButton>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+            <effect>
+                <DropShadow height="8.0" radius="3.5" width="8.0">
+                    <color>
+                        <Color red="0.5894736647605896" green="0.5851072072982788" blue="0.5851072072982788" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </AnchorPane>
+
+    </children>
+    <cursor>
+        <Cursor fx:constant="DEFAULT" />
+    </cursor>
+</AnchorPane>

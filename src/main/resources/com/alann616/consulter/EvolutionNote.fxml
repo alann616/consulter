@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="sheetEvolution" fx:id="sheetEvolution" prefHeight="1123.0" prefWidth="794.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alann616.spring_consulter.controller.EvolutionNoteController">
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="616.0" prefWidth="576.0" spacing="1.0" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0">
+         <children>
+            <Label id="lblDateTime" fx:id="lblDateTime" contentDisplay="CENTER" text="FECHA Y HORA" textAlignment="CENTER">
+               <font>
+                  <Font name="Roboto Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="evoPatientName" text="NOMBRE DEL PACIENTE">
+               <font>
+                  <Font name="Roboto Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="evoPatientAge" text="EDAD DEL PACIENTE">
+               <font>
+                  <Font name="Roboto Bold" size="12.0" />
+               </font></Label>
+            <TextArea fx:id="evoCurrentCondition" prefHeight="70.0" prefWidth="746.0" promptText="CONDICIÓN ACTUAL DEL PACIENTE (TEXTO NO MAYOR A 300 CARACTERES)" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin></TextArea>
+            <Label fx:id="currentConditionLimit" alignment="BOTTOM_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="746.0" text="0/300">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="576.0" spacing="5.0">
+               <children>
+                  <Label text="TA">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Label>
+                  <Spinner fx:id="spnDiastolic" prefHeight="26.0" prefWidth="45.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Spinner>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Spinner fx:id="spnSystolic" prefHeight="26.0" prefWidth="45.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Spinner>
+                  <Label text="PESO">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="spnWeight" prefHeight="26.0" prefWidth="45.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Spinner>
+                  <Label text="TALLA">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="spnHeight" prefHeight="26.0" prefWidth="45.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Spinner>
+                  <Label text="TEMP">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="spnTemperature" prefHeight="26.0" prefWidth="45.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Spinner>
+                  <Label text="SPo2">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="spnSPo2" prefHeight="26.0" prefWidth="45.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Spinner>
+                  <Label text="FC">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="spnHeartRate" prefHeight="26.0" prefWidth="45.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Spinner>
+                  <Label text="FR">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="spnRespitationRate" prefHeight="26.0" prefWidth="45.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin></HBox>
+            <TextArea fx:id="evoGeneralInspection" prefHeight="130.0" prefWidth="746.0" promptText="INSPECCIÓN GENERAL DEL PACIENTE (TEXTO NO MAYOR A 600 CARACTERES)" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin></TextArea>
+            <Label fx:id="generalInspectionLimit" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="750.0" text="0/600">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="PLAN:">
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+                <font>
+                    <Font name="Roboto Bold" size="12.0" />
+                </font>
+            </Label>
+            <TextArea fx:id="evoPlan" prefHeight="75.0" prefWidth="746.0" promptText="PLAN A LLEVAR A CABO CON EL PACIENTE (TEXTO NO MAYOR A 100 CARACTERES)" styleClass="text-area" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin></TextArea>
+            <Label fx:id="planLimit" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="750.0" text="0/100">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="IMPRESIÓN DIAGNÓSTICA:">
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Roboto Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="evoDiagnosis" promptText="TEXTO NO MAYOR A 80 CARACTERES">
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin></TextField>
+            <Label fx:id="diagnosisImpressionLimit" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="750.0" text="0/80" />
+            <Label text="TRATAMIENTO">
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+                <font>
+                    <Font name="Roboto Bold" size="12.0" />
+                </font>
+            </Label>
+            <TextArea fx:id="evoTreatment" prefHeight="90.0" prefWidth="746.0" promptText="TEXTO NO MAYOR A 255 CARACTERES">
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin>
+            </TextArea>
+            <Label fx:id="treatmentLimit" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="750.0" text="0/255" />
+             <Label text="PRONÓSTICO">
+                 <font>
+                     <Font name="Roboto Bold" size="12.0" />
+                 </font>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+             </Label>
+            <TextField fx:id="evoPrognosis" promptText="TEXTO NO MAYOR A 100 CARACTERES">
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="prognosisLimit" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="750.0" text="0/100" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RECOMENDACIONES">
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Roboto Bold" size="12.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="evoInstructions" prefHeight="130.0" prefWidth="746.0" promptText="TEXTO NO MAYOR A 100 CARACTERES">
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin></TextArea>
+            <Label fx:id="instructionsLimit" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="750.0" text="0/100" />
+         </children>
+      </VBox>
+      <Label fx:id="evoDoctorData" text="NOMBRE DEL DOCTOR" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="32.0">
+          <font>
+              <Font name="Roboto Bold" size="12.0" />
+          </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="383.0" layoutY="14.0" text="NOTA DE EVOLUCIÓN" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="Roboto Black" size="22.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
