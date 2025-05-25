@@ -1,0 +1,393 @@
+/* mainview-night.css */
+
+/* ============================================ */
+/* === Definición de Variables para JavaFX === */
+/* ============================================ */
+.root {
+    /* Variables de color para el modo noche con acento Amber */
+    -night-bg-primary: #212121;       /* Gris oscuro principal para fondos */
+    -night-bg-secondary: #303030;    /* Gris oscuro secundario */
+    -night-bg-tertiary: #424242;     /* Gris para elementos menos prominentes */
+    -night-text-primary: #FFFFFF;     /* Texto blanco */
+    -night-text-secondary: #E0E0E0;   /* Texto gris claro */
+    -night-accent-amber: #FFC107;   /* Amber 500 - Acento principal */
+    -night-accent-amber-dark: #FFA000; /* Amber 700 - Acento más oscuro/hover */
+    -night-accent-amber-light: #FFECB3;/* Amber 100 - Acento claro/hover sutil */
+    -night-border-color: #555555;     /* Color de borde sutil */
+    -night-list-hover: #454545;      /* Hover para elementos de lista */
+    -night-list-selected: #FFAB00;   /* Amber A700 - Selección fuerte */
+    -night-list-selected-text: #000000; /* Texto negro para selección fuerte */
+}
+/* ============================================ */
+/* ===       Fin de Variables JavaFX       === */
+/* ============================================ */
+
+
+/* Estilo base para el contenedor principal de MainView */
+#bgMain {
+    -fx-background-color: -night-bg-primary;
+}
+
+/* Etiqueta del usuario */
+#lblUser {
+    -fx-text-fill: -night-text-primary;
+}
+
+/* --- Panel Izquierdo (Lista de Pacientes) --- */
+
+/* Contenedor del panel izquierdo si es un SplitPane */
+.split-pane { /* Asumiendo que es el de MainView */
+    -fx-background-color: -night-bg-secondary;
+    -fx-border-color: -night-border-color;
+    -fx-padding: 0;
+}
+
+.split-pane-divider {
+    -fx-background-color: -night-accent-amber-dark;
+    -fx-border-color: transparent;
+}
+
+.split-pane-divider:hover {
+    -fx-background-color: -night-accent-amber;
+}
+
+
+/* Caja de búsqueda */
+#hboxSearch {
+    -fx-background-color: -night-bg-tertiary;
+    -fx-border-color: -night-accent-amber;
+    -fx-background-radius: 25px;
+    -fx-border-radius: 25px;
+}
+
+#txtSearch {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: -night-text-primary;
+    -fx-prompt-text-fill: -night-text-secondary;
+}
+
+/* Botones del panel izquierdo (Pacientes, Añadir, Filtro) */
+#btnPatients, #btnAddPatient, #btnFilter, #btnProfile, #btnSettings { /* Añadido btnSettings */
+    -fx-background-color: transparent;
+}
+
+/* Iconos dentro de los botones */
+#btnPatients .icon, #btnAddPatient .icon, #btnFilter .icon, #btnProfile .icon, #btnSettings .icon {
+    -fx-fill: -night-text-secondary;
+}
+#btnPatients:hover .icon, #btnAddPatient:hover .icon, #btnFilter:hover .icon, #btnProfile:hover .icon, #btnSettings:hover .icon {
+    -fx-fill: -night-text-primary;
+}
+#btnPatients:hover, #btnAddPatient:hover, #btnFilter:hover, #btnProfile:hover, #btnSettings:hover {
+    -fx-background-color: -night-bg-tertiary;
+    -fx-background-radius: 5px; /* Añadido radio para hover */
+}
+
+/* Lista de Pacientes */
+#lstPatients {
+    -fx-background-color: transparent;
+}
+
+/* --- Estilos para PatientCell --- */
+.patient-cell-hbox {
+    -fx-background-color: transparent;
+}
+.list-cell:hover .patient-cell-hbox { /* Ajustado para aplicar hover a la celda que contiene el hbox */
+    -fx-background-color: -night-list-hover;
+    -fx-background-radius: 15;
+}
+.list-cell:selected .patient-cell-hbox {
+    -fx-background-color: -night-list-selected;
+    -fx-background-radius: 15;
+}
+
+.patient-cell-circle {
+    -fx-fill: -night-accent-amber;
+}
+.patient-cell-initials {
+    -fx-text-fill: -night-text-primary;
+}
+.patient-cell-name {
+    -fx-text-fill: -night-text-primary;
+}
+.patient-cell-phone {
+    -fx-text-fill: -night-text-secondary;
+}
+.list-cell:selected .patient-cell-name,
+.list-cell:selected .patient-cell-initials {
+    -fx-text-fill: -night-list-selected-text;
+}
+.list-cell:selected .patient-cell-phone {
+    -fx-text-fill: -night-bg-primary;
+}
+
+/* Scrollbar de la lista */
+#lstPatients .scroll-bar:vertical .track,
+.list-view .scroll-bar:vertical .track { /* Asegura aplicar a ambos */
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+#lstPatients .scroll-bar:vertical .thumb,
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: -night-accent-amber-dark;
+    -fx-background-radius: 6px;
+}
+#lstPatients .scroll-bar:vertical .increment-button,
+#lstPatients .scroll-bar:vertical .decrement-button,
+.list-view .scroll-bar:vertical .increment-button,
+.list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0; /* Reduce el espacio que ocupan */
+}
+
+
+/* --- Panel Derecho (Detalles del Paciente y Documentos) --- */
+#anchorPatient {
+    -fx-background-color: -night-bg-secondary;
+}
+
+/* Etiquetas de detalles del paciente */
+#anchorPatient Label {
+    -fx-text-fill: -night-text-secondary;
+}
+#anchorPatient Text { /* También aplica estilo a los nodos Text */
+    -fx-fill: -night-text-secondary; /* Usar -fx-fill para Text */
+}
+#anchorPatient #lblName, #anchorPatient #lblLastName, #anchorPatient #lblSecondLastName {
+    -fx-text-fill: -night-text-primary;
+    /* Considera ajustar la fuente si es necesario */
+}
+/* Títulos de las secciones en el panel derecho */
+#anchorPatient VBox > AnchorPane > Label { /* Para títulos como "Información del paciente" */
+    -fx-text-fill: -night-text-primary;
+    -fx-font-weight: bold; /* Hacerlos más visibles */
+}
+
+
+/* Tabla de documentos */
+#tblDocuments { /* Usar ID específico */
+    -fx-background-color: -night-bg-tertiary;
+    -fx-border-color: -night-accent-amber;
+    -fx-background-radius: 0 0 10 10;
+    -fx-border-radius: 0 0 10 10;
+}
+
+/* Encabezado de la tabla */
+#tblDocuments .column-header-background {
+    -fx-background-color: -night-bg-primary;
+}
+#tblDocuments .column-header-background .label {
+    -fx-text-fill: -night-text-primary;
+    -fx-font-weight: bold;
+}
+#tblDocuments .column-header {
+    -fx-background-color: -night-bg-primary;
+    -fx-border-color: transparent -night-border-color transparent transparent;
+}
+#tblDocuments .column-header .arrow {
+    -fx-background-color: -night-accent-amber;
+}
+#tblDocuments .filler {
+    -fx-background-color: -night-bg-primary;
+}
+
+/* Filas de la tabla */
+#tblDocuments .table-row-cell {
+    -fx-background-color: -night-bg-secondary;
+    -fx-border-color: transparent;
+    -fx-text-fill: -night-text-secondary;
+}
+#tblDocuments .table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+#tblDocuments .table-row-cell:hover {
+    -fx-background-color: -night-list-hover;
+}
+#tblDocuments .table-row-cell:selected {
+    -fx-background-color: -night-list-selected;
+    -fx-text-fill: -night-list-selected-text;
+}
+/* Sobrescribir el color del texto de las celdas individuales en la fila seleccionada */
+#tblDocuments .table-row-cell:selected .table-cell {
+    -fx-text-fill: -night-list-selected-text;
+}
+
+
+/* Placeholder de tabla vacía */
+#tblDocuments .placeholder {
+    -fx-background-color: -night-bg-secondary;
+}
+#tblDocuments .placeholder .label {
+    -fx-text-fill: -night-text-secondary;
+}
+
+/* Lista de Historias Clínicas (MFXListView) */
+#lstHistories {
+    -fx-background-color: -night-bg-tertiary;
+    -fx-border-color: -night-border-color;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+#lstHistories .mfx-list-cell { /* Estilo específico para las celdas de esta lista */
+    -fx-background-color: transparent;
+}
+#lstHistories .mfx-list-cell .label {
+    -fx-text-fill: -night-text-secondary;
+}
+#lstHistories .mfx-list-cell:hover {
+    -fx-background-color: -night-list-hover;
+    -fx-background-radius: 5px;
+}
+#lstHistories .mfx-list-cell:selected {
+    -fx-background-color: -night-list-selected;
+    -fx-background-radius: 5px;
+}
+#lstHistories .mfx-list-cell:selected .label {
+    -fx-text-fill: -night-list-selected-text;
+}
+/* Scrollbar de MFXListView */
+#lstHistories .virtual-flow .scroll-bar .track {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+#lstHistories .virtual-flow .scroll-bar .thumb {
+    -fx-background-color: -night-accent-amber-dark;
+}
+
+/* --- StackPane del Perfil --- */
+#stackProfile {
+    -fx-background-color: -night-bg-secondary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 12, 0.4, 0, 4);
+    -fx-background-radius: 8px;
+    -fx-border-color: -night-border-color; /* Añadir borde sutil */
+    -fx-border-radius: 8px;
+}
+#stackProfile Text { /* Estilo para los Text dentro del perfil */
+    -fx-fill: -night-text-secondary;
+}
+#stackProfile TextField {
+    -fx-background-color: -night-bg-tertiary;
+    -fx-text-fill: -night-text-primary;
+    -fx-border-color: -night-border-color;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-prompt-text-fill: -night-text-secondary; /* Para el prompt text si lo hubiera */
+}
+#stackProfile TextField:focused {
+    -fx-border-color: -night-accent-amber;
+}
+#stackProfile TextField:disabled { /* Para el campo de licencia */
+    -fx-opacity: 0.6;
+    -fx-background-color: -night-bg-tertiary; /* Mantener fondo pero opaco */
+    -fx-text-fill: -night-text-secondary; /* Texto más apagado */
+}
+
+
+/* Botón de cambio de usuario */
+#changeUser {
+    -fx-background-color: -night-bg-tertiary;
+    -fx-text-fill: -night-text-primary;
+    -fx-background-radius: 5px;
+    -fx-border-color: -night-border-color;
+    -fx-border-radius: 5px;
+}
+#changeUser:hover {
+    -fx-background-color: -night-list-hover;
+}
+#changeUser .arrow { /* Ajuste para la flecha del MenuButton estándar */
+    -fx-background-color: -night-text-secondary;
+}
+/* Estilo para los MenuItem dentro de changeUser */
+.context-menu {
+    -fx-background-color: -night-bg-secondary;
+    -fx-border-color: -night-border-color;
+}
+.menu-item .label {
+    -fx-text-fill: -night-text-primary;
+}
+.menu-item:focused {
+    -fx-background-color: -night-list-hover;
+}
+.menu-item:focused .label {
+    -fx-text-fill: -night-text-primary;
+}
+.radio-menu-item:selected .label { /* Para el usuario seleccionado */
+    -fx-font-weight: bold;
+    -fx-text-fill: -night-accent-amber; /* Resaltar con Amber */
+}
+.radio-menu-item:selected .radio { /* Ocultar el radio si se quiere */
+    visibility: hidden; /* Opcional: ocultar el punto */
+}
+
+/* --- StackPane de Ajustes --- */
+.settings-pane { /* Ya definido en la respuesta anterior, lo repetimos aquí para claridad */
+    -fx-background-color: -night-bg-secondary;
+    -fx-border-color: -night-border-color;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 12, 0.4, 0, 4);
+}
+
+.settings-title {
+    -fx-font-family: "Inter Semi Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: -night-text-primary;
+    -fx-padding-bottom: 5px;
+}
+
+.settings-pane Separator .line { /* Hacer el separador visible */
+    -fx-border-color: -night-border-color;
+    -fx-border-width: 1 0 0 0;
+}
+
+.settings-pane Label {
+    -fx-text-fill: -night-text-secondary;
+}
+
+.settings-pane .mfx-toggle-button .text {
+    -fx-fill: -night-text-secondary;
+}
+
+.settings-pane .mfx-toggle-button {
+    -mfx-main: -night-accent-amber;
+    -mfx-secondary: #616161;
+}
+.settings-pane .mfx-toggle-button .circle {
+    -fx-stroke: transparent;
+    -fx-fill: #616161;
+}
+.settings-pane .mfx-toggle-button .line {
+    -fx-stroke: #616161;
+    -fx-opacity: 0.5;
+}
+.settings-pane .mfx-toggle-button:selected .circle {
+    -fx-fill: -night-accent-amber;
+}
+.settings-pane .mfx-toggle-button:selected .line {
+    -fx-stroke: -night-accent-amber;
+    -fx-opacity: 0.5;
+}
+
+
+/* Botones de Ordenamiento (ToggleGroup) */
+#toggleOrder .radio-menu-item .label { /* Estilo para el texto del RadioMenuItem */
+    -fx-text-fill: -night-text-primary; /* Hereda del context-menu, pero aseguramos */
+}
+
+#toggleOrder .radio-menu-item:focused {
+    -fx-background-color: -night-list-hover; /* Hereda del context-menu */
+}
+
+#toggleOrder .radio-menu-item:selected .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: -night-accent-amber; /* Resaltar selección con Amber */
+}
+
+#toggleOrder .radio-menu-item CheckBox /* Ocultar la marca por defecto */ {
+    visibility: hidden;
+    -fx-padding: -5; /* Reducir el espacio que ocupa */
+}
+
+/* Placeholders generales (por si hay otros) */
+.placeholder-label { /* Clase para labels de placeholder si las usas */
+    -fx-text-fill: -night-text-secondary;
+}

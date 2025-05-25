@@ -1,0 +1,53 @@
+/* === clinical-history.css === */
+/* Estilos Específicos para la Vista de Historia Clínica */
+/* ==================================================== */
+/* Asume que styles.css o dark-theme.css ya están cargados */
+
+/* --- Estilos de Texto Específicos --- */
+.title-text {
+    -fx-font-family: "Rubik Medium", var(--font-main-medium); /* Fallback a variable */
+    -fx-font-size: 10pt;
+    -fx-text-fill: var(--app-text-primary); /* Usa variable de tema */
+}
+.data-labels {
+    -fx-font-family: "Rubik Light", var(--font-main-light); /* Fallback a variable */
+    -fx-font-size: 10pt;
+    -fx-text-fill: var(--app-text-primary); /* Usa variable de tema */
+}
+
+/* --- Estilos de Layout Específicos --- */
+/* Si los VBox aquí necesitan un fondo distinto al global */
+/* .clinical-history-vbox {
+    -fx-background-color: var(...);
+} */
+
+/* Estilos específicos para TitledPane EN ESTA VISTA */
+/* Si quieres que aquí se vean diferentes a los de MainView */
+.clinical-history-pane.titled-pane {
+    -fx-border-color: var(--app-accent-primary); /* Borde de acento aquí? */
+    -fx-text-fill: var(--app-text-primary);
+    /* Podrías cambiar radios, paddings, etc. */
+}
+.clinical-history-pane.titled-pane > .title {
+    -fx-background-color: var(--app-accent-secondary); /* Fondo de acento? */
+}
+.clinical-history-pane.titled-pane > .title > .text {
+    -fx-font-family: "Rubik Medium", var(--font-main-medium);
+    -fx-font-size: 11pt;
+    -fx-fill: var(--app-text-primary); /* Ajusta si el fondo es oscuro/claro */
+}
+.clinical-history-pane.titled-pane > .content {
+    -fx-background-color: var(--app-surface-color);
+    -fx-padding: 15px; /* Padding específico */
+}
+
+/* --- Overrides de Componentes (SOLO si es necesario para esta vista) --- */
+/* Ejemplo: Si los MFXTextField aquí deben ser más pequeños */
+/* .clinical-history-content .mfx-text-field {
+    -fx-font-size: 9pt;
+} */
+
+/* Ejemplo: Si los botones personalizados aquí tienen otro aspecto */
+/* .clinical-history-content .personalized-button {
+     -fx-border-color: var(-otro-color);
+} */

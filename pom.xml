@@ -2,17 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+        <relativePath/> </parent>
+
     <groupId>com.alann616</groupId>
-    <artifactId>consulter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>consulter</name>
-    <description>consulter</description>
+    <artifactId>martinez-consulter</artifactId>
+    <version>1.0.0</version>
+    <name>Consultorio</name>
+    <description>Aplicación de gestión integral en el consultorio Martinez</description>
     <url/>
     <licenses>
         <license/>
@@ -26,9 +27,14 @@
         <tag/>
         <url/>
     </scm>
+
     <properties>
-        <java.version>21</java.version>
-    </properties>
+        <java.version>23</java.version>
+        <javafx.version>23</javafx.version>
+
+        <app.launcher.class>com.alann616.consulter.Launcher</app.launcher.class>
+        <app.name>Consulter</app.name> <app.vendor>alann616</app.vendor> <app.icon>src/main/resources/images/logo_app.ico</app.icon> <app.java.options>-Xmx2048m</app.java.options> </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,13 +48,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional> </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -64,16 +78,39 @@
             <artifactId>mariadb-java-client</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.17.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -82,16 +119,19 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <release>${java.version}</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.springframework.boot</groupId>
                             <artifactId>spring-boot-configuration-processor</artifactId>
-                        </path>
+                            <version>${project.parent.version}</version> </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
@@ -99,19 +139,97 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <mainClass>${app.launcher.class}</mainClass>
+                    <layout>JAR</layout>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.4.1</version> <executions>
+                <execution>
+                    <id>create-custom-jre</id>
+                    <phase>package</phase> <goals>
+                    <goal>exec</goal>
+                </goals>
+                    <configuration>
+                        <executable>${java.home}/bin/jlink</executable>
+                        <workingDirectory>${project.build.directory}</workingDirectory>
+                        <arguments>
+                            <argument>--module-path</argument>
+                            <argument>"${java.home}/jmods${path.separator}${env.FX_JMODS}"</argument>
+
+                            <argument>--add-modules</argument>
+                            <argument>java.base,java.desktop,java.logging,java.sql,java.naming,java.management,java.instrument,java.xml,jdk.unsupported,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web</argument>
+
+                            <argument>--output</argument>
+                            <argument>custom-jre</argument> <argument>--strip-debug</argument>
+                            <argument>--no-header-files</argument>
+                            <argument>--no-man-pages</argument>
+                            <argument>--compress=2</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+
+                <execution>
+                    <id>create-installer</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                    <configuration>
+                        <executable>${java.home}/bin/jpackage</executable>
+                        <workingDirectory>${project.build.directory}</workingDirectory>
+                        <arguments>
+                            <argument>--type</argument>
+                            <argument>exe</argument>
+                            <argument>--name</argument>
+                            <argument>${app.name}</argument>
+                            <argument>--app-version</argument>
+                            <argument>${project.version}</argument> <argument>--vendor</argument>
+                            <argument>${app.vendor}</argument>
+                            <argument>--copyright</argument>
+                            <argument>"Copyright (c) ${app.vendor} ${maven.build.timestamp}"</argument>
+                            <argument>--dest</argument>
+                            <argument>dist</argument>
+                            <argument>--input</argument>
+                            <argument>.</argument>
+                            <argument>--main-jar</argument>
+                            <argument>${project.build.finalName}.jar</argument>
+                            <argument>--runtime-image</argument>
+                            <argument>custom-jre</argument>
+                            <argument>--java-options</argument>
+                            <argument>${app.java.options}</argument> <argument>--icon</argument>
+                            <argument>${project.basedir}/${app.icon}</argument>
+                            <argument>--win-menu</argument>
+                            <argument>--win-shortcut</argument>
+                            <argument>--verbose</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+            </executions>
+            </plugin>
+
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url> </repository>
+    </repositories>
 
 </project>

@@ -1,0 +1,196 @@
+
+.mfx-button:hover {
+    -fx-background-color: #3F51B5;
+}
+
+.mfx-text-field {
+    -mfx-main: #3F51B5;
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-family: "Open Sans Regular";
+}
+
+.mfx-text-field:readonly,
+.mfx-text-field:readonly .text-field {
+    -fx-cursor: default;
+}
+
+.mfx-text-field .text-field {
+    /* Selected text highlight */
+    -fx-highlight-fill: #ECE0FD;
+    /* Prompt text color */
+    -fx-prompt-text-fill: gray;
+}
+
+.mfx-text-field .text-field .text {
+    -fx-font-smoothing-type: lcd;
+}
+
+.mfx-text-field:focus-within {
+    -fx-background-insets: 2;
+    -fx-border-color: #3F51B5;
+    -fx-border-width: 1.5;
+    -fx-border-insets: -0.5;
+}
+
+.mfx-text-field .floating-text {
+    -fx-font-family: "Rubik Medium";
+    -fx-text-fill: black;
+}
+
+.mfx-text-field:floating .floating-text {
+    -fx-background-color: white;
+}
+
+.mfx-text-field:focus-within .floating-text {
+    -fx-font-family: "Rubik Medium";
+    -fx-text-fill: rgba(0, 0, 0, 0.9);
+}
+
+.mfx-text-field .measure-unit {
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: black;
+}
+
+.mfx-text-field .text-field {
+    -fx-text-box-border: transparent;
+    -fx-background-color: transparent;
+    -fx-backrgound-insets: 0;
+    -fx-padding: 0;
+}
+
+/*.mfx-text-field .text-field:focused {*/
+/*    -fx-focus-color: transparent;*/
+/*    -fx-faint-focus-color: transparent;*/
+/*}*/
+
+/*.mfx-text-field:disabled {*/
+/*    -fx-border-color: rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.mfx-text-field:disabled .floating-text {*/
+/*    -fx-text-fill: -mfx-text-disabled;*/
+/*}*/
+
+/*.mfx-text-field:disabled .text-field {*/
+/*    -fx-text-inner-color: -mfx-text-disabled;*/
+/*}*/
+
+/********************
+Date Picker
+********************/
+.mfx-date-picker {
+    -fx-padding: 3 5 3 5;
+}
+
+.mfx-date-picker .mfx-icon-wrapper .mfx-ripple-generator {
+    -mfx-ripple-radius: 24;
+    -mfx-ripple-color: #F3F1F6;
+}
+
+.mfx-date-picker:focus-within .icon {
+    -mfx-color: #3F51B5;
+}
+
+.mfx-date-picker:disabled .icon {
+    -mfx-color: #bcbcbc;
+}
+
+/********************
+Popup
+********************/
+.mfx-date-picker .date-picker-popup .content {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: #ebebeb;
+    -fx-border-radius: 10;
+    -fx-padding: 15;
+    -fx-min-height: 300;
+}
+
+.mfx-date-picker .date-picker-popup .left-arrow:disabled,
+.mfx-date-picker .date-picker-popup .right-arrow:disabled {
+    -fx-opacity: 0.5;
+}
+
+.mfx-date-picker .date-picker-popup .left-arrow .mfx-ripple-generator,
+.mfx-date-picker .date-picker-popup .right-arrow .mfx-ripple-generator {
+    -mfx-ripple-color: #F0E9FF;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo,
+.mfx-date-picker .date-picker-popup .years-combo {
+    -mfx-float-mode: disabled;
+    -mfx-scroll-on-open: true;
+    -fx-border-color: transparent;
+    -fx-min-width: 120;
+    -fx-min-height: 40;
+    -fx-font-family: "Inter Semi Bold";
+}
+
+.mfx-date-picker .date-picker-popup .months-combo:focus-within,
+.mfx-date-picker .date-picker-popup .years-combo:focus-within {
+    -fx-background-color: #f8f7fa;
+    -fx-text-fill: #3F51B5;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .mfx-icon-wrapper .mfx-ripple-generator,
+.mfx-date-picker .date-picker-popup .years-combo .mfx-icon-wrapper .mfx-ripple-generator {
+    -mfx-ripple-color: #F0E9FF;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell {
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:hover,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:hover {
+    -fx-background-color: #f8f7fa;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected {
+    -fx-background-color: #f8f7fa;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected .label,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected .label {
+    -fx-text-fill: -mfx-purple;
+}
+
+.mfx-date-picker .date-picker-popup .week-day {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: black;
+    -fx-padding: 0 0 5 0;
+}
+
+.mfx-combo-box {
+    -mfx-track-color: rgb(230, 230, 230);
+    -mfx-thumb-color: rgb(137, 137, 137);
+    -mfx-thumb-hover-color: rgb(89, 88, 91);
+    -mfx-gap: 0;
+    -fx-padding: 3 5 3 5;
+}
+
+.mfx-combo-box .caret .mfx-ripple-generator {
+    -mfx-ripple-color: rgba(98, 0, 238, 0.1);
+    -mfx-ripple-radius: 14;
+}
+
+.mfx-combo-box:focus-within .caret .mfx-font-icon {
+    -mfx-color: #3F51B5;
+}
+
+.mfx-combo-box .combo-popup .virtual-flow {
+    -fx-background-radius: 5;
+    -fx-border-color: #ebebeb;
+    -fx-border-radius: 5;
+}
+
+.mfx-combo-box:disabled .caret .mfx-font-icon {
+    -mfx-color: #bcbcbc;
+}

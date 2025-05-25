@@ -1,23 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<HBox id="boxPatientItem" fx:id="boxPatientItem" spacing="15.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="boxPatientItem" fx:id="boxPatientItem" spacing="15.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
    <StackPane id="avatar" fx:id="avatar" prefHeight="0.0" prefWidth="0.0">
       <children>
          <!-- Círculo para las iniciales -->
          <Circle id="circleInitials" fx:id="circleInitials" radius="24" strokeLineCap="ROUND" />
-         <Label id="lblPatientInitials" fx:id="lblPatientInitials" alignment="CENTER" contentDisplay="CENTER" prefHeight="59.0" prefWidth="47.0" textAlignment="CENTER">
-         </Label>
+         <Label id="lblPatientInitials" fx:id="lblPatientInitials" alignment="CENTER" contentDisplay="CENTER" prefHeight="59.0" prefWidth="47.0" textAlignment="CENTER" />
       </children>
    </StackPane>
    <VBox id="boxNameAndPhone" fx:id="boxNameAndPhone">
       <children>
-         <Label id="lblPatientName" fx:id="lblPatientName" VBox.vgrow="ALWAYS" />
+         <Label id="lblPatientName" fx:id="lblPatientName" VBox.vgrow="ALWAYS" maxWidth="Infinity" >
+            <contextMenu>
+               <ContextMenu>
+                 <items>
+                     <MenuItem fx:id="btnUpdatePatient" mnemonicParsing="false" onAction="#updatePatient" text="Cambiar datos personales">
+                        <graphic>
+                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../images/person_edit.png" />
+                              </image>
+                           </ImageView>
+                        </graphic></MenuItem>
+                     <SeparatorMenuItem mnemonicParsing="false" />
+                     <MenuItem fx:id="btnDeletePatient" mnemonicParsing="false" onAction="#deletePatient" text="Eliminar paciente">
+                        <graphic>
+                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../images/delete.png" />
+                              </image>
+                           </ImageView>
+                        </graphic></MenuItem>
+                 </items>
+               </ContextMenu>
+            </contextMenu></Label>
          <Label id="lblPatientPhone" fx:id="lblPatientPhone" VBox.vgrow="ALWAYS">
             <font>
                <Font size="10.0" />

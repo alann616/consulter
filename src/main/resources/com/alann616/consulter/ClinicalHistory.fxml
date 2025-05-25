@@ -1,7 +1,810 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ClinicalHistory">
-
-</AnchorPane>
+<MFXScrollPane cache="true" fitToHeight="true" fitToWidth="true" prefHeight="3150.0" prefWidth="830.0" stylesheets="@../../../css/clinical-history.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alann616.consulter.controller.ClinicalHistoryController">
+   <VBox minHeight="-Infinity" minWidth="-Infinity">
+      <VBox fx:id="vboxPage1" alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1056.0" prefWidth="816.0" VBox.vgrow="ALWAYS">
+         <HBox alignment="CENTER" prefHeight="68.0" prefWidth="816.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HISTORIA CLÍNICA">
+               <font>
+                  <Font name="Rubik ExtraBold" size="32.0" />
+               </font>
+            </Text>
+         </HBox>
+         <HBox alignment="CENTER_RIGHT" prefHeight="123.0" prefWidth="816.0" spacing="40.0">
+            <VBox prefHeight="123.0" prefWidth="320.0">
+               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="4.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="FECHA:" />
+                  <Label fx:id="lblDate" styleClass="data-labels" text="FECHA" textAlignment="CENTER" />
+               </HBox>
+               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="4.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="HORA:" />
+                  <Label fx:id="lblHour" styleClass="data-labels" text="HORA" />
+               </HBox>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="INTERROGATORIO" wrappingWidth="150.15623474121094">
+                  <VBox.margin>
+                     <Insets top="24.0" />
+                  </VBox.margin>
+               </Text>
+               <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Indirecto" />
+                  <MFXToggleButton fx:id="toggleType" contentDisposition="GRAPHIC_ONLY" styleClass="mfx-toggle-button" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Directo" />
+               </HBox>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="123.0" prefWidth="437.0">
+               <HBox alignment="CENTER_LEFT" minHeight="30.0" spacing="4.0">
+                  <padding>
+                     <Insets left="12.0" />
+                  </padding>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="NOMBRE:" />
+                  <Label fx:id="lblPatientName" minHeight="18.0" minWidth="225.0" styleClass="data-labels" text="Juan Carlos Alejandro Hernández Rodríguez" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" minHeight="30.0" spacing="4.0">
+                  <padding>
+                     <Insets left="12.0" />
+                  </padding>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="EDAD:" />
+                  <Label fx:id="lblPatientAge" styleClass="data-labels" text="XX AÑOS">
+                     <padding>
+                        <Insets right="24.0" />
+                     </padding>
+                  </Label>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="SEXO:" />
+                  <Label fx:id="lblPatientGender" styleClass="data-labels" text="Label" />
+               </HBox>
+               <HBox alignment="CENTER_LEFT" minHeight="30.0" prefHeight="30.0" prefWidth="435.0" spacing="4.0">
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+                  <padding>
+                     <Insets left="12.0" />
+                  </padding>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="DOMICILIO:" />
+                  <Label fx:id="lblAddress" minHeight="18.0" minWidth="50.0" prefHeight="18.0" prefWidth="338.0" styleClass="data-labels" text="Label" wrapText="true" />
+               </HBox>
+               <HBox alignment="CENTER_LEFT" minHeight="30.0" spacing="4.0">
+                  <padding>
+                     <Insets left="12.0" />
+                  </padding>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="TELÉFONO:" />
+                  <Label fx:id="lblPhone" styleClass="data-labels" text="1234567890">
+                     <HBox.margin>
+                        <Insets right="4.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="EMAIL:" />
+                  <Label fx:id="lblEmail" styleClass="data-labels" text="carlos.rodriguez_mx@hotmail.com" />
+               </HBox>
+            </VBox>
+         </HBox>
+         <TitledPane fx:id="pnlHereditary" prefHeight="200.0" prefWidth="816.0" styleClass="titled-pane" text="HEREDITARIOS Y FAMILIARES" VBox.vgrow="ALWAYS">
+            <font>
+               <Font size="10.0" />
+            </font>
+            <GridPane alignment="CENTER" prefHeight="178.0" prefWidth="814.0" HBox.hgrow="ALWAYS">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <MFXTextField fx:id="txtDiabetes" borderGap="12.0" floatMode="BORDER" floatingText="DIABETES MELLITUS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" />
+               <MFXTextField fx:id="txtHeartDisease" borderGap="12.0" floatMode="BORDER" floatingText="CARDIOPATIAS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <MFXTextField fx:id="txtHypertension" borderGap="12.0" floatMode="BORDER" floatingText="HAS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.rowIndex="1" />
+               <MFXTextField fx:id="txtBirthDisease" borderGap="12.0" floatMode="BORDER" floatingText="MALFORMACIONES CONGENITAS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               <MFXTextField fx:id="txtTB" borderGap="12.0" floatMode="BORDER" floatingText="TB" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.rowIndex="2" />
+               <MFXTextField fx:id="txtEndocrineDisorders" borderGap="12.0" floatMode="BORDER" floatingText="ENDÓCRINAS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="2" />
+               <MFXTextField fx:id="txtNeoplasia" borderGap="12.0" floatMode="BORDER" floatingText="NEOPLASIA" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="1" />
+               <MFXTextField fx:id="txtOtherHereditary" borderGap="12.0" floatMode="BORDER" floatingText="OTRAS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            </GridPane>
+         </TitledPane>
+         <TitledPane fx:id="pnlNonPathologic" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="240.0" prefWidth="816.0" styleClass="titled-pane" text="PERSONALES NO PATOLÓGICOS">
+            <font>
+               <Font name="System Bold" size="10.0" />
+            </font>
+            <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutY="8.0" prefHeight="212.0" prefWidth="235.0" AnchorPane.topAnchor="7.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="ESTADO CIVIL">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <MFXRadioButton fx:id="rbtnSingle" text="Soltero">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toggleMaritalStatus" />
+                                 </toggleGroup>
+                              </MFXRadioButton>
+                              <MFXRadioButton fx:id="rbtnWidowded" text="Unión libre" toggleGroup="$toggleMaritalStatus" GridPane.rowIndex="1" />
+                              <MFXRadioButton fx:id="rbtnMarried" text="Casado" toggleGroup="$toggleMaritalStatus" GridPane.columnIndex="1" />
+                              <MFXRadioButton fx:id="rbtnHacinamiento" text="Hacimiento" toggleGroup="$toggleMaritalStatus" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="8.0" top="8.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <MFXTextField fx:id="txtReligion" floatMode="BORDER" floatingText="RELIGIÓN" prefHeight="40.0" prefWidth="250.0" styleClass="mfx-text-field">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </MFXTextField>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="8.0" top="8.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <MFXTextField fx:id="txtOcupation" floatMode="BORDER" floatingText="OCUPACIÓN" prefHeight="40.0" prefWidth="250.0" styleClass="mfx-text-field" />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="219.0" prefWidth="30.0" />
+                  <VBox prefHeight="212.0" prefWidth="230.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="PISO" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="194.0" spacing="12.0">
+                           <children>
+                              <MFXCheckbox fx:id="cboxDirt" gap="4.0" text="Tierra" />
+                              <MFXCheckbox fx:id="cboxCement" gap="4.0" text="Cemento" />
+                           </children>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="4.0" top="4.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="PAREDES" />
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <MFXCheckbox fx:id="cboxBlock" gap="4.0" prefHeight="28.0" prefWidth="100.0" text="Block" textExpand="true" />
+                              <MFXCheckbox fx:id="cboxAdobe" gap="4.0" prefHeight="28.0" prefWidth="100.0" text="Adobe" textExpand="true" GridPane.columnIndex="1" />
+                              <MFXCheckbox fx:id="cboxWood" gap="4.0" prefHeight="28.0" prefWidth="100.0" text="Madera" textExpand="true" GridPane.rowIndex="1" />
+                              <MFXCheckbox fx:id="cboxOtherWalls" gap="4.0" prefHeight="28.0" prefWidth="100.0" text="Otros" textExpand="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="4.0" top="4.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="SERVICIOS" />
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <MFXCheckbox fx:id="cboxWater" gap="4.0" prefHeight="28.0" prefWidth="100.0" text="Agua" textExpand="true" />
+                              <MFXCheckbox fx:id="cboxDrainage" gap="4.0" prefHeight="28.0" prefWidth="100.0" text="Drenaje" textExpand="true" GridPane.columnIndex="1" />
+                              <MFXCheckbox fx:id="cboxGas" gap="4.0" prefHeight="28.0" prefWidth="100.0" text="Gas" textExpand="true" GridPane.rowIndex="1" />
+                              <MFXCheckbox fx:id="cboxLenia" gap="4.0" prefHeight="28.0" prefWidth="100.0" text="Leña" textExpand="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="219.0" prefWidth="30.0" />
+                  <VBox prefHeight="212.0" prefWidth="235.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="ESQUEMA DE VACUNACIÓN" />
+                        <GridPane prefHeight="21.0" prefWidth="250.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="10.0" prefWidth="73.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="59.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.0" minWidth="10.0" prefWidth="109.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="75.0" styleClass="data-labels" text="Incompleta" />
+                              <Label styleClass="data-labels" text="Completa" GridPane.columnIndex="2" />
+                              <MFXToggleButton fx:id="toggleVaccunation" contentDisposition="GRAPHIC_ONLY" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="CONSUMO DE SUSTANCIAS" />
+                        <MFXCheckbox fx:id="cboxDrugs" allowIndeterminate="true" gap="4.0" prefHeight="28.0" prefWidth="160.0" text="Toxicomanías" textExpand="true" />
+                        <MFXCheckbox fx:id="cboxAlcoholism" allowIndeterminate="true" gap="4.0" prefHeight="28.0" prefWidth="160.0" text="Alcoholismo" textExpand="true" />
+                        <MFXCheckbox fx:id="cboxTabaquism" allowIndeterminate="true" gap="4.0" prefHeight="28.0" prefWidth="160.0" text="Tabaquismo" textExpand="true" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets top="4.0" />
+               </padding>
+            </HBox>
+         </TitledPane>
+         <TitledPane fx:id="pnlPathologic" prefHeight="200.0" prefWidth="816.0" styleClass="titled-pane" text="PERSONALES PATOLÓGICOS">
+            <content>
+               <GridPane alignment="CENTER" prefWidth="814.0">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                     <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                     <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                     <MFXTextField fx:id="txtSurgery" borderGap="12.0" floatMode="BORDER" floatingText="QUIRÚRGICOS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" />
+                     <MFXTextField fx:id="txtCombe" borderGap="12.0" floatMode="BORDER" floatingText="COMBE" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     <MFXTextField fx:id="txtTraumatic" borderGap="12.0" floatMode="BORDER" floatingText="TRAUMÁTICOS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.rowIndex="1" />
+                     <MFXTextField fx:id="txtHas" borderGap="12.0" floatMode="BORDER" floatingText="HAS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     <MFXTextField fx:id="txtAllergic" borderGap="12.0" floatMode="BORDER" floatingText="ALÉRGICOS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.rowIndex="2" />
+                     <MFXTextField fx:id="txtDM2" borderGap="12.0" floatMode="BORDER" floatingText="DM2" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="2" />
+                     <MFXTextField fx:id="txtTransfusion" borderGap="12.0" floatMode="BORDER" floatingText="TANSFUSIONALES" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="1" />
+                     <MFXTextField fx:id="txtOtherPathological" borderGap="12.0" floatMode="BORDER" floatingText="OTROS" floatingTextGap="3.0" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" styleClass="mfx-text-field" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  </children>
+               </GridPane>
+            </content>
+            <font>
+               <Font name="System Bold" size="10.0" />
+            </font>
+         </TitledPane>
+         <TitledPane fx:id="pnlGinecological" prefHeight="234.0" prefWidth="816.0" styleClass="titled-pane" text="GINECO-OBSTÉTRICOS">
+            <content>
+               <HBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
+                  <children>
+                     <GridPane prefHeight="129.0" prefWidth="695.0" HBox.hgrow="ALWAYS">
+                        <columnConstraints>
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.0" minWidth="10.0" prefWidth="393.6000244140625" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.7999755859375" minWidth="10.0" prefWidth="396.7999755859375" />
+                        </columnConstraints>
+                        <rowConstraints>
+                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                           <GridPane prefHeight="90.0" prefWidth="412.0">
+                              <columnConstraints>
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="77.0" />
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="148.0" />
+                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="53.0" />
+                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="138.0" />
+                              </columnConstraints>
+                              <rowConstraints>
+                                 <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                              </rowConstraints>
+                              <children>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Menarca" />
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="12.0" />
+                                    </padding>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Ritmo menstrual" wrappingWidth="74.0" />
+                                    </children>
+                                    <GridPane.margin>
+                                       <Insets bottom="8.0" />
+                                    </GridPane.margin>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="IVSA" />
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="12.0" />
+                                    </padding>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="FUM" />
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="8.0" />
+                                    </padding>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                    <children>
+                                       <Spinner fx:id="spnMenarche" editable="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="80.0">
+                                          <HBox.margin>
+                                             <Insets left="4.0" />
+                                          </HBox.margin>
+                                       </Spinner>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="años">
+                                          <HBox.margin>
+                                             <Insets left="4.0" />
+                                          </HBox.margin>
+                                       </Text>
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="12.0" />
+                                    </padding>
+                                 </HBox>
+                                 <MFXComboBox fx:id="cboxRythm" prefHeight="40.0" prefWidth="99.0" scaleX="0.95" scaleY="0.95" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                    <children>
+                                       <Spinner fx:id="spnIVSA" editable="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="80.0" />
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="años">
+                                          <HBox.margin>
+                                             <Insets left="4.0" />
+                                          </HBox.margin>
+                                       </Text>
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="12.0" />
+                                    </padding>
+                                 </HBox>
+                                 <MFXDatePicker fx:id="dpickerFUM" maxHeight="-Infinity" prefHeight="38.0" prefWidth="120.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              </children>
+                           </GridPane>
+                           <GridPane prefHeight="90.0" prefWidth="384.0" GridPane.columnIndex="1">
+                              <columnConstraints>
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="107.0" />
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="104.0" />
+                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="88.0" />
+                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
+                              </columnConstraints>
+                              <rowConstraints>
+                                 <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                              </rowConstraints>
+                              <children>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gesta(s)" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aborto(s)" wrappingWidth="71.0" />
+                                    </children>
+                                    <GridPane.margin>
+                                       <Insets bottom="4.0" />
+                                    </GridPane.margin>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Parto(s)" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="50.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cesárea(s)" />
+                                    </children>
+                                    <GridPane.margin>
+                                       <Insets bottom="4.0" />
+                                    </GridPane.margin>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="3">
+                                    <children>
+                                       <Spinner fx:id="spnPartos" editable="true" prefHeight="30.0" prefWidth="79.0" />
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="4.0" />
+                                    </padding>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <children>
+                                       <Spinner fx:id="spnCesareas" editable="true" prefHeight="30.0" prefWidth="79.0" />
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="4.0" />
+                                    </padding>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <children>
+                                       <Spinner fx:id="spnAbortos" editable="true" prefHeight="30.0" prefWidth="80.0" />
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="4.0" />
+                                    </padding>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1">
+                                    <children>
+                                       <Spinner fx:id="spnGestas" editable="true" prefHeight="30.0" prefWidth="80.0" />
+                                    </children>
+                                    <padding>
+                                       <Insets bottom="4.0" />
+                                    </padding>
+                                 </HBox>
+                              </children>
+                           </GridPane>
+                           <GridPane prefHeight="71.0" prefWidth="390.0" GridPane.rowIndex="1">
+                              <columnConstraints>
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="74.0" />
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="148.0" />
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="98.99999999999997" />
+                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="84.60000000000002" />
+                              </columnConstraints>
+                              <rowConstraints>
+                                 <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                              </rowConstraints>
+                              <children>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="LUI" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Último parto" wrappingWidth="55.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                    <children>
+                                       <Spinner fx:id="spnMacrosomicos" editable="true" prefHeight="30.0" prefWidth="60.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <children>
+                                       <Spinner fx:id="spnBajoPeso" editable="true" prefHeight="30.0" prefWidth="60.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1">
+                                    <children>
+                                       <MFXTextField fx:id="txtLUI" floatMode="BORDER" prefHeight="38.0" prefWidth="125.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <children>
+                                       <MFXDatePicker fx:id="dpickerLastDelivery" prefHeight="38.0" prefWidth="125.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="2">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Hijos macrosómicos" wrappingWidth="107.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Hijos con bajo peso al nacer" wrappingWidth="100.97868347167969" />
+                                    </children>
+                                 </HBox>
+                              </children>
+                           </GridPane>
+                           <GridPane alignment="BOTTOM_LEFT" prefHeight="71.0" prefWidth="395.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <columnConstraints>
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="107.99996337890624" />
+                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="136.00003662109376" />
+                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="94.0" minWidth="0.0" prefWidth="34.2000732421875" />
+                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="154.39999999999998" minWidth="10.0" prefWidth="118.99992675781249" />
+                              </columnConstraints>
+                              <rowConstraints>
+                                 <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                              </rowConstraints>
+                              <children>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Planificación familiar" wrappingWidth="96.82534790039062" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiempo de uso de método" wrappingWidth="103.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                    <children>
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PAP" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="3" />
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1">
+                                    <children>
+                                       <MFXTextField fx:id="txtPlanificacion" floatMode="BORDER" prefHeight="38.0" prefWidth="125.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <children>
+                                       <MFXTextField fx:id="txtTime" floatMode="BORDER" prefHeight="38.0" prefWidth="125.0" />
+                                    </children>
+                                 </HBox>
+                                 <MFXDatePicker fx:id="dpickerPAP" prefHeight="38.0" prefWidth="46.0" GridPane.columnIndex="3" />
+                              </children>
+                           </GridPane>
+                        </children>
+                     </GridPane>
+                  </children>
+               </HBox>
+            </content>
+            <font>
+               <Font name="System Bold" size="10.0" />
+            </font>
+         </TitledPane>
+      </VBox>
+      <Separator prefWidth="200.0" />
+      <VBox fx:id="vboxPage2" prefHeight="1056.0" prefWidth="816.0">
+         <children>
+            <TitledPane prefHeight="165.0" prefWidth="828.0" text="PADECIMIENTO ACTUAL">
+               <content>
+                  <TextArea fx:id="txtCurrentCondition" prefHeight="134.0" prefWidth="811.0" wrapText="true" />
+               </content>
+            </TitledPane>
+            <HBox alignment="CENTER" prefHeight="160.0" prefWidth="828.0">
+               <children>
+                  <TitledPane prefHeight="160.0" prefWidth="414.0" text="ÓRGANOS Y SISTEMAS">
+                     <content>
+                        <TextArea fx:id="txtOrgans" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                     </content>
+                  </TitledPane>
+                  <TitledPane prefHeight="160.0" prefWidth="414.0" text="SÍNTOMAS GENERALES">
+                     <content>
+                        <TextArea fx:id="txtGeneralSimptoms" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                     </content>
+                  </TitledPane>
+               </children>
+            </HBox>
+            <GridPane alignment="CENTER" prefHeight="200.0" prefWidth="823.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="MEDICIONES ANTROPOMÉTRICAS" wrappingWidth="190.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="SIGNOS VITALES" GridPane.columnIndex="2" />
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Peso (kg):" />
+                        <Spinner fx:id="spnWeight" editable="true" prefHeight="26.0" prefWidth="45.0">
+                           <HBox.margin>
+                              <Insets left="45.0" />
+                           </HBox.margin>
+                        </Spinner>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IMC" />
+                        <Spinner fx:id="spnIMC" editable="true" prefHeight="26.0" prefWidth="45.0">
+                           <HBox.margin>
+                              <Insets left="80.0" />
+                           </HBox.margin>
+                        </Spinner>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Perímetro abdominal (cm): " wrappingWidth="103.81512451171875" />
+                        <Spinner fx:id="spnAbdominal" editable="true" prefHeight="26.0" prefWidth="45.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Talla (m): " />
+                        <Spinner fx:id="spnHeight" editable="true" prefHeight="26.0" prefWidth="45.0">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Spinner>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Perímetro cefálico (cm): " wrappingWidth="89.47135925292969" />
+                        <Spinner fx:id="spnCefalico" editable="true" prefHeight="26.0" prefWidth="45.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Frecuencia cardíaca (x'): " wrappingWidth="82.4609375" />
+                        <Spinner fx:id="spnHeartRate" editable="true" prefHeight="26.0" prefWidth="45.0">
+                           <HBox.margin>
+                              <Insets left="18.0" />
+                           </HBox.margin>
+                        </Spinner>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Presión arterial (mmHg): " wrappingWidth="100.16017150878906" />
+                        <Spinner fx:id="spnSystolic" editable="true" prefHeight="26.0" prefWidth="45.0" />
+                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                           <font>
+                              <Font name="Roboto Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Spinner fx:id="spnDiastolic" editable="true" prefHeight="26.0" prefWidth="45.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Glucemia capilar (mg/dL): " wrappingWidth="105.51303100585938" />
+                        <Spinner fx:id="spnGlucemia" editable="true" prefHeight="26.0" prefWidth="45.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Frecuencia respiratoria (x'):" wrappingWidth="100.77996826171875" />
+                        <Spinner fx:id="spnRespiratoryRate" editable="true" prefHeight="26.0" prefWidth="45.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura (ºC): " wrappingWidth="84.24737548828125" />
+                        <Spinner fx:id="spnTemperature" editable="true" prefHeight="26.0" prefWidth="45.0">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Spinner>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SpO2 (%): " />
+                        <Spinner fx:id="spnSpO2" editable="true" prefHeight="26.0" prefWidth="45.0">
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
+                        </Spinner>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </GridPane>
+            <MFXTextField fx:id="txtGeneralInspection" floatingText="INSPECCIÓN GENERAL" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtHead" floatingText="CABEZA" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtNeck" floatingText="CUELLO" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtThorax" floatingText="TORAX" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtAbdomen" floatingText="ABDOMEN" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtVertebral" floatingText="COLUMNA VERTEBRAL" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtGenitalia" floatingText="GENITALES EXTERNOS" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtRectalTouch" floatingText="TACTO RECTAL" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtVaginalTouch" floatingText="TACTO VAGINAL" prefHeight="49.0" prefWidth="828.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXTextField fx:id="txtLimbs" floatingText="EXTREMIDADES" prefHeight="49.0" prefWidth="828.0" />
+         </children>
+      </VBox>
+      <Separator prefWidth="200.0" />
+      <VBox fx:id="vboxPage3" prefHeight="1056.0" prefWidth="816.0">
+         <children>
+            <TitledPane prefHeight="200.0" prefWidth="200.0" text="IMPRESIÓN DIAGNÓSTICA">
+               <content>
+                  <TextArea fx:id="txtDiagnosticImpression" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+               </content>
+            </TitledPane>
+            <TitledPane prefHeight="200.0" prefWidth="200.0" text="TRATAMIENTO">
+               <content>
+                  <TextArea fx:id="txtTreatment" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+               </content>
+            </TitledPane>
+            <TitledPane prefHeight="200.0" prefWidth="200.0" text="PRONÓSTICO">
+               <content>
+                  <TextArea fx:id="txtPrognosis" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+               </content>
+            </TitledPane>
+            <TitledPane prefHeight="200.0" prefWidth="200.0" text="DATOS DEL MÉDICO A CARGO">
+               <content>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="24.0">
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                        <padding>
+                           <Insets top="14.0" />
+                        </padding>
+                        <Label fx:id="lblDoctorName" text="Dr. Carlos Eduardo Martinez Vielma" />
+                        <Label fx:id="lblLicense" text="C.P.: 11810523" />
+                     </HBox>
+                     <VBox alignment="CENTER" prefHeight="100.0" prefWidth="790.0">
+                        <Line endX="120.0" startX="-120.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Firma del médico">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                     </VBox>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <Button fx:id="btnSaveHistory" onAction="#saveHistory" styleClass="personalized-button" text="Guardar" />
+            </HBox>
+         </children>
+      </VBox>
+   </VBox>
+</MFXScrollPane>

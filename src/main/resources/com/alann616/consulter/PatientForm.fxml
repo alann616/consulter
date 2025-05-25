@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="600.0" prefWidth="360.0"
+            style="-fx-background-color: &quot;#FFFFFF&quot;; -fx-border-color: gray; -fx-background-radius: 10px; -fx-border-radius: 10px;"
+            stylesheets="@../../../css/material.css" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alann616.consulter.controller.PatientFormController">
+   <children>
+      <VBox alignment="CENTER_LEFT" prefWidth="356.0" spacing="24.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <MFXTextField fx:id="txtName" borderGap="2.0" floatMode="BORDER" floatingText="Nombre(s) *" prefColumnCount="20" prefHeight="40.0" prefWidth="206.0" styleClass="mfx-text-field" textLimit="100" />
+            <MFXTextField fx:id="txtLastName" floatMode="BORDER" floatingText="Apellido Paterno *" prefColumnCount="20" prefHeight="40.0" textLimit="100" />
+            <MFXTextField fx:id="txtSecondLastName" floatMode="BORDER" floatingText="Apellido Materno *" nodeOrientation="LEFT_TO_RIGHT" prefColumnCount="20" prefHeight="40.0" textLimit="100">
+               <styleClass>
+                  <String fx:value="floating-text" />
+                  <String fx:value="mfx-text-field" />
+               </styleClass></MFXTextField>
+            <MFXComboBox fx:id="cbxGender" accessibleRole="COMBO_BOX" allowEdit="true" floatMode="BORDER" floatingText="Sexo *" prefColumnCount="10" prefHeight="40.0" prefWidth="180.0" scrollOnOpen="true" selectable="true" />
+            <MFXDatePicker fx:id="dtpBirthDate" floatMode="BORDER" floatingText="Fecha de nacimiento" prefColumnCount="10" prefHeight="40.0" prefWidth="180.0" />
+            <MFXTextField fx:id="txtPhone" floatMode="BORDER" floatingText="Número de teléfono" layoutX="10.0" layoutY="138.0" nodeOrientation="LEFT_TO_RIGHT" prefColumnCount="0" prefHeight="40.0" prefWidth="130.0" textLimit="10" />
+            <MFXTextField fx:id="txtEmail" floatMode="BORDER" floatingText="Correo electrónico" layoutX="10.0" layoutY="330.0" nodeOrientation="LEFT_TO_RIGHT" prefColumnCount="0" prefHeight="40.0" prefWidth="240.0" textLimit="255" />
+            <MFXTextField fx:id="txtAddress" floatMode="BORDER" floatingText="Domicilio" layoutX="10.0" layoutY="394.0" nodeOrientation="LEFT_TO_RIGHT" prefColumnCount="0" prefHeight="40.0" prefWidth="240.0" textLimit="255" />
+         </children>
+      </VBox>
+      <Label fx:id="lblPatId" layoutX="14.0" layoutY="14.0" prefHeight="23.0" prefWidth="226.0" text="ID: #" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0">
+         <font>
+            <Font name="Roboto Black" size="18.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="47.0" layoutY="449.0" prefHeight="50.0" prefWidth="332.0" spacing="48.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <MFXButton fx:id="btnSave" buttonType="RAISED" depthLevel="LEVEL1" onAction="#savePatient" rippleAnimateShadow="true" rippleColor="#9fa8da" style="-fx-background-color: &quot;#7986CB&quot;;" text="Guardar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+            <MFXButton fx:id="btnCancel" buttonType="RAISED" depthLevel="LEVEL1" onAction="#cancel" rippleColor="#f00000d1" style="-fx-background-color: &quot;#FF0000B2&quot;;" text="Cancelar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="12.0" />
+   </padding>
 </AnchorPane>
