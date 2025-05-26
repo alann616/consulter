@@ -35,14 +35,6 @@ public class ClinicalHistoryService {
         clinicalHistory.getGynecological().setClinicalHistory(clinicalHistory);
         clinicalHistory.getPatientInterview().setClinicalHistory(clinicalHistory);
 
-        // Guardar primero las entidades hijas
-        hereditaryRepository.save(clinicalHistory.getHereditary());
-        nonPathologicalRepository.save(clinicalHistory.getNonPathological());
-        pathologicalRepository.save(clinicalHistory.getPathological());
-        gynecologicalRepository.save(clinicalHistory.getGynecological());
-        patientInterviewRepository.save(clinicalHistory.getPatientInterview());
-
-        // Luego guardar la historia clínica principal
         return clinicalHistoryRepository.save(clinicalHistory);
     }
 

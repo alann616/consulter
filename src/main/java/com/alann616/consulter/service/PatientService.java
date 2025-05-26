@@ -49,91 +49,22 @@ public class PatientService {
     }
 
     @Transactional
-    @CacheEvict(value = "patients", allEntries = true) // Invalida caché
+    @CacheEvict(value = "patients", allEntries = true)
     public void savePatient(Patient patient) {
-        if (patient.getPatientId() != null) {
-            // Actualizar paciente existente
-            Patient existingPatient = patientRepository.findById(patient.getPatientId()).orElse(null);
-            if (existingPatient != null) {
-                // Actualizar solo los campos que pueden cambiar
-                existingPatient.setName(patient.getName());
-                existingPatient.setLastName(patient.getLastName());
-                existingPatient.setSecondLastName(patient.getSecondLastName());
-                existingPatient.setGender(patient.getGender());
-                existingPatient.setBirthDate(patient.getBirthDate());
-                existingPatient.setPhone(patient.getPhone());
-                existingPatient.setEmail(patient.getEmail());
-                existingPatient.setAddress(patient.getAddress());
-                // Guardar el paciente actualizado
-                patientRepository.save(existingPatient);
-            }
-        } else {
-            // Guardar nuevo paciente
-            patientRepository.save(patient);
-        }
+        patientRepository.save(patient);
         refreshPatients();
     }
 
-
-// En: main/java/com/alann616/consulter/service/PatientService.java
-
-    @Transactional // Muy importante
-    @CacheEvict(value = "patients", allEntries = true) // Invalida caché al salir del método (idealmente post-commit)
-    public void deletePatient(Long patientId) throws RuntimeException { // Puedes declarar que lanza excepción
-        System.out.println("Attempting to delete patient ID: " + patientId);
-        try {
-            // --- Paso 1: Eliminar Notas de Evolución ---
-            List<EvolutionNote> notes = evolutionNoteRepository.findByPatient_PatientId(patientId);
-            if (notes != null && !notes.isEmpty()) {
-                System.out.println("Found " + notes.size() + " evolution notes to delete.");
-                // *** Sugerencia 1: Probar con deleteAll en lugar de deleteAllInBatch ***
-                // evolutionNoteRepository.deleteAllInBatch(notes); // Original
-                evolutionNoteRepository.deleteAll(notes);      // Prueba con esto
-                // entityManager.flush(); // Opcional: Forzar sincronización con BD aquí
-                System.out.println("Deleted " + notes.size() + " evolution notes for patient ID: " + patientId);
-            } else {
-                System.out.println("No evolution notes found for patient ID: " + patientId);
-            }
-
-            // --- Paso 2: Eliminar Historias Clínicas ---
-            // Esta parte llama a ClinicalHistoryService, que maneja la cascada interna
-            List<ClinicalHistory> histories = clinicalHistoryRepository.findByPatientPatientId(patientId);
-            if (histories != null && !histories.isEmpty()) {
-                System.out.println("Found " + histories.size() + " clinical histories to delete.");
-                for (ClinicalHistory history : histories) {
-                    // La lógica de eliminar las tablas hijas está en este servicio
-                    clinicalHistoryService.deleteClinicalHistory(history.getDocumentId());
-                }
-                // entityManager.flush(); // Opcional: Forzar sincronización con BD aquí
-                System.out.println("Deleted " + histories.size() + " clinical histories for patient ID: " + patientId);
-            } else {
-                System.out.println("No clinical histories found for patient ID: " + patientId);
-            }
-
-            // --- Paso 3: Eliminar el Paciente ---
-            System.out.println("Deleting patient entity...");
-            Patient patientToDelete = patientRepository.findById(patientId)
-                    .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + patientId + " for deletion."));
-            patientRepository.delete(patientToDelete);
-            entityManager.flush(); // Opcional: Forzar sincronización con BD aquí
-            System.out.println("Patient ID: " + patientId + " deleted from repository.");
-
-            refreshPatients();
-        } catch (Exception e) { // Captura genérica está bien, pero revisa la causa raíz
-            // *** Sugerencia 2: Mejorar el log de errores ***
-            System.err.println("ERROR during deletion transaction for patient ID " + patientId + ": " + e.getMessage());
-            // Imprimir la causa raíz si existe, puede dar más detalles de JPA/DB
-            if (e.getCause() != null) {
-                System.err.println("Cause: " + e.getCause().getMessage());
-                e.getCause().printStackTrace(); // Stack trace de la causa raíz
-            } else {
-                e.printStackTrace(); // Stack trace de la excepción principal
-            }
-            // Lanzar excepción para que la transacción haga rollback y PatientCell sepa que falló
-            throw new RuntimeException("Error al eliminar paciente ID " + patientId + ". Revise los logs para más detalles.", e);
+    @Transactional
+    @CacheEvict(value = "patients", allEntries = true)
+    public void deletePatient(Long patientId) {
+        if (!patientRepository.existsById(patientId)) {
+            throw new RuntimeException("Paciente no encontrado con ID: " + patientId);
         }
-        System.out.println("Deletion logic completed for patient ID: " + patientId + ". Transaction commit pending.");
-        // NO llames a refreshPatients() aquí, la caché se invalida por @CacheEvict
+        // Con CascadeType.ALL y orphanRemoval=true en la entidad Patient,
+        // JPA se encargará de borrar todas las notas e historias asociadas.
+        patientRepository.deleteById(patientId);
+        refreshPatients();
     }
 
     // Este método es el que REALMENTE carga de la BD

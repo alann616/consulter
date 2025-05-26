@@ -648,8 +648,12 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
 
             EvolutionNoteController noteController = fxmlLoader.getController();
-            noteController.setPatient(selectedPatient);
-            noteController.setDoctor(loggedUser);
+
+            // ---- CAMBIO CLAVE ----
+            // En lugar de configurar el paciente y el doctor por separado,
+            // llamamos al nuevo método que reinicia completamente el estado del controlador.
+            noteController.prepareForNewNote(selectedPatient, loggedUser);
+            // ----------------------
 
             Stage noteStage = new Stage();
             noteStage.setTitle("Nueva nota de evolución");
@@ -660,7 +664,7 @@ public class MainViewController {
             Scene scene = new Scene(root);
             noteStage.setScene(scene);
 
-            // ⬇️ Refrescar después de cerrar
+            // Refrescar después de cerrar
             noteStage.setOnHidden(event2 -> showPatientDetails(selectedPatient));
 
             noteStage.showAndWait();
@@ -675,7 +679,7 @@ public class MainViewController {
             loader.setControllerFactory(context::getBean);
             Parent root = loader.load();
 
-            EvolutionNoteController controller = loader.getController();
+            EvolutionNoteController noteController = loader.getController();
             EvolutionNote note = evolutionNoteService.getEvolutionNoteById(documentId);
 
             if (note == null) {
@@ -683,9 +687,9 @@ public class MainViewController {
                 return;
             }
 
-            controller.setDoctor(loggedUser); // ya lo tenés guardado en tu controller
-            controller.setPatient(note.getPatient());
-            controller.setEvolutionNote(note); // Necesitamos crear este método (ver siguiente paso)
+            noteController.setDoctor(loggedUser); // ya lo tenés guardado en tu noteController
+            noteController.setPatient(note.getPatient());
+            noteController.setEvolutionNote(note); // Necesitamos crear este método (ver siguiente paso)
 
             Stage stage = new Stage();
             stage.setTitle("Nota de evolución");
@@ -787,21 +791,17 @@ public class MainViewController {
         }
     }
 
-    // En MainViewController.java
     public void refreshPatientList() {
-        System.out.println("MainViewController refreshing patient list...");
+        System.out.println("Refrescando la lista de pacientes en la UI...");
         try {
-            // Obtener la lista actualizada del servicio (que debería usar la caché o recargarla si fue invalidada)
+            // El servicio se encarga de la caché. Esta llamada traerá datos frescos si la caché fue invalidada.
             ObservableList<Patient> updatedPatients = patientService.getAllPatients();
+            allPatients.setAll(updatedPatients); // setAll es eficiente para actualizar la UI
 
-            // Limpiar la lista base ANTES de añadir los nuevos datos
-            allPatients.clear();
-            allPatients.addAll(updatedPatients);
-
+            // Limpiar la selección y los detalles del paciente
+            lstPatients.getSelectionModel().clearSelection();
             anchorPatient.setVisible(false);
-
-            // La FilteredList y SortedList que envuelven 'allPatients' se actualizarán automáticamente.
-            System.out.println("Patient list updated in UI with " + allPatients.size() + " patients.");
+            selectPatientContent.setVisible(true);
 
         } catch (Exception e) {
             System.err.println("Error refreshing patient list UI: " + e.getMessage());

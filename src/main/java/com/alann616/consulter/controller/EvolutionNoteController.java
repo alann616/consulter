@@ -4,7 +4,6 @@ import com.alann616.consulter.enums.DocumentType;
 import com.alann616.consulter.model.Patient;
 import com.alann616.consulter.model.User;
 import com.alann616.consulter.model.doctordocs.EvolutionNote;
-import com.alann616.consulter.service.DocumentService;
 import com.alann616.consulter.service.EvolutionNoteService;
 import com.alann616.consulter.service.PatientService;
 import com.alann616.consulter.service.UserService;
@@ -43,7 +42,6 @@ public class EvolutionNoteController {
 
     @Autowired private PatientService patientService;
     @Autowired private UserService userService;
-    @Autowired private DocumentService documentService;
 
     @FXML
     private Label evoDoctorData, lblDateTime, lblName, lblAge;
@@ -122,15 +120,21 @@ public class EvolutionNoteController {
     public void saveEvolutionNote(ActionEvent e) throws IOException {
         if (patient == null || doctor == null) {
             System.err.println("Error: Paciente o doctor no definidos.");
+            // Considera mostrar una alerta al usuario.
+            Alert alert = new Alert(Alert.AlertType.ERROR, "No se ha podido identificar al paciente o al doctor. Por favor, reinicie el formulario.");
+            alert.setTitle("Error de Datos");
+            alert.setHeaderText("Faltan datos esenciales");
+            alert.showAndWait();
             return;
         }
 
-        // Si evolutionNote es null, significa que estamos guardando una nota nueva.
-        // Si no es null, estamos editando una existente (establecida por setEvolutionNote).
+        // Si la variable de instancia `evolutionNote` es nula, creamos una nueva.
+        // Si ya existe, la estamos editando.
         if (evolutionNote == null) {
-            evolutionNote = new EvolutionNote(); // Crear una nueva instancia SOLO si es nota nueva
+            evolutionNote = new EvolutionNote();
         }
 
+        // 1. Poblar el objeto con todos los datos del formulario
         evolutionNote.setTimestamp(LocalDateTime.now());
         evolutionNote.setPatient(patient);
         evolutionNote.setDoctor(doctor);
@@ -152,33 +156,31 @@ public class EvolutionNoteController {
         evolutionNote.setLaboratoryResults(laboratoryResults.getText());
         evolutionNote.setDocumentType(DocumentType.EVOLUTION_NOTE);
 
-        // Primero guardamos la nota para que obtenga un ID si es nueva
-        // Si es una edición, save actualizará la entidad existente
-        evolutionNote = evolutionNoteService.saveEvolutionNote(evolutionNote);
+        // 2. Guardar la entidad en la base de datos UNA SOLA VEZ.
+        // El objeto 'savedNote' es la versión persistida y ya contiene el ID generado.
+        EvolutionNote savedNote = evolutionNoteService.saveEvolutionNote(evolutionNote);
 
-        // Ahora generamos el documentName con el ID real (que ahora ya está asignado)
+        // 3. Generar el nombre del documento usando el ID real.
         String documentName = String.format("NotaEvolucion_%d_%s_%s_%s",
-                evolutionNote.getDocumentId(), // Usamos el ID asignado
-                evolutionNote.getTimestamp().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")).replace(":", "-").replace("/", "-").replace(" ", "_"), // Formato amigable para nombre de archivo
+                savedNote.getDocumentId(), // Usamos el ID del objeto devuelto por save()
+                savedNote.getTimestamp().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")), // Formato amigable para nombres de archivo
                 patient.getName().replaceAll("\\s+", ""),
                 patient.getLastName().replaceAll("\\s+", "")
         );
 
-        // Actualizamos la nota con el documentName y guardamos de nuevo
-        evolutionNote.setDocumentName(documentName);
-        evolutionNote = evolutionNoteService.saveEvolutionNote(evolutionNote); // Segunda actualización para el nombre
+        // 4. Asignar el nombre a la entidad y guardarla de nuevo (esto es una operación de actualización).
+        savedNote.setDocumentName(documentName);
+        evolutionNoteService.saveEvolutionNote(savedNote);
 
-        // Generamos el documento con el nombre correcto
-        generateDocx(evolutionNote);
+        System.out.println("Nota de evolución guardada correctamente: " + savedNote);
 
-        System.out.println("Nota de evolución guardada correctamente: " + evolutionNote);
+        // 5. Generar el documento físico (DOCX).
+        generateDocx(savedNote);
 
-        // 🚨 IMPORTANTE: Resetear la variable de instancia después de guardar
-        // para asegurar que la próxima vez que se abra el formulario para una NOTA NUEVA,
-        // se cree una nueva instancia.
-        this.evolutionNote = null; // Añade esta línea
+        // 6. Resetear la variable de instancia para que el formulario esté listo para una nueva nota.
+        this.evolutionNote = null;
 
-
+        // 7. Cerrar la ventana.
         ((Stage) btnSaveNote.getScene().getWindow()).close();
     }
 
@@ -448,4 +450,40 @@ public class EvolutionNoteController {
         laboratoryResults.setText(note.getLaboratoryResults());
     }
 
+
+    public void prepareForNewNote(Patient patient, User doctor) {
+        // 1. Reinicia la variable de estado principal.
+        this.evolutionNote = null;
+
+        // 2. Carga los datos del paciente y doctor para la nueva nota.
+        setPatient(patient);
+        setDoctor(doctor);
+
+        // 3. Restablece todos los campos del formulario a su estado inicial.
+        // Esto limpia visualmente cualquier dato de una nota cargada anteriormente.
+        spnSystolic.getValueFactory().setValue(120);
+        spnDiastolic.getValueFactory().setValue(80);
+        spnSPo2.getValueFactory().setValue(98);
+        spnHeartRate.getValueFactory().setValue(75);
+        spnRespirationRate.getValueFactory().setValue(16);
+        spnWeight.getValueFactory().setValue(60.0);
+        spnHeight.getValueFactory().setValue(1.60);
+        spnTemperature.getValueFactory().setValue(36.5);
+
+        currentCondition.clear();
+        genInspection.clear();
+        laboratoryResults.clear();
+        treatment.clear();
+        diagnosis.clear();
+
+        // 4. Restablece los textos predeterminados con viñetas.
+        prognosis.setText("RESERVADO A EVOLUCIÓN DEL PACIENTE");
+
+        treatmentPlan.setText("""
+                · SE EXPLICAN DATOS DE ALARMA
+                · MEDIDAS GENERALES PARA PREVENCIÓN DE SARS COV-2
+                · CONSUMIR ABUNDANTES LÍQUIDOS""");
+
+        instructions.setText("· CITA ABIERTA EN CASO DE CUALQUIER EVENTUALIDAD" + "\n" + "· REPOSO RELATIVO");
+    }
 }

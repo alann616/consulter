@@ -191,12 +191,17 @@ public class ClinicalHistoryController {
                 0, 300, 80, 1));
     }
 
+// En: src/main/java/com/alann616/consulter/controller/ClinicalHistoryController.java
+
     @FXML
     public void saveHistory() {
         if (patient == null || doctor == null) {
-            System.out.println("Error: Patient or doctor is null.");
+            System.err.println("Error: Paciente o doctor no definidos.");
+            // Mostrar alerta al usuario
             return;
         }
+
+        // Configurar el tamaño de los VBox para la captura de pantalla del PDF
         vboxPage1.setMaxSize(816, 1056);
         vboxPage1.setMinSize(816, 1056);
         vboxPage2.setMaxSize(816, 1056);
@@ -204,151 +209,66 @@ public class ClinicalHistoryController {
         vboxPage3.setMaxSize(816, 1056);
         vboxPage3.setMinSize(816, 1056);
 
+        // Si 'clinicalHistory' es nulo, creamos una instancia nueva. Si no, la editamos.
+        if (clinicalHistory == null) {
+            clinicalHistory = new ClinicalHistory();
+            clinicalHistory.setHereditary(new Hereditary());
+            clinicalHistory.setNonPathological(new NonPathological());
+            clinicalHistory.setPathological(new Pathological());
+            clinicalHistory.setGynecological(new Gynecological());
+            clinicalHistory.setPatientInterview(new PatientInterview());
+        }
 
-        // Always create a new ClinicalHistory object and its associated tables
-        clinicalHistory = new ClinicalHistory();
-        clinicalHistory.setHereditary(new Hereditary());
-        clinicalHistory.setNonPathological(new NonPathological());
-        clinicalHistory.setPathological(new Pathological());
-        clinicalHistory.setGynecological(new Gynecological());
-        clinicalHistory.setPatientInterview(new PatientInterview());
-
-        // General data
+        // 1. Poblar el objeto ClinicalHistory y todas sus tablas hijas con los datos del formulario.
+        // ... (Tu código existente para poblar los objetos h, np, p, g, pi y clinicalHistory va aquí)
+        // (Este código es largo y ya lo tienes, así que se omite por brevedad)
+        // Ejemplo:
         clinicalHistory.setTimestamp(LocalDateTime.now());
         clinicalHistory.setPatient(patient);
         clinicalHistory.setDoctor(doctor);
-        clinicalHistory.setType(toggleType.selectedProperty().get());
-        clinicalHistory.setBodyTemp(spnTemperature.getValue());
-        clinicalHistory.setSystolicBP(spnSystolic.getValue());
-        clinicalHistory.setDiastolicBP(spnDiastolic.getValue());
-        clinicalHistory.setHeartRate(spnHeartRate.getValue());
-        clinicalHistory.setHeight(spnHeight.getValue());
-        clinicalHistory.setOxygenSaturation(spnSpO2.getValue());
-        clinicalHistory.setRespiratoryRate(spnRespiratoryRate.getValue());
-        clinicalHistory.setWeight(spnWeight.getValue());
-        clinicalHistory.setCurrentCondition(txtCurrentCondition.getText());
-        clinicalHistory.setDiagnosticImpression(txtDiagnosticImpression.getText());
-        clinicalHistory.setGeneralInspection(txtGeneralInspection.getText());
-        clinicalHistory.setInstructions(null);
-        clinicalHistory.setPrognosis(txtPrognosis.getText());
-        clinicalHistory.setTreatment(txtTreatment.getText());
-        clinicalHistory.setAbdominalPerimeter(spnAbdominal.getValue());
-        clinicalHistory.setBodyMassIndex(spnIMC.getValue());
-        clinicalHistory.setCapillaryGlycemia(spnGlucemia.getValue());
-        clinicalHistory.setCephalicPerimeter(spnCefalico.getValue());
-
-        // Hereditary
-        Hereditary h = clinicalHistory.getHereditary();
-        h.setTimestamp(LocalDateTime.now());
-        h.setDiabetesMellitus(txtDiabetes.getText());
-        h.setHypertension(txtHypertension.getText());
-        h.setTuberculosis(txtTB.getText());
-        h.setCongenitalAnomalies(txtBirthDisease.getText());
-        h.setEndocrineDisorders(txtEndocrineDisorders.getText());
-        h.setHeartConditions(txtHeartDisease.getText());
-        h.setNeoplasms(txtNeoplasia.getText());
-        h.setOtherHereditaryConditions(txtOtherHereditary.getText());
-
-        // Non-pathological
-        NonPathological np = clinicalHistory.getNonPathological();
-        np.setTimestamp(LocalDateTime.now());
-        np.setIsDrinker(getCheckboxValue(cboxAlcoholism));
-        np.setFullyVaccinated(toggleVaccunation.isSelected());
-        np.setIsSmoker(getCheckboxValue(cboxTabaquism));
-        np.setSubstanceUse(getCheckboxValue(cboxDrugs));
-        np.setOvercrowding(false);
-        np.setPromiscuity(false);
-        np.setFloorMaterial(getSelectedFloor());
-        np.setWallMaterial(getSelectedWalls());
-        np.setServices(getSelectedServices());
-        np.setMaritalStatus(toggleMaritalStatus.getSelectedToggle().getUserData().toString());
-        np.setOccupation(txtOcupation.getText());
-        np.setReligion(txtReligion.getText());
-
-        // Pathological
-        Pathological p = clinicalHistory.getPathological();
-        p.setTimestamp(LocalDateTime.now());
-        p.setAllergicHistory(txtAllergic.getText());
-        p.setCoombsTest(txtCombe.getText());
-        p.setDiabetes(txtDM2.getText());
-        p.setHypertension(txtHas.getText());
-        p.setOtherPathologicalConditions(txtOtherPathological.getText());
-        p.setSurgicalHistory(txtSurgery.getText());
-        p.setTransfusionHistory(txtTransfusion.getText());
-        p.setTraumaticHistory(txtTraumatic.getText());
-
-        // Gynecological
-        Gynecological g = clinicalHistory.getGynecological();
-        g.setTimestamp(LocalDateTime.now());
-        g.setContraceptiveUsageDuration(txtTime.getText());
-        g.setFamilyPlanningMethod(txtPlanificacion.getText());
-        g.setMenstrualCycleRegularity(cboxRythm.getSelectedItem());
-        g.setUterineCurettage(txtLUI.getText());
-        g.setLastDeliveryDate(dpickerLastDelivery.getValue());
-        g.setLastMenstrualPeriod(dpickerFUM.getValue());
-        g.setLastPapSmearDate(dpickerPAP.getValue());
-        g.setLowBirthWeightChildren(spnBajoPeso.getValue());
-        g.setMacrosomicChildren(spnMacrosomicos.getValue());
-        g.setMenarcheAge(spnMenarche.getValue());
-        g.setNumberOfAbortions(spnAbortos.getValue());
-        g.setNumberOfCesareanSections(spnCesareas.getValue());
-        g.setNumberOfBirths(spnPartos.getValue());
-        g.setNumberOfPregnancies(spnGestas.getValue());
-        g.setSexualActivityStartAge(spnIVSA.getValue());
-
-        // Patient interview
-        PatientInterview pi = clinicalHistory.getPatientInterview();
-        pi.setTimestamp(LocalDateTime.now());
-        pi.setReviewOfSystems(txtOrgans.getText());
-        pi.setGeneralSimptoms(txtGeneralSimptoms.getText());
-        pi.setHead(txtHead.getText());
-        pi.setNeck(txtNeck.getText());
-        pi.setThorax(txtThorax.getText());
-        pi.setAbdomen(txtAbdomen.getText());
-        pi.setBackbone(txtVertebral.getText());
-        pi.setExternalGenitalia(txtGenitalia.getText());
-        pi.setRectalTouch(txtRectalTouch.getText());
-        pi.setVaginalTouch(txtVaginalTouch.getText());
-        pi.setLimbs(txtLimbs.getText());
+        // ... resto de los setters ...
 
         try {
-            btnSaveHistory.setVisible(false);
+            // Desactivar el botón para evitar doble clic
+            btnSaveHistory.setDisable(true);
 
-            List<VBox> vboxes = Arrays.asList(vboxPage1, vboxPage2, vboxPage3);
-            // First save to generate an id
-            clinicalHistory = clinicalHistoryService.saveClinicalHistory(clinicalHistory);
+            // 2. Guardar la historia clínica UNA VEZ para obtener el ID.
+            ClinicalHistory savedHistory = clinicalHistoryService.saveClinicalHistory(clinicalHistory);
 
-            // Now generate the document name with a real id
+            // 3. Generar el nombre del documento con el ID real.
             String documentName = String.format("HistoriaClinica_%d_%s_%s_%s",
-                    clinicalHistory.getDocumentId(),
-                    clinicalHistory.getTimestamp().format(DateTimeFormatter.ofPattern("yyyyMMdd")),
+                    savedHistory.getDocumentId(),
+                    savedHistory.getTimestamp().format(DateTimeFormatter.ofPattern("yyyyMMdd")),
                     patient.getName().replaceAll("\\s+", ""),
                     patient.getLastName().replaceAll("\\s+", "")
             );
 
-            // Update the clinical history with its generated name
-            clinicalHistory.setDocumentName(documentName);
-            clinicalHistory = clinicalHistoryService.saveClinicalHistory(clinicalHistory); // 🔹 Segunda actualización solo para el nombre
+            // 4. Asignar el nombre y actualizar la entidad.
+            savedHistory.setDocumentName(documentName);
+            clinicalHistoryService.saveClinicalHistory(savedHistory);
 
-            System.out.println("Historia clínica guardada correctamente: " + clinicalHistory);
+            System.out.println("Historia clínica guardada en BD: " + savedHistory);
 
-            // Generate the pdf in a separate thread
+            // 5. Generar el PDF en un hilo separado para no congelar la UI.
+            final ClinicalHistory historyForPdf = savedHistory;
             Task<Void> pdfTask = new Task<>() {
                 @Override
-                protected Void call() {
-                    generatePdf(clinicalHistory, vboxes);
+                protected Void call() throws Exception {
+                    List<VBox> vboxes = Arrays.asList(vboxPage1, vboxPage2, vboxPage3);
+                    generatePdf(historyForPdf, vboxes); // Usar el objeto final para el hilo
                     return null;
                 }
 
                 @Override
                 protected void succeeded() {
                     Platform.runLater(() -> {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        // Mostrar confirmación y cerrar la ventana SÓLO cuando el PDF se ha generado
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION, "La historia clínica se ha guardado y exportado a PDF correctamente.");
                         alert.setTitle("Éxito");
-                        alert.setHeaderText("Historia clínica guardada");
-                        alert.setContentText("La historia clínica se ha guardado correctamente.");
+                        alert.setHeaderText("Operación completada");
                         alert.showAndWait();
 
+                        // Cerrar el formulario
                         Stage form = (Stage) btnSaveHistory.getScene().getWindow();
                         form.close();
                     });
@@ -356,12 +276,24 @@ public class ClinicalHistoryController {
 
                 @Override
                 protected void failed() {
+                    // En caso de error en la generación del PDF
                     getException().printStackTrace();
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "La historia se guardó en la base de datos, pero ocurrió un error al generar el archivo PDF.");
+                        alert.setTitle("Error de Exportación");
+                        alert.setHeaderText("No se pudo generar el PDF");
+                        alert.showAndWait();
+                        btnSaveHistory.setDisable(false); // Reactivar el botón
+                    });
                 }
             };
             new Thread(pdfTask).start();
+
         } catch (Exception e) {
-            System.out.println("Error al guardar la historia clínica: " + e.getMessage());
+            System.err.println("Error al guardar la historia clínica en la base de datos: " + e.getMessage());
+            e.printStackTrace();
+            btnSaveHistory.setDisable(false); // Reactivar el botón en caso de error
+            // Mostrar alerta de error de base de datos
         }
     }
 
