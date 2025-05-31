@@ -2,79 +2,98 @@ package com.alann616.consulter.service;
 
 import com.alann616.consulter.model.doctordocs.ClinicalHistory;
 import com.alann616.consulter.repository.ClinicalHistoryRepository;
-import com.alann616.consulter.repository.historytables.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // ✨ Importante
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class ClinicalHistoryService {
-    @Autowired private ClinicalHistoryRepository clinicalHistoryRepository;
+    private final ClinicalHistoryRepository clinicalHistoryRepository;
 
-    // Repositorios de tablas relacionadas (one-to-one)
-    private final HereditaryRepository hereditaryRepository;
-    private final NonPathologicalRepository nonPathologicalRepository;
-    private final PathologicalRepository pathologicalRepository;
-    private final GynecologicalRepository gynecologicalRepository;
-    private final PatientInterviewRepository patientInterviewRepository;
-
-    private ObservableList<ClinicalHistory> clinicalHistoryList;
-
-    @Transactional // ✨ Asegura que todo se haga o nada
-    public ClinicalHistory saveClinicalHistory(ClinicalHistory clinicalHistory) {
-        // Establecer relaciones inversas
-        clinicalHistory.getHereditary().setClinicalHistory(clinicalHistory);
-        clinicalHistory.getNonPathological().setClinicalHistory(clinicalHistory);
-        clinicalHistory.getPathological().setClinicalHistory(clinicalHistory);
-        clinicalHistory.getGynecological().setClinicalHistory(clinicalHistory);
-        clinicalHistory.getPatientInterview().setClinicalHistory(clinicalHistory);
-
-        return clinicalHistoryRepository.save(clinicalHistory);
+    public ClinicalHistoryService(ClinicalHistoryRepository clinicalHistoryRepository) {
+        this.clinicalHistoryRepository = clinicalHistoryRepository;
     }
 
-    public ObservableList<ClinicalHistory> getClinicalHistory() {
-        List<ClinicalHistory> histories = clinicalHistoryRepository.findAll();
-        return FXCollections.observableArrayList(histories);
+    /**
+     * Obtiene todas las historias clínicas.
+     * @return Lista de todas las historias clínicas.
+     */
+    @Transactional(readOnly = true)
+    public List<ClinicalHistory> getAllClinicalHistories() {
+        return clinicalHistoryRepository.findAll();
     }
 
-    public ObservableList<ClinicalHistory> getHistoriesByPatient(Long patientId) {
-        List<ClinicalHistory> histories = clinicalHistoryRepository.findByPatientPatientId(patientId);
-        return FXCollections.observableArrayList(histories);
+    /**
+     * Obtiene todas las historias clínicas de un paciente específico.
+     * @param patientId ID del paciente.
+     * @return Lista de historias clínicas del paciente.
+     */
+    public List<ClinicalHistory> getClinicalHistoriesByPatientId(Long patientId) {
+        return clinicalHistoryRepository.findByPatientPatientId(patientId);
     }
 
+    /**
+     * Obtiene una historia clínica por su ID.
+     * @param id ID de la historia clínica.
+     * @return Historia clínica encontrada.
+     * @throws RuntimeException si no se encuentra la historia clínica.
+     */
     public ClinicalHistory getClinicalHistoryById(Long id) {
-        return clinicalHistoryRepository.findById(id).orElse(null);
+        return clinicalHistoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Historia clínica no encontrada con ID: " + id));
     }
 
-    @Transactional // Asegura atomicidad para esta operación específica
-    public void deleteClinicalHistory(Long selectedHistory) {
-        // Usamos findById para obtener la entidad administrada por JPA
-        ClinicalHistory clinicalHistory = clinicalHistoryRepository.findById(selectedHistory)
-                .orElse(null); // Encuentra la historia o devuelve null
-
-        if (clinicalHistory != null) {
-            System.out.println("Deleting related entities for ClinicalHistory ID: " + selectedHistory);
-            // La cascada ALL *debería* manejar esto, pero la eliminación explícita es más segura
-            // Si confías en CascadeType.ALL y ON DELETE CASCADE en BD, podrías omitir esto.
-            // Por seguridad, mantenemos la eliminación explícita por ahora:
-            if (clinicalHistory.getHereditary() != null) hereditaryRepository.delete(clinicalHistory.getHereditary());
-            if (clinicalHistory.getNonPathological() != null) nonPathologicalRepository.delete(clinicalHistory.getNonPathological());
-            if (clinicalHistory.getPathological() != null) pathologicalRepository.delete(clinicalHistory.getPathological());
-            if (clinicalHistory.getGynecological() != null) gynecologicalRepository.delete(clinicalHistory.getGynecological());
-            if (clinicalHistory.getPatientInterview() != null) patientInterviewRepository.delete(clinicalHistory.getPatientInterview());
-
-            System.out.println("Deleting ClinicalHistory entity ID: " + selectedHistory);
-            // Luego eliminar la historia clínica principal
-            clinicalHistoryRepository.delete(clinicalHistory);
-            System.out.println("ClinicalHistory ID: " + selectedHistory + " deleted.");
-        } else {
-            System.out.println("ClinicalHistory ID: " + selectedHistory + " not found for deletion.");
+    /**
+     * Guarda una historia clínica nueva o actualiza una existente.
+     * Si la historia clínica tiene un ID, se actualiza; si no, se crea una nueva.
+     * @param clinicalHistory Historia clínica a guardar.
+     * @return Historia clínica guardada (con su ID si es nueva).
+     */
+    @Transactional
+    public ClinicalHistory saveClinicalHistory(ClinicalHistory clinicalHistory) {
+        if (clinicalHistory.getTimestamp() == null) {
+            clinicalHistory.setTimestamp(LocalDateTime.now());
         }
+
+        // Establecer relaciones inversas (owner side of relationship)
+        // Esto es crucial para que CascadeType.ALL funcione correctamente al persistir
+        // y para que las sub-entidades tengan la FK a ClinicalHistory.
+        if (clinicalHistory.getHereditary() != null) clinicalHistory.getHereditary().setClinicalHistory(clinicalHistory);
+        if (clinicalHistory.getNonPathological() != null) clinicalHistory.getNonPathological().setClinicalHistory(clinicalHistory);
+        if (clinicalHistory.getPathological() != null) clinicalHistory.getPathological().setClinicalHistory(clinicalHistory);
+        if (clinicalHistory.getGynecological() != null) clinicalHistory.getGynecological().setClinicalHistory(clinicalHistory);
+        if (clinicalHistory.getPatientInterview() != null) clinicalHistory.getPatientInterview().setClinicalHistory(clinicalHistory);
+
+        boolean isNew = clinicalHistory.getDocumentId() == null;
+        ClinicalHistory savedHistory = clinicalHistoryRepository.save(clinicalHistory); // JPA guarda el padre y los hijos por cascada.
+
+        if (isNew || savedHistory.getDocumentName() == null || savedHistory.getDocumentName().isEmpty()) {
+            // Generar documentName después del primer guardado para tener el ID
+            String documentName = String.format("HistoriaClinica_%d_%s_%s_%s",
+                    savedHistory.getDocumentId(),
+                    savedHistory.getTimestamp().format(DateTimeFormatter.ofPattern("yyyyMMdd")),
+                    savedHistory.getPatient().getName().replaceAll("\\s+", ""),
+                    savedHistory.getPatient().getLastName().replaceAll("\\s+", "")
+            );
+            savedHistory.setDocumentName(documentName);
+            return clinicalHistoryRepository.save(savedHistory); // Guardar de nuevo con el nombre
+        }
+        return savedHistory;
+    }
+
+    /**
+     * Elimina una historia clínica por su ID.
+     * @param id ID de la historia clínica a eliminar.
+     */
+    public void deleteClinicalHistory(Long id) {
+        if (!clinicalHistoryRepository.existsById(id)) {
+            throw new RuntimeException("Historia clínica no encontrada con ID: " + id);
+        }
+
+        clinicalHistoryRepository.deleteById(id);
+        System.out.println("Historia clínica eliminada con ID: " + id);
     }
 }
