@@ -39,8 +39,8 @@ public class Patient {
     @NotNull
     private LocalDate birthDate;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "allergies", columnDefinition = "varchar(255)")
+    private String allergies;
 
     @Column(name = "phone", columnDefinition = "CHAR(10)")
     private String phone;
