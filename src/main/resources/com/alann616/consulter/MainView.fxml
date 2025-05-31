@@ -28,452 +28,385 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="background" fx:id="bgMain" minHeight="600.0" minWidth="800.0" prefHeight="730.0" prefWidth="1294.0" styleClass="root" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alann616.consulter.controller.MainViewController">
-    <children>
-        <Button id="btnPatients" fx:id="btnPatients" alignment="CENTER" contentDisplay="TOP" layoutX="24.0" layoutY="82.4" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" text="Inicio" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="80.0">
-            <font>
-                <Font name="Roboto" size="10.0" />
-            </font>
-            <graphic>
-                <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0">
-                    <children>
-                        <SVGPath content="M156-200v-351.85q0-23.17 10.68-44.03 10.69-20.87 29.24-34.81l225.7-169.54q26.95-19.46 58.32-19.46t58.44 19.46l225.7 169.54q18.55 13.94 29.24 34.81Q804-575.02 804-551.85V-200q0 36.54-24.73 61.27Q754.54-114 718-114H615.31q-20.37 0-34.76-14.4-14.4-14.39-14.4-34.76v-195.38q0-20.36-14.39-34.76-14.39-14.39-34.76-14.39h-74q-20.37 0-34.76 14.39-14.39 14.4-14.39 34.76v195.38q0 20.37-14.4 34.76-14.39 14.4-34.76 14.4H242q-36.54 0-61.27-24.73Q156-163.46 156-200Z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
-                    </children>
-                </StackPane>
-            </graphic>
-        </Button>
-        <Separator layoutX="17.0" layoutY="550.0" prefWidth="50.0" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="10.0" />
-        <Button id="btnProfile" fx:id="btnProfile" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="31.0" layoutY="629.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" text="Perfil" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0">
-            <font>
-                <Font size="10.0" />
-            </font>
-            <graphic>
-                <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0">
-                    <children>
-                        <SVGPath content="M227.92-275.31q56-40.84 119.12-62.77Q410.15-360 480-360q69.85 0 132.96 21.92 63.12 21.93 119.12 62.77 37.3-46 55.61-96.42Q806-422.15 806-480q0-134-96-230t-230-96q-134 0-230 96t-96 230q0 57.85 18.31 108.27 18.31 50.42 55.61 96.42ZM480.08-426q-64.85 0-109.46-44.54Q326-515.07 326-579.92t44.54-109.46Q415.07-734 479.92-734t109.46 44.54Q634-644.93 634-580.08t-44.54 109.46Q544.93-426 480.08-426ZM480-68q-84.15 0-159.53-32.53-75.39-32.54-131.16-88.58-55.77-56.04-88.54-131.39T68-480.5q0-84.65 32.77-159.5t88.54-130.89q55.77-56.04 131.16-88.58Q395.85-892 480.5-892T640-859.23q74.85 32.77 130.65 88.58 55.81 55.8 88.58 130.57Q892-565.32 892-480q0 84.15-32.53 159.53-32.54 75.39-88.58 131.16-56.04 55.77-130.81 88.54Q565.32-68 480-68Z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
-                    </children>
-                </StackPane>
-            </graphic>
-        </Button>
-        <Label id="lblUser" fx:id="lblUser" layoutX="940.0" layoutY="18.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" text="Dr. " AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="4.0" />
-        <Button id="btnSettings" fx:id="btnSettings" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="8.0" layoutY="570.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Ajustes" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="5.0">
-            <font>
-                <Font name="Roboto" size="10.0" />
-            </font>
-            <graphic>
-                <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0">
-                    <children>
-                        <SVGPath content="M411.69-68q-19.46 0-34.84-13.08-15.39-13.07-18.62-32.92l-10.77-82.85q-10.07-4.38-23.46-11.57-13.38-7.2-22.69-15.27L223-191.23q-18.85 8.31-37.88 1.61-19.04-6.69-28.58-24.3L87.46-338.08q-9.54-17.61-6.07-36.27 3.46-18.65 19.46-30.42l64.92-50q-.38-6.92-.96-13.92t-.58-13.93q0-5.53.58-12.34t.96-14.27l-63.92-48q-16-11.77-19.27-31.12-3.27-19.34 6.27-36.96l68.69-120q9.54-17.23 28.08-23.61 18.53-6.39 37.38.92l73.92 30.08q11.47-8.46 25.39-15.96t25.77-13.27L358.23-848q2.23-19.85 18.12-32.92Q392.23-894 411.69-894h136.62q19.46 0 35.34 13.08 15.89 13.07 18.12 32.92l9.77 82.23q13 6.54 25.57 13.27 12.58 6.73 24.43 15.58L736.39-768q18.84-8.31 37.38-1.42 18.54 6.88 29.07 24.11l68.7 120.39q9.54 17.61 6.07 36.77-3.46 19.15-19.46 30.92l-67.46 51.15q1.15 6.69 1.35 13.62.19 6.92.19 12.46 0 5.15-.39 12.08-.38 6.92-.76 14.77l64.3 48.38q16 11.77 20.16 30.92 4.15 19.16-5.39 36.77l-68.31 122.77q-9.53 17.62-29.26 24.31-19.73 6.69-38.58-1.62l-77.46-32.46q-10.85 7.85-21.81 14.46-10.96 6.62-22.19 11.39L601.77-114q-3.23 19.85-18.62 32.92Q567.77-68 548.31-68H411.69Zm65.77-266q61.92 0 104.96-43.04 43.04-43.04 43.04-104.96 0-61.92-43.04-104.96Q539.38-630 477.46-630q-61.54 0-104.77 43.04T329.46-482q0 61.92 43.23 104.96Q415.92-334 477.46-334Z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
-                    </children>
-                </StackPane>
-            </graphic>
-        </Button>
-        <SplitPane id="surface" fx:id="splitMain" cache="true" dividerPositions="0.4574468085106383" layoutX="150.0" layoutY="65.0" prefHeight="665.0" prefWidth="1224.0" styleClass="split-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
-            <items>
-                <AnchorPane id="pnlPatients" fx:id="leftSplit" prefHeight="160.0" prefWidth="100.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" layoutX="87.0" layoutY="100.0" prefHeight="55.0" prefWidth="330.0" spacing="8.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
-                            <children>
-                                <HBox id="hboxSearch" alignment="CENTER_LEFT" fillHeight="false" minWidth="170.0" prefHeight="22.0" prefWidth="358.0" HBox.hgrow="ALWAYS">
-                                    <HBox.margin>
-                                        <Insets left="8.0" right="8.0" />
-                                    </HBox.margin>
-                                    <children>
-                                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0">
-                                            <children>
-                                                <SVGPath content="M380.77-335.39q-102.46 0-173.54-71.07-71.07-71.08-71.07-173.54t71.07-173.54q71.08-71.07 173.54-71.07t173.54 71.07q71.07 71.08 71.07 173.54 0 42.85-14.38 81.85-14.39 39-38.39 67.84l230.16 230.16q8.31 8.3 8.5 20.88.19 12.58-8.5 21.27t-21.08 8.69q-12.38 0-21.07-8.69L530.46-388.16q-30 24.77-69 38.77-39 14-80.69 14Zm0-59.99q77.31 0 130.96-53.66 53.66-53.65 53.66-130.96t-53.66-130.96q-53.65-53.66-130.96-53.66t-130.96 53.66Q196.15-657.31 196.15-580t53.66 130.96q53.65 53.66 130.96 53.66Z" scaleX="0.035" scaleY="0.035" styleClass="icon" />
-                                            </children>
-                                        </StackPane>
-                                        <TextField id="txtSearch" fx:id="txtSearch" prefHeight="30.0" promptText="Buscar pacientes" HBox.hgrow="ALWAYS">
-                                            <font>
-                                                <Font name="Roboto" size="10.0" />
-                                            </font>
-                                            <HBox.margin>
-                                                <Insets right="8.0" />
-                                            </HBox.margin>
-                                        </TextField>
-                                    </children>
-                                    <padding>
-                                        <Insets left="4.0" />
-                                    </padding>
-                                </HBox>
-                                <Button id="btnAddPatient" fx:id="btnAddPatient" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openForm" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER">
-                                    <graphic>
-                                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
-                                            <children>
-                                                <SVGPath content="M725-530h-90q-12.75 0-21.37-8.63-8.63-8.63-8.63-21.38 0-12.76 8.63-21.37Q622.25-590 635-590h90v-90q0-12.75 8.63-21.37 8.63-8.63 21.38-8.63 12.76 0 21.37 8.63Q785-692.75 785-680v90h90q12.75 0 21.37 8.63 8.63 8.63 8.63 21.38 0 12.76-8.63 21.37Q887.75-530 875-530h-90v90q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63-12.76 0-21.37-8.63Q725-427.25 725-440v-90Zm-365 37.69q-57.75 0-98.87-41.12Q220-574.56 220-632.31q0-57.75 41.13-98.87 41.12-41.13 98.87-41.13 57.75 0 98.87 41.13Q500-690.06 500-632.31q0 57.75-41.13 98.88-41.12 41.12-98.87 41.12ZM60-248.46v-28.16q0-29.38 15.96-54.42 15.96-25.04 42.66-38.5 59.3-29.07 119.65-43.61 60.35-14.54 121.73-14.54t121.73 14.54q60.35 14.54 119.65 43.61 26.7 13.46 42.66 38.5Q660-306 660-276.62v28.16q0 25.3-17.73 43.04-17.73 17.73-43.04 17.73H120.77q-25.31 0-43.04-17.73Q60-223.16 60-248.46Z" scaleX="0.04" scaleY="0.04" styleClass="icon" />
-                                            </children>
-                                        </StackPane>
-                                    </graphic>
-                                </Button>
-                                <MenuButton maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" text="Ordenar por:" HBox.hgrow="ALWAYS">
-                                    <items>
-                                        <RadioMenuItem fx:id="btnYoungToOld" mnemonicParsing="false" onAction="#orderPatientsYoungToOld" text="Edad: menor a mayor">
-                                            <toggleGroup>
-                                                <ToggleGroup fx:id="toggleOrder" />
-                                            </toggleGroup>
-                                        </RadioMenuItem>
-                                        <SeparatorMenuItem mnemonicParsing="false" />
-                                        <RadioMenuItem fx:id="btnOldToYoung" mnemonicParsing="false" onAction="#orderPatientsOldToYoung" text="Edad: mayor a menor" toggleGroup="$toggleOrder" />
-                                        <SeparatorMenuItem mnemonicParsing="false" />
-                                        <RadioMenuItem fx:id="btnNewest" mnemonicParsing="false" onAction="#orderPatientsNewest" text="Recientes" toggleGroup="$toggleOrder" />
-                                        <SeparatorMenuItem mnemonicParsing="false" />
-                                        <RadioMenuItem fx:id="btnOldest" mnemonicParsing="false" onAction="#orderPatientsOldest" text="Antiguos" toggleGroup="$toggleOrder" />
-                                    </items>
-                                    <graphic>
-                                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
-                                            <children>
-                                                <SVGPath content="M455.39-180q-15.08 0-25.23-10.16Q420-200.31 420-215.39v-231.53L196.08-731.38q-11.54-15.39-3.35-32 8.2-16.62 27.66-16.62h519.22q19.46 0 27.66 16.62 8.19 16.61-3.35 32L540-446.92v231.53q0 15.08-10.16 25.23Q519.69-180 504.61-180h-49.22Z" scaleX="0.03" scaleY="0.03" styleClass="icon" />
-                                            </children>
-                                        </StackPane>
-                                    </graphic>
-                                </MenuButton>
-                            </children>
+<AnchorPane id="background" fx:id="bgMain" minHeight="600.0" minWidth="800.0" prefHeight="730.0" prefWidth="1294.0" styleClass="root" stylesheets="@../../../css/mainview/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alann616.consulter.controller.MainViewController">
+   <VBox layoutX="5.0" layoutY="80.0" prefHeight="663.0" prefWidth="42.0" spacing="12.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="65.0">
+      <children>
+          <Button id="btnPatients" fx:id="btnPatients" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="0.0" minHeight="60.0" minWidth="45.0" text="Inicio">
+              <font>
+                  <Font name="Roboto" size="10.0" />
+              </font>
+              <graphic>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
+                      <SVGPath content="M156-200v-351.85q0-23.17 10.68-44.03 10.69-20.87 29.24-34.81l225.7-169.54q26.95-19.46 58.32-19.46t58.44 19.46l225.7 169.54q18.55 13.94 29.24 34.81Q804-575.02 804-551.85V-200q0 36.54-24.73 61.27Q754.54-114 718-114H615.31q-20.37 0-34.76-14.4-14.4-14.39-14.4-34.76v-195.38q0-20.36-14.39-34.76-14.39-14.39-34.76-14.39h-74q-20.37 0-34.76 14.39-14.39 14.4-14.39 34.76v195.38q0 20.37-14.4 34.76-14.39 14.4-34.76 14.4H242q-36.54 0-61.27-24.73Q156-163.46 156-200Z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
+                  </StackPane>
+              </graphic>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+          </Button>
+          <Separator layoutY="-5.0" />
+          <Button id="btnSettings" fx:id="btnSettings" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="0.0" maxHeight="60.0" maxWidth="45.0" minHeight="60.0" mnemonicParsing="false" text="Ajustes">
+              <font>
+                  <Font name="Roboto" size="10.0" />
+              </font>
+              <graphic>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
+                      <SVGPath content="M411.69-68q-19.46 0-34.84-13.08-15.39-13.07-18.62-32.92l-10.77-82.85q-10.07-4.38-23.46-11.57-13.38-7.2-22.69-15.27L223-191.23q-18.85 8.31-37.88 1.61-19.04-6.69-28.58-24.3L87.46-338.08q-9.54-17.61-6.07-36.27 3.46-18.65 19.46-30.42l64.92-50q-.38-6.92-.96-13.92t-.58-13.93q0-5.53.58-12.34t.96-14.27l-63.92-48q-16-11.77-19.27-31.12-3.27-19.34 6.27-36.96l68.69-120q9.54-17.23 28.08-23.61 18.53-6.39 37.38.92l73.92 30.08q11.47-8.46 25.39-15.96t25.77-13.27L358.23-848q2.23-19.85 18.12-32.92Q392.23-894 411.69-894h136.62q19.46 0 35.34 13.08 15.89 13.07 18.12 32.92l9.77 82.23q13 6.54 25.57 13.27 12.58 6.73 24.43 15.58L736.39-768q18.84-8.31 37.38-1.42 18.54 6.88 29.07 24.11l68.7 120.39q9.54 17.61 6.07 36.77-3.46 19.15-19.46 30.92l-67.46 51.15q1.15 6.69 1.35 13.62.19 6.92.19 12.46 0 5.15-.39 12.08-.38 6.92-.76 14.77l64.3 48.38q16 11.77 20.16 30.92 4.15 19.16-5.39 36.77l-68.31 122.77q-9.53 17.62-29.26 24.31-19.73 6.69-38.58-1.62l-77.46-32.46q-10.85 7.85-21.81 14.46-10.96 6.62-22.19 11.39L601.77-114q-3.23 19.85-18.62 32.92Q567.77-68 548.31-68H411.69Zm65.77-266q61.92 0 104.96-43.04 43.04-43.04 43.04-104.96 0-61.92-43.04-104.96Q539.38-630 477.46-630q-61.54 0-104.77 43.04T329.46-482q0 61.92 43.23 104.96Q415.92-334 477.46-334Z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
+                  </StackPane>
+              </graphic>
+          </Button>
+          <Button id="btnProfile" fx:id="btnProfile" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="0.0" minHeight="60.0" minWidth="45.0" text="Perfil" textAlignment="CENTER">
+              <font>
+                  <Font size="10.0" />
+              </font>
+              <graphic>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
+                      <SVGPath content="M227.92-275.31q56-40.84 119.12-62.77Q410.15-360 480-360q69.85 0 132.96 21.92 63.12 21.93 119.12 62.77 37.3-46 55.61-96.42Q806-422.15 806-480q0-134-96-230t-230-96q-134 0-230 96t-96 230q0 57.85 18.31 108.27 18.31 50.42 55.61 96.42ZM480.08-426q-64.85 0-109.46-44.54Q326-515.07 326-579.92t44.54-109.46Q415.07-734 479.92-734t109.46 44.54Q634-644.93 634-580.08t-44.54 109.46Q544.93-426 480.08-426ZM480-68q-84.15 0-159.53-32.53-75.39-32.54-131.16-88.58-55.77-56.04-88.54-131.39T68-480.5q0-84.65 32.77-159.5t88.54-130.89q55.77-56.04 131.16-88.58Q395.85-892 480.5-892T640-859.23q74.85 32.77 130.65 88.58 55.81 55.8 88.58 130.57Q892-565.32 892-480q0 84.15-32.53 159.53-32.54 75.39-88.58 131.16-56.04 55.77-130.81 88.54Q565.32-68 480-68Z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
+                  </StackPane>
+              </graphic>
+          </Button>
+      </children>
+   </VBox>
+    <Label fx:id="lblUser" layoutX="940.0" layoutY="18.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" styleClass="title-small" text="Dr. " AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="4.0" />
+    <SplitPane id="surface" fx:id="splitMain" cache="true" dividerPositions="0.4574468085106383" layoutX="150.0" layoutY="65.0" prefHeight="665.0" prefWidth="1224.0" styleClass="split-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+        <AnchorPane id="pnlPatients" fx:id="leftSplit" prefHeight="160.0" prefWidth="100.0">
+            <HBox alignment="CENTER_LEFT" layoutX="87.0" layoutY="100.0" prefHeight="55.0" prefWidth="330.0" spacing="8.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
+                <padding>
+                    <Insets bottom="8.0" top="8.0" />
+                </padding>
+                <HBox id="hboxSearch" alignment="CENTER_LEFT" fillHeight="false" minWidth="170.0" prefHeight="22.0" prefWidth="358.0" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                        <Insets left="8.0" right="8.0" />
+                    </HBox.margin>
+                    <padding>
+                        <Insets left="4.0" />
+                    </padding>
+                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0">
+                        <SVGPath content="M380.77-335.39q-102.46 0-173.54-71.07-71.07-71.08-71.07-173.54t71.07-173.54q71.08-71.07 173.54-71.07t173.54 71.07q71.07 71.08 71.07 173.54 0 42.85-14.38 81.85-14.39 39-38.39 67.84l230.16 230.16q8.31 8.3 8.5 20.88.19 12.58-8.5 21.27t-21.08 8.69q-12.38 0-21.07-8.69L530.46-388.16q-30 24.77-69 38.77-39 14-80.69 14Zm0-59.99q77.31 0 130.96-53.66 53.66-53.65 53.66-130.96t-53.66-130.96q-53.65-53.66-130.96-53.66t-130.96 53.66Q196.15-657.31 196.15-580t53.66 130.96q53.65 53.66 130.96 53.66Z" scaleX="0.035" scaleY="0.035" styleClass="icon" />
+                    </StackPane>
+                    <TextField id="txtSearch" fx:id="txtSearch" prefHeight="30.0" promptText="Buscar pacientes" HBox.hgrow="ALWAYS">
+                        <font>
+                            <Font name="Roboto" size="10.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets right="8.0" />
+                        </HBox.margin>
+                    </TextField>
+                </HBox>
+                <Button id="btnAddPatient" fx:id="btnAddPatient" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openForm" prefHeight="30.0" prefWidth="30.0" textAlignment="CENTER">
+                    <graphic>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
+                            <SVGPath content="M725-530h-90q-12.75 0-21.37-8.63-8.63-8.63-8.63-21.38 0-12.76 8.63-21.37Q622.25-590 635-590h90v-90q0-12.75 8.63-21.37 8.63-8.63 21.38-8.63 12.76 0 21.37 8.63Q785-692.75 785-680v90h90q12.75 0 21.37 8.63 8.63 8.63 8.63 21.38 0 12.76-8.63 21.37Q887.75-530 875-530h-90v90q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63-12.76 0-21.37-8.63Q725-427.25 725-440v-90Zm-365 37.69q-57.75 0-98.87-41.12Q220-574.56 220-632.31q0-57.75 41.13-98.87 41.12-41.13 98.87-41.13 57.75 0 98.87 41.13Q500-690.06 500-632.31q0 57.75-41.13 98.88-41.12 41.12-98.87 41.12ZM60-248.46v-28.16q0-29.38 15.96-54.42 15.96-25.04 42.66-38.5 59.3-29.07 119.65-43.61 60.35-14.54 121.73-14.54t121.73 14.54q60.35 14.54 119.65 43.61 26.7 13.46 42.66 38.5Q660-306 660-276.62v28.16q0 25.3-17.73 43.04-17.73 17.73-43.04 17.73H120.77q-25.31 0-43.04-17.73Q60-223.16 60-248.46Z" scaleX="0.04" scaleY="0.04" styleClass="icon" />
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <MenuButton maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" text="Ordenar por:" HBox.hgrow="ALWAYS">
+                    <items>
+                        <RadioMenuItem fx:id="btnYoungToOld" mnemonicParsing="false" onAction="#orderPatientsYoungToOld" text="Edad: menor a mayor">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="toggleOrder" />
+                            </toggleGroup>
+                        </RadioMenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <RadioMenuItem fx:id="btnOldToYoung" mnemonicParsing="false" onAction="#orderPatientsOldToYoung" text="Edad: mayor a menor" toggleGroup="$toggleOrder" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <RadioMenuItem fx:id="btnNewest" mnemonicParsing="false" onAction="#orderPatientsNewest" text="Recientes" toggleGroup="$toggleOrder" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <RadioMenuItem fx:id="btnOldest" mnemonicParsing="false" onAction="#orderPatientsOldest" text="Antiguos" toggleGroup="$toggleOrder" />
+                    </items>
+                    <graphic>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
+                            <SVGPath content="M455.39-180q-15.08 0-25.23-10.16Q420-200.31 420-215.39v-231.53L196.08-731.38q-11.54-15.39-3.35-32 8.2-16.62 27.66-16.62h519.22q19.46 0 27.66 16.62 8.19 16.61-3.35 32L540-446.92v231.53q0 15.08-10.16 25.23Q519.69-180 504.61-180h-49.22Z" scaleX="0.03" scaleY="0.03" styleClass="icon" />
+                        </StackPane>
+                    </graphic>
+                </MenuButton>
+            </HBox>
+            <ListView id="lstPatients" fx:id="lstPatients" fixedCellSize="0.0" layoutX="21.0" layoutY="78.0" prefHeight="200.0" prefWidth="576.0" styleClass="list-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+            <StackPane fx:id="stackProfile" layoutY="353.0" prefHeight="310.0" prefWidth="355.0" visible="false">
+                <VBox alignment="TOP_CENTER" spacing="24.0">
+                    <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                    </padding>
+                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <padding>
+                            <Insets left="12.0" />
+                        </padding>
+                        <VBox alignment="TOP_RIGHT" spacing="48.0" HBox.hgrow="SOMETIMES">
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre: " />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cédula profesional: " />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Especialidad: " />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Celular: " />
+                        </VBox>
+                        <VBox prefHeight="200.0" spacing="36.0" HBox.hgrow="ALWAYS">
                             <padding>
-                                <Insets bottom="8.0" top="8.0" />
+                                <Insets left="12.0" />
                             </padding>
-                        </HBox>
-                        <ListView id="lstPatients" fx:id="lstPatients" fixedCellSize="0.0" layoutX="21.0" layoutY="78.0" prefHeight="200.0" prefWidth="576.0" styleClass="list-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
-                        <StackPane fx:id="stackProfile" layoutY="353.0" prefHeight="310.0" prefWidth="355.0" visible="false">
-                            <children>
-                                <VBox alignment="TOP_CENTER" spacing="24.0">
-                                    <children>
-                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                            <children>
-                                                <VBox alignment="TOP_RIGHT" spacing="48.0" HBox.hgrow="SOMETIMES">
-                                                    <children>
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre: " />
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cédula profesional: " />
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Especialidad: " />
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Celular: " />
-                                                    </children>
-                                                </VBox>
-                                                <VBox prefHeight="200.0" spacing="36.0" HBox.hgrow="ALWAYS">
-                                                    <padding>
-                                                        <Insets left="12.0" />
-                                                    </padding>
-                                                    <children>
-                                                        <TextField fx:id="profileName" />
-                                                        <TextField fx:id="profileLicense" disable="true" />
-                                                        <TextField fx:id="profileProfession" />
-                                                        <TextField fx:id="profilePhone" />
-                                                    </children>
-                                                </VBox>
-                                            </children>
-                                            <padding>
-                                                <Insets left="12.0" />
-                                            </padding>
-                                        </HBox>
-                                        <MenuButton fx:id="changeUser" mnemonicParsing="false">
-                                            <items>
-                                                <RadioMenuItem fx:id="changeCarlos" mnemonicParsing="false" text="Dr. Carlos">
-                                                    <toggleGroup>
-                                                        <ToggleGroup fx:id="toggleChangeUser" />
-                                                    </toggleGroup>
-                                                </RadioMenuItem>
-                                                <RadioMenuItem fx:id="changeVicente" mnemonicParsing="false" text="Dr. Vicente" toggleGroup="$toggleChangeUser" />
-                                            </items>
-                                        </MenuButton>
-                                    </children>
-                                    <padding>
-                                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                                    </padding>
+                            <TextField fx:id="profileName" />
+                            <TextField fx:id="profileLicense" disable="true" />
+                            <TextField fx:id="profileProfession" />
+                            <TextField fx:id="profilePhone" />
+                        </VBox>
+                    </HBox>
+                    <MenuButton fx:id="changeUser" mnemonicParsing="false">
+                        <items>
+                            <RadioMenuItem fx:id="changeCarlos" mnemonicParsing="false" text="Dr. Carlos">
+                                <toggleGroup>
+                                    <ToggleGroup fx:id="toggleChangeUser" />
+                                </toggleGroup>
+                            </RadioMenuItem>
+                            <RadioMenuItem fx:id="changeVicente" mnemonicParsing="false" text="Dr. Vicente" toggleGroup="$toggleChangeUser" />
+                        </items>
+                    </MenuButton>
+                </VBox>
+            </StackPane>
+            <StackPane fx:id="stackSettings" layoutX="4.0" layoutY="430.0" prefHeight="134.0" prefWidth="225.0" visible="false">
+                <padding>
+                    <Insets bottom="15" left="15" right="15" top="15" />
+                </padding>
+                <VBox spacing="20">
+                    <Label styleClass="settings-title" text="Ajustes de Apariencia" />
+                    <Separator />
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Modo Oscuro" />
+                        <MFXToggleButton fx:id="toggleDarkMode" text="" />
+                    </HBox>
+                </VBox>
+            </StackPane>
+        </AnchorPane>
+        <AnchorPane id="pnlPatientsDetails" fx:id="rightSplit" minHeight="0.0" minWidth="645.0" prefHeight="160.0" prefWidth="100.0">
+            <StackPane layoutY="14.0" prefHeight="557.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <VBox fx:id="selectPatientContent" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="14.0">
+                    <Label alignment="CENTER" contentDisplay="TOP" text="Detalles del Paciente" textAlignment="CENTER" textFill="#666666" wrapText="true">
+                        <font>
+                            <Font name="Roboto Medium" size="24.0" />
+                        </font>
+                        <graphic>
+                            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                <effect>
+                                    <ColorAdjust contrast="-0.02" saturation="-1.0" />
+                                </effect>
+                                <Image url="@../../../images/logo_app.png" />
+                            </ImageView>
+                        </graphic>
+                    </Label>
+                    <Label alignment="CENTER" contentDisplay="CENTER" text="Seleccione un paciente para visualizar sus detalles." textAlignment="CENTER" textFill="#666666" wrapText="true">
+                        <font>
+                            <Font name="Roboto Light" size="16.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                <AnchorPane fx:id="anchorPatient" prefHeight="622.0" prefWidth="790.0" visible="false">
+                    <VBox alignment="CENTER" prefHeight="663.0" prefWidth="790.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <padding>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                        <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="300.0" prefWidth="770.0" VBox.vgrow="NEVER">
+                            <Label layoutX="3.0" layoutY="14.0" styleClass="details-label" text="Información del paciente" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="4.0">
+                                <font>
+                                    <Font name="Roboto Black" size="18.0" />
+                                </font>
+                            </Label>
+                            <HBox alignment="CENTER_LEFT" layoutX="2.0" layoutY="173.0" prefHeight="225.0" prefWidth="768.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="55.0">
+                                <padding>
+                                    <Insets left="12.0" />
+                                </padding>
+                                <VBox prefHeight="229.0" prefWidth="320.0" spacing="2.0">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="ID">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblId" text="Label">
+                                        <VBox.margin>
+                                            <Insets bottom="10.0" />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                        <styleClass>
+                                            <String fx:value="patient-data-label" />
+                                            <String fx:value="label" />
+                                        </styleClass>
+                                    </Label>
+                                    <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Nombre(s)">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblName" layoutX="10.0" layoutY="27.0" styleClass="patient-data-label" text="Label">
+                                        <VBox.margin>
+                                            <Insets bottom="10.0" />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Apellido Paterno">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblLastName" layoutX="10.0" layoutY="27.0" styleClass="patient-data-label" text="Label">
+                                        <VBox.margin>
+                                            <Insets bottom="10.0" />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Text layoutX="10.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Apellido Materno">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblSecondLastName" layoutX="10.0" layoutY="95.0" styleClass="patient-data-label" text="Label">
+                                        <VBox.margin>
+                                            <Insets bottom="10.0" />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Sexo">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblGender" layoutX="10.0" layoutY="95.0" styleClass="patient-data-label" text="Label">
+                                        <VBox.margin>
+                                            <Insets />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
                                 </VBox>
-                            </children>
-                        </StackPane>
-                        <StackPane fx:id="stackSettings" layoutX="4.0" layoutY="430.0" prefHeight="134.0" prefWidth="225.0" visible="false">
-                            <padding>
-                                <Insets bottom="15" left="15" right="15" top="15" />
-                            </padding>
-                            <children>
-                                <VBox spacing="20">
-                                    <children>
-                                        <Label styleClass="settings-title" text="Ajustes de Apariencia" />
-                                        <Separator />
-                                        <HBox alignment="CENTER_LEFT" spacing="10">
-                                            <children>
-                                                <Label text="Modo Oscuro" />
-                                                <MFXToggleButton fx:id="toggleDarkMode" text="" />
-                                            </children>
-                                        </HBox>
-                                    </children>
+                                <VBox prefHeight="229.0" prefWidth="320.0" spacing="2.0">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Fecha de nacimiento">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblBirthDate" styleClass="patient-data-label" text="Label">
+                                        <padding>
+                                            <Insets bottom="10.0" />
+                                        </padding>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Edad">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblAddress" styleClass="patient-data-label" text="Label">
+                                        <padding>
+                                            <Insets bottom="10.0" />
+                                        </padding>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Número de teléfono">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblPhone" styleClass="patient-data-label" text="Label">
+                                        <padding>
+                                            <Insets bottom="10.0" />
+                                        </padding>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Correo electrónico">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblEmail" styleClass="patient-data-label" text="Label">
+                                        <padding>
+                                            <Insets bottom="10.0" />
+                                        </padding>
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Fecha y hora de registro">
+                                        <font>
+                                            <Font name="Roboto Light" size="12.0" />
+                                        </font>
+                                    </Text>
+                                    <Label fx:id="lblTimestamp" styleClass="patient-data-label" text="Label">
+                                        <font>
+                                            <Font name="Roboto Medium" size="14.0" />
+                                        </font>
+                                    </Label>
                                 </VBox>
-                            </children>
-                        </StackPane>
-                    </children>
+                            </HBox>
+                            <MenuButton layoutX="584.0" layoutY="4.0" mnemonicParsing="false" text="Nuevo documento" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                <items>
+                                    <MenuItem fx:id="bntAddEvolutionNote" mnemonicParsing="false" onAction="#addEvolutionNote" text="Nota de evolución">
+                                        <graphic>
+                                            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
+                                                <SVGPath content="M371.96-241.39h215.76q11.05 0 18.66-7.4 7.62-7.41 7.62-18.39 0-10.97-7.45-18.59-7.46-7.62-18.51-7.62H372.28q-11.05 0-18.66 7.41-7.62 7.4-7.62 18.38 0 10.98 7.45 18.6 7.46 7.61 18.51 7.61Zm0-112.3h215.76q11.05 0 18.66-7.41 7.62-7.4 7.62-18.38 0-10.98-7.45-18.6-7.46-7.61-18.51-7.61H372.28q-11.05 0-18.66 7.4-7.62 7.41-7.62 18.39t7.45 18.59q7.46 7.62 18.51 7.62Zm107.96-329.85q-12.72-15.86-27.78-25.47-15.06-9.6-37.02-9.6-28.52 0-48.82 20.26T346-649.61q0 45.77 41.13 83.52 41.14 37.75 71.56 65.4 9.85 7.84 21.31 7.84 11.46 0 21.31-7.84 30.42-27.2 71.56-65.06Q614-603.6 614-649.28q0-28.49-20.34-48.91-20.33-20.42-48.9-20.42-21.99 0-37.05 9.6-15.06 9.61-27.79 25.47ZM683.65-116H276.03q-27.03 0-45.53-18.65T212-180.31v-599.38q0-27.01 18.66-45.66Q249.32-844 276.35-844h407.62q27.03 0 45.53 18.65t18.5 45.66v599.38q0 27.01-18.66 45.66Q710.68-116 683.65-116Zm-407.34-52h407.38q5.39 0 8.85-3.46t3.46-8.85v-599.38q0-5.39-3.46-8.85t-8.85-3.46H276.31q-5.39 0-8.85 3.46t-3.46 8.85v599.38q0 5.39 3.46 8.85t8.85 3.46ZM264-168v-624 624Z" scaleX="0.03" scaleY="0.03" styleClass="icon" />
+                                            </StackPane>
+                                        </graphic>
+                                    </MenuItem>
+                                    <MenuItem fx:id="btnAddClinicalHistory" mnemonicParsing="false" onAction="#addClinicalHistory" text="Historia clínica">
+                                        <graphic>
+                                            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
+                                                <SVGPath content="M301.15-337.31v64.62q0 9.64 6.58 16.17 6.58 6.52 16.31 6.52 9.73 0 16.11-6.52 6.39-6.53 6.39-16.17v-64.62h64.61q9.65 0 16.17-6.58 6.53-6.58 6.53-16.31 0-9.72-6.53-16.11-6.52-6.38-16.17-6.38h-64.61v-64.62q0-9.64-6.58-16.17-6.58-6.52-16.31-6.52-9.73 0-16.11 6.52-6.39 6.53-6.39 16.17v64.62h-64.61q-9.65 0-16.17 6.58-6.52 6.58-6.52 16.31 0 9.72 6.52 16.11 6.52 6.38 16.17 6.38h64.61Zm235.39-53.84h196.92q6.87 0 11.71-4.83 4.83-4.83 4.83-11.69 0-6.87-4.83-11.71-4.84-4.85-11.71-4.85H536.54q-6.87 0-11.71 4.83-4.83 4.83-4.83 11.69 0 6.86 4.83 11.71 4.84 4.85 11.71 4.85Zm0 107.69h116.92q6.87 0 11.71-4.83 4.83-4.83 4.83-11.69 0-6.87-4.83-11.71-4.84-4.85-11.71-4.85H536.54q-6.87 0-11.71 4.83-4.83 4.83-4.83 11.69 0 6.87 4.83 11.71 4.84 4.85 11.71 4.85ZM157.69-100q-23.53 0-40.61-17.08T100-157.69v-444.62q0-23.53 17.08-40.61T157.69-660h244.23v-154.61q0-17.98 13.72-31.68Q429.36-860 447.75-860h64.6q18.4 0 32.06 13.71 13.67 13.7 13.67 31.68V-660h244.23q23.53 0 40.61 17.08T860-602.31v444.62q0 23.53-17.08 40.61T802.31-100H157.69Zm0-45.39h644.62q5.38 0 8.84-3.46t3.46-8.84v-444.62q0-5.38-3.46-8.84t-8.84-3.46H558.08v37.3q0 21.08-13.58 33.23-13.58 12.16-32.22 12.16h-64.56q-18.64 0-32.22-12.16-13.58-12.15-13.58-33.23v-37.3H157.69q-5.38 0-8.84 3.46t-3.46 8.84v444.62q0 5.38 3.46 8.84t8.84 3.46Zm289.62-431.92h65.38v-237.3h-65.38v237.3ZM480-380Z" scaleX="0.03" scaleY="0.03" styleClass="icon" />
+                                            </StackPane>
+                                        </graphic>
+                                    </MenuItem>
+                                </items>
+                                <graphic>
+                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
+                                        <SVGPath content="M480-786.15q13 0 21.5-8.5t8.5-21.5q0-13-8.5-21.5t-21.5-8.5q-13 0-21.5 8.5t-8.5 21.5q0 13 8.5 21.5t21.5 8.5ZM720-57.69q-74.92 0-127.46-52.54Q540-162.77 540-237.69q0-74.92 52.54-127.46 52.54-52.54 127.46-52.54 74.92 0 127.46 52.54Q900-312.61 900-237.69q0 74.92-52.54 127.46Q794.92-57.69 720-57.69ZM212.31-140q-29.83 0-51.07-21.24Q140-182.48 140-212.31v-535.38q0-29.83 21.24-51.07Q182.48-820 212.31-820h178q3.77-33.31 29.08-56.65 25.3-23.35 60.8-23.35T541-876.65q25.31 23.34 28.69 56.65h178q29.83 0 51.07 21.24Q820-777.52 820-747.69v209.15q0 16.54-13.08 25.73-13.08 9.19-28.92 4.73-13.54-3.84-28.23-5.57-14.69-1.73-29.77-1.73-15.62 0-29.92 1.84-14.31 1.85-28.54 5.77-3.08-.81-7.39-1.61-3.46 0-8.07-.31-4.62-.31-9.54-.31H320q-12.75 0-21.37 8.63-8.63 8.63-8.63 21.38 0 12.76 8.63 21.37Q307.25-450 320-450h224.23q-24.15 18.92-42.88 42.96-18.73 24.04-31.66 52.43H320q-12.75 0-21.37 8.62-8.63 8.63-8.63 21.39 0 12.75 8.63 21.37 8.62 8.61 21.37 8.61h130.69q-3.15 13.47-4.61 26.81-1.46 13.35-1.46 27.81 0 15 1.23 29.54t4.69 28.84q3.46 15.46-5.6 28.54Q435.87-140 420.46-140H212.31Zm490-80v82.31q0 7.07 5.31 12.38Q712.92-120 720-120q7.08 0 12.38-5.31 5.31-5.31 5.31-12.38V-220H820q7.08 0 12.38-5.31 5.31-5.31 5.31-12.38 0-7.08-5.31-12.39-5.3-5.3-12.38-5.3h-82.31v-82.31q0-7.08-5.31-12.39-5.3-5.3-12.38-5.3-7.08 0-12.38 5.3-5.31 5.31-5.31 12.39v82.31H620q-7.08 0-12.38 5.3-5.31 5.31-5.31 12.39 0 7.07 5.31 12.38Q612.92-220 620-220h82.31ZM320-605.39h316.54q10.46 0 21.96-8.62 11.5-8.63 11.5-21.39 0-12.75-8.63-21.37-8.62-8.61-21.37-8.61H320q-12.75 0-21.37 8.63-8.63 8.62-8.63 21.38 0 12.75 8.63 21.37 8.62 8.61 21.37 8.61Z" scaleX="0.03" scaleY="0.03" styleClass="icon" />
+                                    </StackPane>
+                                </graphic>
+                            </MenuButton>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="140.0" prefWidth="648.0" VBox.vgrow="ALWAYS">
+                            <VBox prefHeight="123.0" prefWidth="622.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                <Label styleClass="details-label" text="Historia clínica">
+                                    <font>
+                                        <Font name="Roboto Black" size="18.0" />
+                                    </font>
+                                </Label>
+                                <MFXListView fx:id="lstHistories" prefHeight="274.0" prefWidth="1022.0" VBox.vgrow="ALWAYS">
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                </MFXListView>
+                            </VBox>
+                        </AnchorPane>
+                        <AnchorPane minWidth="640.0" prefHeight="243.0" prefWidth="770.0" VBox.vgrow="ALWAYS">
+                            <Label layoutX="60.0" layoutY="16.0" styleClass="details-label" text="Documentos del paciente" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="4.0">
+                                <font>
+                                    <Font name="Roboto Black" size="18.0" />
+                                </font>
+                            </Label>
+                            <TableView fx:id="tblDocuments" editable="true" layoutX="76.0" layoutY="28.0" minWidth="600.0" prefHeight="200.0" prefWidth="713.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="30.0">
+                                <columns>
+                                    <TableColumn fx:id="colTimestamp" maxWidth="Infinity" minWidth="125.0" prefWidth="-1.0" text="Fecha" />
+                                    <TableColumn fx:id="colDocumentId" maxWidth="Infinity" minWidth="125.0" prefWidth="-1.0" text="ID del documento" />
+                                    <TableColumn fx:id="colDocType" maxWidth="100.0" minWidth="100.0" prefWidth="-1.0" text="Tipo" />
+                                    <TableColumn fx:id="colDoctorName" maxWidth="Infinity" minWidth="125.0" prefWidth="256.7998962402344" text="Creada por" />
+                                    <TableColumn fx:id="colDocName" maxWidth="Infinity" minWidth="125.0" prefWidth="-1.0" text="Archivo" />
+                                </columns>
+                                <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                </columnResizePolicy>
+                            </TableView>
+                        </AnchorPane>
+                    </VBox>
                 </AnchorPane>
-                <AnchorPane id="pnlPatientsDetails" fx:id="rightSplit" minHeight="0.0" minWidth="645.0" prefHeight="160.0" prefWidth="100.0">
-                    <children>
-                        <StackPane layoutY="14.0" prefHeight="557.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <children>
-                                <VBox fx:id="selectPatientContent" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="14.0">
-                                    <children>
-                                        <Label alignment="CENTER" contentDisplay="TOP" text="Detalles del Paciente" textAlignment="CENTER" textFill="#666666" wrapText="true">
-                                            <font>
-                                                <Font name="Roboto Medium" size="24.0" />
-                                            </font>
-                                            <graphic>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../../../images/logo_app.png" />
-                                                    </image>
-                                                    <effect>
-                                                        <ColorAdjust contrast="-0.02" saturation="-1.0" />
-                                                    </effect>
-                                                </ImageView>
-                                            </graphic>
-                                        </Label>
-                                        <Label alignment="CENTER" contentDisplay="CENTER" text="Seleccione un paciente para visualizar sus detalles." textAlignment="CENTER" textFill="#666666" wrapText="true">
-                                            <font>
-                                                <Font name="Roboto Light" size="16.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </VBox>
-                                <AnchorPane fx:id="anchorPatient" prefHeight="622.0" prefWidth="790.0" visible="false">
-                                    <children>
-                                        <VBox alignment="CENTER" prefHeight="663.0" prefWidth="790.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <children>
-                                                <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="300.0" prefWidth="770.0" VBox.vgrow="NEVER">
-                                                    <children>
-                                                        <Label layoutX="3.0" layoutY="14.0" styleClass="details-label" text="Información del paciente" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="4.0">
-                                                            <font>
-                                                                <Font name="Roboto Black" size="18.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <HBox alignment="CENTER_LEFT" layoutX="2.0" layoutY="173.0" prefHeight="225.0" prefWidth="768.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="55.0">
-                                                            <children>
-                                                                <VBox prefHeight="229.0" prefWidth="320.0" spacing="2.0">
-                                                                    <children>
-                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="ID">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblId" text="Label">
-                                                                            <VBox.margin>
-                                                                                <Insets bottom="10.0" />
-                                                                            </VBox.margin>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                         <styleClass>
-                                                            <String fx:value="patient-data-label" />
-                                                            <String fx:value="label" />
-                                                         </styleClass>
-                                                                        </Label>
-                                                                        <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Nombre(s)">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblName" layoutX="10.0" layoutY="27.0" styleClass="patient-data-label" text="Label">
-                                                                            <VBox.margin>
-                                                                                <Insets bottom="10.0" />
-                                                                            </VBox.margin>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Apellido Paterno">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblLastName" layoutX="10.0" layoutY="27.0" styleClass="patient-data-label" text="Label">
-                                                                            <VBox.margin>
-                                                                                <Insets bottom="10.0" />
-                                                                            </VBox.margin>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Text layoutX="10.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Apellido Materno">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblSecondLastName" layoutX="10.0" layoutY="95.0" styleClass="patient-data-label" text="Label">
-                                                                            <VBox.margin>
-                                                                                <Insets bottom="10.0" />
-                                                                            </VBox.margin>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Sexo">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblGender" layoutX="10.0" layoutY="95.0" styleClass="patient-data-label" text="Label">
-                                                                            <VBox.margin>
-                                                                                <Insets />
-                                                                            </VBox.margin>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                    </children>
-                                                                </VBox>
-                                                                <VBox prefHeight="229.0" prefWidth="320.0" spacing="2.0">
-                                                                    <children>
-                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Fecha de nacimiento">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblBirthDate" styleClass="patient-data-label" text="Label">
-                                                                            <padding>
-                                                                                <Insets bottom="10.0" />
-                                                                            </padding>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Edad">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblAddress" styleClass="patient-data-label" text="Label">
-                                                                            <padding>
-                                                                                <Insets bottom="10.0" />
-                                                                            </padding>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Número de teléfono">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblPhone" styleClass="patient-data-label" text="Label">
-                                                                            <padding>
-                                                                                <Insets bottom="10.0" />
-                                                                            </padding>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Correo electrónico">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblEmail" styleClass="patient-data-label" text="Label">
-                                                                            <padding>
-                                                                                <Insets bottom="10.0" />
-                                                                            </padding>
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="patient-data-text" text="Fecha y hora de registro">
-                                                                            <font>
-                                                                                <Font name="Roboto Light" size="12.0" />
-                                                                            </font>
-                                                                        </Text>
-                                                                        <Label fx:id="lblTimestamp" styleClass="patient-data-label" text="Label">
-                                                                            <font>
-                                                                                <Font name="Roboto Medium" size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                    </children>
-                                                                </VBox>
-                                                            </children>
-                                                            <padding>
-                                                                <Insets left="12.0" />
-                                                            </padding>
-                                                        </HBox>
-                                                        <MenuButton layoutX="584.0" layoutY="4.0" mnemonicParsing="false" text="Nuevo documento" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
-                                                            <items>
-                                                                <MenuItem fx:id="bntAddEvolutionNote" mnemonicParsing="false" onAction="#addEvolutionNote" text="Nota de evolución">
-                                                                    <graphic>
-                                                                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
-                                                                            <children>
-                                                                                <SVGPath content="M371.96-241.39h215.76q11.05 0 18.66-7.4 7.62-7.41 7.62-18.39 0-10.97-7.45-18.59-7.46-7.62-18.51-7.62H372.28q-11.05 0-18.66 7.41-7.62 7.4-7.62 18.38 0 10.98 7.45 18.6 7.46 7.61 18.51 7.61Zm0-112.3h215.76q11.05 0 18.66-7.41 7.62-7.4 7.62-18.38 0-10.98-7.45-18.6-7.46-7.61-18.51-7.61H372.28q-11.05 0-18.66 7.4-7.62 7.41-7.62 18.39t7.45 18.59q7.46 7.62 18.51 7.62Zm107.96-329.85q-12.72-15.86-27.78-25.47-15.06-9.6-37.02-9.6-28.52 0-48.82 20.26T346-649.61q0 45.77 41.13 83.52 41.14 37.75 71.56 65.4 9.85 7.84 21.31 7.84 11.46 0 21.31-7.84 30.42-27.2 71.56-65.06Q614-603.6 614-649.28q0-28.49-20.34-48.91-20.33-20.42-48.9-20.42-21.99 0-37.05 9.6-15.06 9.61-27.79 25.47ZM683.65-116H276.03q-27.03 0-45.53-18.65T212-180.31v-599.38q0-27.01 18.66-45.66Q249.32-844 276.35-844h407.62q27.03 0 45.53 18.65t18.5 45.66v599.38q0 27.01-18.66 45.66Q710.68-116 683.65-116Zm-407.34-52h407.38q5.39 0 8.85-3.46t3.46-8.85v-599.38q0-5.39-3.46-8.85t-8.85-3.46H276.31q-5.39 0-8.85 3.46t-3.46 8.85v599.38q0 5.39 3.46 8.85t8.85 3.46ZM264-168v-624 624Z" scaleX="0.03" scaleY="0.03" styleClass="icon" />
-                                                                            </children>
-                                                                        </StackPane>
-                                                                    </graphic>
-                                                                </MenuItem>
-                                                                <MenuItem fx:id="btnAddClinicalHistory" mnemonicParsing="false" onAction="#addClinicalHistory" text="Historia clínica">
-                                                                    <graphic>
-                                                                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
-                                                                            <children>
-                                                                                <SVGPath content="M301.15-337.31v64.62q0 9.64 6.58 16.17 6.58 6.52 16.31 6.52 9.73 0 16.11-6.52 6.39-6.53 6.39-16.17v-64.62h64.61q9.65 0 16.17-6.58 6.53-6.58 6.53-16.31 0-9.72-6.53-16.11-6.52-6.38-16.17-6.38h-64.61v-64.62q0-9.64-6.58-16.17-6.58-6.52-16.31-6.52-9.73 0-16.11 6.52-6.39 6.53-6.39 16.17v64.62h-64.61q-9.65 0-16.17 6.58-6.52 6.58-6.52 16.31 0 9.72 6.52 16.11 6.52 6.38 16.17 6.38h64.61Zm235.39-53.84h196.92q6.87 0 11.71-4.83 4.83-4.83 4.83-11.69 0-6.87-4.83-11.71-4.84-4.85-11.71-4.85H536.54q-6.87 0-11.71 4.83-4.83 4.83-4.83 11.69 0 6.86 4.83 11.71 4.84 4.85 11.71 4.85Zm0 107.69h116.92q6.87 0 11.71-4.83 4.83-4.83 4.83-11.69 0-6.87-4.83-11.71-4.84-4.85-11.71-4.85H536.54q-6.87 0-11.71 4.83-4.83 4.83-4.83 11.69 0 6.87 4.83 11.71 4.84 4.85 11.71 4.85ZM157.69-100q-23.53 0-40.61-17.08T100-157.69v-444.62q0-23.53 17.08-40.61T157.69-660h244.23v-154.61q0-17.98 13.72-31.68Q429.36-860 447.75-860h64.6q18.4 0 32.06 13.71 13.67 13.7 13.67 31.68V-660h244.23q23.53 0 40.61 17.08T860-602.31v444.62q0 23.53-17.08 40.61T802.31-100H157.69Zm0-45.39h644.62q5.38 0 8.84-3.46t3.46-8.84v-444.62q0-5.38-3.46-8.84t-8.84-3.46H558.08v37.3q0 21.08-13.58 33.23-13.58 12.16-32.22 12.16h-64.56q-18.64 0-32.22-12.16-13.58-12.15-13.58-33.23v-37.3H157.69q-5.38 0-8.84 3.46t-3.46 8.84v444.62q0 5.38 3.46 8.84t8.84 3.46Zm289.62-431.92h65.38v-237.3h-65.38v237.3ZM480-380Z" scaleX="0.03" scaleY="0.03" styleClass="icon" />
-                                                                            </children>
-                                                                        </StackPane>
-                                                                    </graphic>
-                                                                </MenuItem>
-                                                            </items>
-                                                            <graphic>
-                                                                <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0">
-                                                                    <children>
-                                                                        <SVGPath content="M480-786.15q13 0 21.5-8.5t8.5-21.5q0-13-8.5-21.5t-21.5-8.5q-13 0-21.5 8.5t-8.5 21.5q0 13 8.5 21.5t21.5 8.5ZM720-57.69q-74.92 0-127.46-52.54Q540-162.77 540-237.69q0-74.92 52.54-127.46 52.54-52.54 127.46-52.54 74.92 0 127.46 52.54Q900-312.61 900-237.69q0 74.92-52.54 127.46Q794.92-57.69 720-57.69ZM212.31-140q-29.83 0-51.07-21.24Q140-182.48 140-212.31v-535.38q0-29.83 21.24-51.07Q182.48-820 212.31-820h178q3.77-33.31 29.08-56.65 25.3-23.35 60.8-23.35T541-876.65q25.31 23.34 28.69 56.65h178q29.83 0 51.07 21.24Q820-777.52 820-747.69v209.15q0 16.54-13.08 25.73-13.08 9.19-28.92 4.73-13.54-3.84-28.23-5.57-14.69-1.73-29.77-1.73-15.62 0-29.92 1.84-14.31 1.85-28.54 5.77-3.08-.81-7.39-1.61-3.46 0-8.07-.31-4.62-.31-9.54-.31H320q-12.75 0-21.37 8.63-8.63 8.63-8.63 21.38 0 12.76 8.63 21.37Q307.25-450 320-450h224.23q-24.15 18.92-42.88 42.96-18.73 24.04-31.66 52.43H320q-12.75 0-21.37 8.62-8.63 8.63-8.63 21.39 0 12.75 8.63 21.37 8.62 8.61 21.37 8.61h130.69q-3.15 13.47-4.61 26.81-1.46 13.35-1.46 27.81 0 15 1.23 29.54t4.69 28.84q3.46 15.46-5.6 28.54Q435.87-140 420.46-140H212.31Zm490-80v82.31q0 7.07 5.31 12.38Q712.92-120 720-120q7.08 0 12.38-5.31 5.31-5.31 5.31-12.38V-220H820q7.08 0 12.38-5.31 5.31-5.31 5.31-12.38 0-7.08-5.31-12.39-5.3-5.3-12.38-5.3h-82.31v-82.31q0-7.08-5.31-12.39-5.3-5.3-12.38-5.3-7.08 0-12.38 5.3-5.31 5.31-5.31 12.39v82.31H620q-7.08 0-12.38 5.3-5.31 5.31-5.31 12.39 0 7.07 5.31 12.38Q612.92-220 620-220h82.31ZM320-605.39h316.54q10.46 0 21.96-8.62 11.5-8.63 11.5-21.39 0-12.75-8.63-21.37-8.62-8.61-21.37-8.61H320q-12.75 0-21.37 8.63-8.63 8.62-8.63 21.38 0 12.75 8.63 21.37 8.62 8.61 21.37 8.61Z" scaleX="0.03" scaleY="0.03" styleClass="icon" />
-                                                                    </children>
-                                                                </StackPane>
-                                                            </graphic>
-                                                        </MenuButton>
-                                                    </children>
-                                                </AnchorPane>
-                                                <AnchorPane prefHeight="140.0" prefWidth="648.0" VBox.vgrow="ALWAYS">
-                                                    <children>
-                                                        <VBox prefHeight="123.0" prefWidth="622.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
-                                                            <children>
-                                                                <Label styleClass="details-label" text="Historia clínica">
-                                                                    <font>
-                                                                        <Font name="Roboto Black" size="18.0" />
-                                                                    </font>
-                                                                </Label>
-                                                                <MFXListView fx:id="lstHistories" prefHeight="274.0" prefWidth="1022.0" VBox.vgrow="ALWAYS">
-                                                                    <VBox.margin>
-                                                                        <Insets />
-                                                                    </VBox.margin>
-                                                                </MFXListView>
-                                                            </children>
-                                                        </VBox>
-                                                    </children>
-                                                </AnchorPane>
-                                                <AnchorPane minWidth="640.0" prefHeight="243.0" prefWidth="770.0" VBox.vgrow="ALWAYS">
-                                                    <children>
-                                                        <Label layoutX="60.0" layoutY="16.0" styleClass="details-label" text="Documentos del paciente" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="4.0">
-                                                            <font>
-                                                                <Font name="Roboto Black" size="18.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <TableView fx:id="tblDocuments" editable="true" layoutX="76.0" layoutY="28.0" minWidth="600.0" prefHeight="200.0" prefWidth="713.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="30.0">
-                                                            <columns>
-                                                                <TableColumn fx:id="colTimestamp" maxWidth="Infinity" minWidth="125.0" prefWidth="-1.0" text="Fecha" />
-                                                                <TableColumn fx:id="colDocumentId" maxWidth="Infinity" minWidth="125.0" prefWidth="-1.0" text="ID del documento" />
-                                                                <TableColumn fx:id="colDocType" maxWidth="100.0" minWidth="100.0" prefWidth="-1.0" text="Tipo" />
-                                                                <TableColumn fx:id="colDoctorName" maxWidth="Infinity" minWidth="125.0" prefWidth="256.7998962402344" text="Creada por" />
-                                                                <TableColumn fx:id="colDocName" maxWidth="Infinity" minWidth="125.0" prefWidth="-1.0" text="Archivo" />
-                                                            </columns>
-                                                            <columnResizePolicy>
-                                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                            </columnResizePolicy>
-                                                        </TableView>
-                                                    </children>
-                                                </AnchorPane>
-                                            </children>
-                                            <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                            </padding>
-                                        </VBox>
-                                    </children>
-                                </AnchorPane>
-                            </children>
-                        </StackPane>
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
-        <Label layoutX="70.0" layoutY="27.0" text="Pacientes" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="12.0">
-            <font>
-                <Font name="Roboto Black" size="32.0" />
-            </font>
-        </Label>
-    </children>
+            </StackPane>
+        </AnchorPane>
+    </SplitPane>
+   <Text fontSmoothingType="LCD" layoutX="241.0" layoutY="45.0" text="Pacientes" wrappingWidth="123.00000000000011" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="8.0" />
 </AnchorPane>

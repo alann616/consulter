@@ -301,86 +301,142 @@ public class ClinicalHistoryController {
     public void setClinicalHistory(ClinicalHistory history) {
         this.clinicalHistory = history;
 
-        // Hereditary antecedents table
-        txtDiabetes.setText(history.getHereditary().getDiabetesMellitus());
-        txtHypertension.setText(history.getHereditary().getHypertension());
-        txtTB.setText(history.getHereditary().getTuberculosis());
-        txtNeoplasia.setText(history.getHereditary().getNeoplasms());
-        txtHeartDisease.setText(history.getHereditary().getHeartConditions());
-        txtBirthDisease.setText(history.getHereditary().getCongenitalAnomalies());
-        txtEndocrineDisorders.setText(history.getHereditary().getEndocrineDisorders());
-        txtOtherHereditary.setText(history.getHereditary().getOtherHereditaryConditions());
-
-        // Non-pathological antecedents table
-        String maritalStatus = history.getNonPathological().getMaritalStatus();
-        if (maritalStatus != null) {
-            for (Toggle toggle : toggleMaritalStatus.getToggles()) {
-                if (maritalStatus.equals(toggle.getUserData())) {
-                    toggleMaritalStatus.selectToggle(toggle);
-                    break;
-                }
-            }
+        // --- Hereditary antecedents table ---
+        if (history.getHereditary() != null) {
+            txtDiabetes.setText(history.getHereditary().getDiabetesMellitus());
+            txtHypertension.setText(history.getHereditary().getHypertension());
+            txtTB.setText(history.getHereditary().getTuberculosis());
+            txtNeoplasia.setText(history.getHereditary().getNeoplasms());
+            txtHeartDisease.setText(history.getHereditary().getHeartConditions());
+            txtBirthDisease.setText(history.getHereditary().getCongenitalAnomalies());
+            txtEndocrineDisorders.setText(history.getHereditary().getEndocrineDisorders());
+            txtOtherHereditary.setText(history.getHereditary().getOtherHereditaryConditions());
         }
 
-        txtReligion.setText(history.getNonPathological().getReligion());
-        txtOcupation.setText(history.getNonPathological().getOccupation());
+        // --- Non-pathological antecedents table ---
+        if (history.getNonPathological() != null) {
+            NonPathological np = history.getNonPathological();
 
-        String wallMaterial = history.getNonPathological().getWallMaterial();
-        List<String> selectedMaterials = Arrays.asList(wallMaterial.split(","));
-        cboxDirt.setSelected(selectedMaterials.contains("Tierra"));
-        cboxCement.setSelected(selectedMaterials.contains("Cemento"));
-        cboxBlock.setSelected(selectedMaterials.contains("Block"));
-        cboxAdobe.setSelected(selectedMaterials.contains("Adobe"));
-        cboxWood.setSelected(selectedMaterials.contains("Madera"));
-        cboxOtherWalls.setSelected(selectedMaterials.contains("Otros"));
+            String maritalStatus = np.getMaritalStatus();
+            // CAMBIO: Comprobar que maritalStatus no sea nulo antes de usarlo.
+            if (maritalStatus != null) {
+                for (Toggle toggle : toggleMaritalStatus.getToggles()) {
+                    if (maritalStatus.equals(toggle.getUserData())) {
+                        toggleMaritalStatus.selectToggle(toggle);
+                        break;
+                    }
+                }
+            }
 
-        String services = history.getNonPathological().getServices();
-        List<String> selectedServices = Arrays.asList(services.split(","));
-        cboxWater.setSelected(selectedServices.contains("Agua"));
-        cboxDrainage.setSelected(selectedServices.contains("Drenaje"));
-        cboxGas.setSelected(selectedServices.contains("Gas"));
-        cboxLenia.setSelected(selectedServices.contains("Leña"));
+            txtReligion.setText(np.getReligion());
+            txtOcupation.setText(np.getOccupation());
 
-        toggleVaccunation.setSelected(history.getNonPathological().isFullyVaccinated());
+            String wallMaterial = np.getWallMaterial();
+            // CAMBIO: Comprobar que wallMaterial no sea nulo antes de hacer split.
+            if (wallMaterial != null && !wallMaterial.isEmpty()) {
+                List<String> selectedMaterials = Arrays.asList(wallMaterial.split(","));
+                cboxBlock.setSelected(selectedMaterials.contains("Block"));
+                cboxAdobe.setSelected(selectedMaterials.contains("Adobe"));
+                cboxWood.setSelected(selectedMaterials.contains("Madera"));
+                cboxOtherWalls.setSelected(selectedMaterials.contains("Otros"));
+            } else {
+                // Asegurarse de que los checkboxes estén deseleccionados si no hay datos.
+                cboxBlock.setSelected(false);
+                cboxAdobe.setSelected(false);
+                cboxWood.setSelected(false);
+                cboxOtherWalls.setSelected(false);
+            }
 
-        setCheckboxFromString(cboxDrugs, history.getNonPathological().getSubstanceUse());
-        setCheckboxFromString(cboxAlcoholism, history.getNonPathological().getIsDrinker());
-        setCheckboxFromString(cboxTabaquism, history.getNonPathological().getIsSmoker());
+            // CAMBIO: Añadir la misma comprobación para el material del piso (floorMaterial).
+            String floorMaterial = np.getFloorMaterial();
+            if (floorMaterial != null && !floorMaterial.isEmpty()) {
+                List<String> selectedFloors = Arrays.asList(floorMaterial.split(","));
+                cboxDirt.setSelected(selectedFloors.contains("Tierra"));
+                cboxCement.setSelected(selectedFloors.contains("Cemento"));
+            } else {
+                cboxDirt.setSelected(false);
+                cboxCement.setSelected(false);
+            }
 
-        // Pathological antecedents table
-        txtSurgery.setText(history.getPathological().getSurgicalHistory());
-        txtTraumatic.setText(history.getPathological().getTraumaticHistory());
-        txtAllergic.setText(history.getPathological().getAllergicHistory());
-        txtTransfusion.setText(history.getPathological().getTransfusionHistory());
-        txtCombe.setText(history.getPathological().getCoombsTest());
-        txtHas.setText(history.getPathological().getHypertension());
-        txtDM2.setText(history.getPathological().getDiabetes());
-        txtOtherPathological.setText(history.getPathological().getOtherPathologicalConditions());
+            String services = np.getServices();
+            // CAMBIO: Comprobar que services no sea nulo.
+            if (services != null && !services.isEmpty()) {
+                List<String> selectedServices = Arrays.asList(services.split(","));
+                cboxWater.setSelected(selectedServices.contains("Agua"));
+                cboxDrainage.setSelected(selectedServices.contains("Drenaje"));
+                cboxGas.setSelected(selectedServices.contains("Gas"));
+                cboxLenia.setSelected(selectedServices.contains("Leña"));
+            } else {
+                cboxWater.setSelected(false);
+                cboxDrainage.setSelected(false);
+                cboxGas.setSelected(false);
+                cboxLenia.setSelected(false);
+            }
 
-        // Gynecological antecedents table
-        spnMenarche.getValueFactory().setValue(history.getGynecological().getMenarcheAge());
-        cboxRythm.setValue(history.getGynecological().getMenstrualCycleRegularity());
-        spnIVSA.getValueFactory().setValue(history.getGynecological().getSexualActivityStartAge());
-        spnGestas.getValueFactory().setValue(history.getGynecological().getNumberOfPregnancies());
-        spnPartos.getValueFactory().setValue(history.getGynecological().getNumberOfBirths());
-        spnAbortos.getValueFactory().setValue(history.getGynecological().getNumberOfAbortions());
-        spnCesareas.getValueFactory().setValue(history.getGynecological().getNumberOfCesareanSections());
-        spnMacrosomicos.getValueFactory().setValue(history.getGynecological().getMacrosomicChildren());
-        spnBajoPeso.getValueFactory().setValue(history.getGynecological().getLowBirthWeightChildren());
 
-        dpickerFUM.setValue(history.getGynecological().getLastMenstrualPeriod());
-        dpickerLastDelivery.setValue(history.getGynecological().getLastDeliveryDate());
-        dpickerPAP.setValue(history.getGynecological().getLastPapSmearDate());
+            toggleVaccunation.setSelected(np.isFullyVaccinated());
+            setCheckboxFromString(cboxDrugs, np.getSubstanceUse());
+            setCheckboxFromString(cboxAlcoholism, np.getIsDrinker());
+            setCheckboxFromString(cboxTabaquism, np.getIsSmoker());
+        }
 
-        txtLUI.setText(history.getGynecological().getUterineCurettage());
-        txtPlanificacion.setText(history.getGynecological().getFamilyPlanningMethod());
-        txtTime.setText(String.valueOf(history.getGynecological().getContraceptiveUsageDuration()));
+        // --- Pathological antecedents table ---
+        if (history.getPathological() != null) {
+            txtSurgery.setText(history.getPathological().getSurgicalHistory());
+            txtTraumatic.setText(history.getPathological().getTraumaticHistory());
+            txtAllergic.setText(history.getPathological().getAllergicHistory());
+            txtTransfusion.setText(history.getPathological().getTransfusionHistory());
+            txtCombe.setText(history.getPathological().getCoombsTest());
+            txtHas.setText(history.getPathological().getHypertension());
+            txtDM2.setText(history.getPathological().getDiabetes());
+            txtOtherPathological.setText(history.getPathological().getOtherPathologicalConditions());
+        }
 
-        // Clinical interview table
+        // --- Gynecological antecedents table ---
+        // CAMBIO: Comprobar que la sección ginecológica no sea nula.
+        if (history.getGynecological() != null) {
+            Gynecological g = history.getGynecological();
+            spnMenarche.getValueFactory().setValue(g.getMenarcheAge());
+            // CAMBIO: Comprobar que el valor del ComboBox no sea nulo.
+            if (g.getMenstrualCycleRegularity() != null) {
+                cboxRythm.setValue(g.getMenstrualCycleRegularity());
+            }
+            spnIVSA.getValueFactory().setValue(g.getSexualActivityStartAge());
+            spnGestas.getValueFactory().setValue(g.getNumberOfPregnancies());
+            spnPartos.getValueFactory().setValue(g.getNumberOfBirths());
+            spnAbortos.getValueFactory().setValue(g.getNumberOfAbortions());
+            spnCesareas.getValueFactory().setValue(g.getNumberOfCesareanSections());
+            spnMacrosomicos.getValueFactory().setValue(g.getMacrosomicChildren());
+            spnBajoPeso.getValueFactory().setValue(g.getLowBirthWeightChildren());
+
+            dpickerFUM.setValue(g.getLastMenstrualPeriod());
+            dpickerLastDelivery.setValue(g.getLastDeliveryDate());
+            dpickerPAP.setValue(g.getLastPapSmearDate());
+
+            txtLUI.setText(g.getUterineCurettage());
+            txtPlanificacion.setText(g.getFamilyPlanningMethod());
+            txtTime.setText(g.getContraceptiveUsageDuration());
+        }
+
+        // --- Clinical interview table ---
+        // CAMBIO: Comprobar que la sección de entrevista no sea nula.
+        if (history.getPatientInterview() != null) {
+            PatientInterview pi = history.getPatientInterview();
+            txtOrgans.setText(pi.getReviewOfSystems());
+            txtGeneralSimptoms.setText(pi.getGeneralSimptoms());
+            txtHead.setText(pi.getHead());
+            txtNeck.setText(pi.getNeck());
+            txtThorax.setText(pi.getThorax());
+            txtAbdomen.setText(pi.getAbdomen());
+            txtVertebral.setText(pi.getBackbone());
+            txtGenitalia.setText(pi.getExternalGenitalia());
+            txtRectalTouch.setText(pi.getRectalTouch());
+            txtVaginalTouch.setText(pi.getVaginalTouch());
+            txtLimbs.setText(pi.getLimbs());
+        }
+
+        // --- Datos generales y vitales (en la entidad ClinicalHistory) ---
         txtCurrentCondition.setText(history.getCurrentCondition());
-        txtOrgans.setText(history.getPatientInterview().getReviewOfSystems());
-        txtGeneralSimptoms.setText(history.getPatientInterview().getGeneralSimptoms());
-
         spnWeight.getValueFactory().setValue(history.getWeight());
         spnHeight.getValueFactory().setValue(history.getHeight());
         spnIMC.getValueFactory().setValue(history.getBodyMassIndex());
@@ -393,39 +449,20 @@ public class ClinicalHistoryController {
         spnSpO2.getValueFactory().setValue(history.getOxygenSaturation());
         spnSystolic.getValueFactory().setValue(history.getSystolicBP());
         spnDiastolic.getValueFactory().setValue(history.getDiastolicBP());
-
         txtGeneralInspection.setText(history.getGeneralInspection());
-        txtHead.setText(history.getPatientInterview().getHead());
-        txtNeck.setText(history.getPatientInterview().getNeck());
-        txtThorax.setText(history.getPatientInterview().getThorax());
-        txtAbdomen.setText(history.getPatientInterview().getAbdomen());
-        txtVertebral.setText(history.getPatientInterview().getBackbone());
-        txtGenitalia.setText(history.getPatientInterview().getExternalGenitalia());
-        txtRectalTouch.setText(history.getPatientInterview().getRectalTouch());
-        txtVaginalTouch.setText(history.getPatientInterview().getVaginalTouch());
-        txtLimbs.setText(history.getPatientInterview().getLimbs());
-
         txtDiagnosticImpression.setText(history.getDiagnosticImpression());
         txtTreatment.setText(history.getTreatment());
         txtPrognosis.setText(history.getPrognosis());
+        toggleType.setSelected(history.getType() != null && history.getType());
 
-        toggleType.setSelected(history.getType());
-
-        // Set the date and time labels
+        // --- Rellenar etiquetas con datos del paciente y doctor (estos no deberían ser nulos) ---
         lblDate.setText(history.getTimestamp().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         lblHour.setText(history.getTimestamp().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-
-        // Set the patient information labels
-        lblPatientName.setText(history.getPatient().getName() +
-                " " + history.getPatient().getLastName() +
-                " " + history.getPatient().getSecondLastName());
-
+        lblPatientName.setText(String.format("%s %s %s", history.getPatient().getName(), history.getPatient().getLastName(), history.getPatient().getSecondLastName()));
         int ageInYears = history.getPatient().getBirthDate().until(LocalDate.now()).getYears();
         lblPatientAge.setText(String.valueOf(ageInYears));
-        lblPatientGender.setText(String.valueOf(history.getPatient().getGender()));
+        lblPatientGender.setText(history.getPatient().getGender().getDescription());
         lblAddress.setText(history.getPatient().getAddress());
-
-        // Set the doctor information labels
         lblDoctorName.setText(history.getDoctor().getName());
         lblLicense.setText(String.valueOf(history.getDoctor().getDoctorLicense()));
     }
@@ -598,4 +635,115 @@ public class ClinicalHistoryController {
         return result[0];
     }
 
+    /**
+     * Prepara el controlador y el formulario para crear una nueva historia clínica.
+     * Este método reinicia el estado del controlador para evitar la sobreescritura
+     * de registros existentes.
+     * @param patient El paciente al que se le creará la historia.
+     * @param doctor El doctor que la registra.
+     */
+    public void prepareForNewHistory(Patient patient, User doctor) {
+        // 1. Reinicia la variable de estado principal a null.
+        this.clinicalHistory = null;
+
+        // 2. Carga los datos del paciente y doctor en las etiquetas correspondientes.
+        setPatient(patient);
+        setDoctor(doctor);
+
+        // 3. Reinicia TODOS los campos del formulario a su estado por defecto.
+
+        // --- General ---
+        toggleType.setSelected(false);
+
+        // --- Hereditarios ---
+        txtDiabetes.clear();
+        txtHypertension.clear();
+        txtTB.clear();
+        txtNeoplasia.clear();
+        txtHeartDisease.clear();
+        txtBirthDisease.clear();
+        txtEndocrineDisorders.clear();
+        txtOtherHereditary.clear();
+
+        // --- No Patológicos ---
+        toggleMaritalStatus.selectToggle(null); // Deselecciona el grupo de botones
+        txtReligion.clear();
+        txtOcupation.clear();
+        cboxDirt.setSelected(false);
+        cboxCement.setSelected(false);
+        cboxBlock.setSelected(false);
+        cboxAdobe.setSelected(false);
+        cboxWood.setSelected(false);
+        cboxOtherWalls.setSelected(false);
+        cboxWater.setSelected(false);
+        cboxDrainage.setSelected(false);
+        cboxGas.setSelected(false);
+        cboxLenia.setSelected(false);
+        toggleVaccunation.setSelected(false);
+        cboxDrugs.setSelected(false);
+        cboxAlcoholism.setSelected(false);
+        cboxTabaquism.setSelected(false);
+
+        // --- Patológicos ---
+        txtSurgery.clear();
+        txtTraumatic.clear();
+        txtAllergic.clear();
+        txtTransfusion.clear();
+        txtCombe.clear();
+        txtHas.clear();
+        txtDM2.clear();
+        txtOtherPathological.clear();
+
+        // --- Ginecológicos ---
+        spnMenarche.getValueFactory().setValue(0);
+        spnIVSA.getValueFactory().setValue(0);
+        spnGestas.getValueFactory().setValue(0);
+        spnPartos.getValueFactory().setValue(0);
+        spnAbortos.getValueFactory().setValue(0);
+        spnCesareas.getValueFactory().setValue(0);
+        spnMacrosomicos.getValueFactory().setValue(0);
+        spnBajoPeso.getValueFactory().setValue(0);
+        dpickerFUM.clear();
+        dpickerLastDelivery.clear();
+        dpickerPAP.clear();
+        txtLUI.clear();
+        txtPlanificacion.clear();
+        txtTime.clear();
+        cboxRythm.clearSelection();
+
+        // --- Entrevista y Signos Vitales ---
+        txtCurrentCondition.clear();
+        txtOrgans.clear();
+        txtGeneralSimptoms.clear();
+        spnWeight.getValueFactory().setValue(0.0);
+        spnHeight.getValueFactory().setValue(1.65);
+        spnIMC.getValueFactory().setValue(0.0);
+        spnCefalico.getValueFactory().setValue(0.0);
+        spnAbdominal.getValueFactory().setValue(0.0);
+        spnHeartRate.getValueFactory().setValue(75);
+        // CORRECCIÓN: El valor por defecto para Frec. Respiratoria era muy alto. 18 es más realista.
+        spnRespiratoryRate.getValueFactory().setValue(18);
+        spnTemperature.getValueFactory().setValue(36.5);
+        spnGlucemia.getValueFactory().setValue(95.0);
+        spnSpO2.getValueFactory().setValue(95);
+        spnSystolic.getValueFactory().setValue(120);
+        spnDiastolic.getValueFactory().setValue(80);
+
+        // --- Inspección Física ---
+        txtGeneralInspection.clear();
+        txtHead.clear();
+        txtNeck.clear();
+        txtThorax.clear();
+        txtAbdomen.clear();
+        txtVertebral.clear();
+        txtGenitalia.clear();
+        txtRectalTouch.clear();
+        txtVaginalTouch.clear();
+        txtLimbs.clear();
+
+        // --- Diagnóstico y Plan ---
+        txtDiagnosticImpression.clear();
+        txtTreatment.clear();
+        txtPrognosis.clear();
+    }
 }

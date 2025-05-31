@@ -127,8 +127,8 @@ public class MainViewController {
     private String defaultThemePath; // Para tu DefaultTheme.css o styles.css (el que sea el tema claro principal)
     private String nightThemePath;
 
-    private final String lightThemeCss = getClass().getResource("/css/styles.css").toExternalForm();
-    private final String nightThemeCss = getClass().getResource("/css/mainview-night.css").toExternalForm();
+    private final String lightThemeCss = getClass().getResource("/css/mainview/styles.css").toExternalForm();
+    private final String nightThemeCss = getClass().getResource("/css/mainview/mainview-night.css").toExternalForm();
 
     @FXML
     public void initialize() {
@@ -139,7 +139,7 @@ public class MainViewController {
             // Asumimos que DefaultTheme.css es tu tema claro principal que se intercambia.
             // Si styles.css es el que define el tema claro, usa esa ruta.
             defaultThemePath = Objects.requireNonNull(getClass().getResource("/css/DefaultTheme.css"), "DefaultTheme.css no encontrado").toExternalForm();
-            nightThemePath = Objects.requireNonNull(getClass().getResource("/css/mainview-night.css"), "mainview-night.css no encontrado").toExternalForm();
+            nightThemePath = Objects.requireNonNull(getClass().getResource("/css/mainview/mainview-night.css"), "mainview-night.css no encontrado").toExternalForm();
 
             // Configuración del botón de cambio de tema (si existe)
             if (toggleDarkMode != null) {
@@ -724,8 +724,12 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
 
             ClinicalHistoryController historyController = fxmlLoader.getController();
-            historyController.setPatient(selectedPatient);
-            historyController.setDoctor(loggedUser);
+
+            // ---- CAMBIO CLAVE ----
+            // Se llama al método que prepara el controlador para una nueva entidad.
+            // Esto reinicia su estado y limpia todos los campos del formulario.
+            historyController.prepareForNewHistory(selectedPatient, loggedUser);
+            // ----------------------
 
             Stage historyStage = new Stage();
             historyStage.setTitle("Añadir Historia Clínica");
@@ -736,9 +740,8 @@ public class MainViewController {
             double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
             historyStage.setHeight(screenHeight);
 
-            // ⬇️ Añadir esto para refrescar después de cerrar
+            // Refrescar después de cerrar
             historyStage.setOnHidden(event2 -> {
-                // Refrescar la lista de documentos del paciente seleccionado
                 Patient currentSelectedPatient = lstPatients.getSelectionModel().getSelectedItem();
                 if (currentSelectedPatient != null) {
                     showPatientDetails(currentSelectedPatient);

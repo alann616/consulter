@@ -1,53 +1,468 @@
-/* === clinical-history.css === */
-/* Estilos Específicos para la Vista de Historia Clínica */
-/* ==================================================== */
-/* Asume que styles.css o dark-theme.css ya están cargados */
+@import "DefaultTheme.css";
 
-/* --- Estilos de Texto Específicos --- */
+.root {
+    -fx-background-color: white;
+}
+
+.vbox {
+    -fx-background-color: transparent;
+}
+
+
 .title-text {
-    -fx-font-family: "Rubik Medium", var(--font-main-medium); /* Fallback a variable */
+    -fx-font-family: "Rubik Medium";
     -fx-font-size: 10pt;
-    -fx-text-fill: var(--app-text-primary); /* Usa variable de tema */
+    -fx-text-fill: black;
 }
 .data-labels {
-    -fx-font-family: "Rubik Light", var(--font-main-light); /* Fallback a variable */
+    -fx-font-family: "Rubik Light";
     -fx-font-size: 10pt;
-    -fx-text-fill: var(--app-text-primary); /* Usa variable de tema */
+    -fx-text-fill: black;
 }
 
-/* --- Estilos de Layout Específicos --- */
-/* Si los VBox aquí necesitan un fondo distinto al global */
-/* .clinical-history-vbox {
-    -fx-background-color: var(...);
-} */
-
-/* Estilos específicos para TitledPane EN ESTA VISTA */
-/* Si quieres que aquí se vean diferentes a los de MainView */
-.clinical-history-pane.titled-pane {
-    -fx-border-color: var(--app-accent-primary); /* Borde de acento aquí? */
-    -fx-text-fill: var(--app-text-primary);
-    /* Podrías cambiar radios, paddings, etc. */
-}
-.clinical-history-pane.titled-pane > .title {
-    -fx-background-color: var(--app-accent-secondary); /* Fondo de acento? */
-}
-.clinical-history-pane.titled-pane > .title > .text {
-    -fx-font-family: "Rubik Medium", var(--font-main-medium);
+.titled-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Rubik Medium";
     -fx-font-size: 11pt;
-    -fx-fill: var(--app-text-primary); /* Ajusta si el fondo es oscuro/claro */
-}
-.clinical-history-pane.titled-pane > .content {
-    -fx-background-color: var(--app-surface-color);
-    -fx-padding: 15px; /* Padding específico */
+    -fx-text-fill: black;
 }
 
-/* --- Overrides de Componentes (SOLO si es necesario para esta vista) --- */
-/* Ejemplo: Si los MFXTextField aquí deben ser más pequeños */
-/* .clinical-history-content .mfx-text-field {
+.titled-pane .title {
+    -fx-background-color: #E8EAF6;
+}
+
+.titled-pane:expanded .content {
+    -fx-background-color: white;
+}
+
+.mfx-toggle-button {
+    -mfx-main: #3F51B5;
+    -mfx-secondary: #424242;
+    -fx-padding: 10;
+}
+
+.mfx-toggle-button .mfx-ripple-generator {
+    -mfx-animation-speed: 1.5;
+    -mfx-ripple-radius: 10;
+    -mfx-ripple-color: #3F51B5;
+    -mfx-ripple-opacity: 0.4;
+}
+
+.mfx-toggle-button .circle {
+    -fx-stroke: transparent;
+    -fx-fill: #424242;
+}
+
+.mfx-toggle-button .line {
+    -fx-stroke-line-cap: ROUND;
+    -fx-stroke: #424242;
+    -fx-opacity: 0.3;
+}
+
+.mfx-toggle-button:selected .mfx-ripple-generator {
+    -mfx-ripple-color: #424242;
+}
+
+.mfx-toggle-button:selected .circle {
+    -fx-fill: #3F51B5;
+}
+
+.mfx-toggle-button:selected .line {
+    -fx-stroke: #3F51B5;
+}
+
+.mfx-toggle-button:disabled .circle,
+.mfx-toggle-button:disabled:selected .circle {
+    -fx-fill: gray;
+}
+
+.mfx-toggle-button:disabled .line,
+.mfx-toggle-button:disabled:selected .line {
+    -fx-stroke: gray;
+}
+
+.mfx-text-field {
+    -mfx-main: #3F51B5;
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-family: "Rubik";
     -fx-font-size: 9pt;
-} */
+}
 
-/* Ejemplo: Si los botones personalizados aquí tienen otro aspecto */
-/* .clinical-history-content .personalized-button {
-     -fx-border-color: var(-otro-color);
-} */
+.mfx-text-field:readonly,
+.mfx-text-field:readonly .text-field {
+    -fx-cursor: default;
+}
+
+.mfx-text-field .text-field {
+    /* Selected text highlight */
+    -fx-highlight-fill: #ECE0FD;
+    /* Prompt text color */
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.60);
+}
+
+.mfx-text-field .text-field .text {
+    -fx-font-smoothing-type: lcd;
+}
+
+.mfx-text-field:focus-within {
+    -fx-background-insets: 2;
+    -fx-border-color: #3F51B5;
+    -fx-border-width: 1.5;
+    -fx-border-insets: -0.5;
+}
+
+.mfx-text-field .floating-text {
+    -fx-font-family: "Rubik Medium";
+    -fx-text-fill: black;
+}
+
+.mfx-text-field:floating .floating-text {
+    -fx-background-color: white;
+}
+
+.mfx-text-field:floating .text-field {
+    -fx-font-size: 10pt;
+    -fx-font-family: Rubik;
+    -fx-text-fill: black;
+}
+
+.mfx-text-field:focus-within .floating-text {
+    -fx-text-fill: #3F51B5;
+    -fx-font-family: "Rubik Medium";
+}
+
+/*.mfx-text-field .measure-unit {*/
+/*    -fx-font-family: "Lilita One";*/
+/*    -fx-text-fill: rgb(255, 0, 0);*/
+/*}*/
+
+.mfx-text-field .text-field {
+    -fx-text-box-border: transparent;
+    -fx-background-color: transparent;
+    -fx-backrgound-insets: 0;
+    -fx-padding: 0;
+}
+
+.mfx-text-field .text-field:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.mfx-scroll-pane {
+    -fx-background-color: white;
+    -track-color: rgb(230, 230, 230);
+    -thumb-color: rgb(137, 137, 137);
+    -thumb-hover-color: rgb(89, 88, 91);
+}
+
+/* Remove JavaFX crap */
+.mfx-scroll-pane:focused {
+    -fx-background-color: white;
+}
+
+.mfx-scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+
+.mfx-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.mfx-scroll-pane .scroll-bar,
+.mfx-scroll-pane .scroll-bar .decrement-arrow,
+.mfx-scroll-pane .scroll-bar .increment-arrow {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+.mfx-scroll-pane .scroll-bar:horizontal .increment-button,
+.mfx-scroll-pane .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0.0 0.0 10.0 0.0;
+}
+
+.mfx-scroll-pane .scroll-bar:vertical .increment-button,
+.mfx-scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0.0 10.0 0.0 0.0;
+}
+
+.mfx-scroll-pane .scroll-bar .increment-arrow,
+.mfx-scroll-pane .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0.15em 0.0;
+}
+
+.mfx-scroll-pane .scroll-bar:horizontal .increment-arrow,
+.mfx-scroll-pane .scroll-bar:horizontal .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0.0 0.05em;
+}
+
+.mfx-scroll-pane .scroll-bar:vertical .increment-arrow,
+.mfx-scroll-pane .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0.0 0.05em;
+}
+
+/* Customize ScrollBars */
+
+.mfx-scroll-pane .scroll-bar:horizontal .track {
+    -fx-background-color: -track-color;
+    -fx-border-color: transparent;
+    -fx-background-radius: 2.0em;
+    -fx-border-radius: 2.0em;
+    -fx-background-insets: 3;
+}
+
+.mfx-scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: -track-color;
+    -fx-border-color: transparent;
+    -fx-background-radius: 2.0em;
+    -fx-border-radius: 2.0em;
+    -fx-background-insets: 3;
+}
+
+.mfx-scroll-pane .scroll-bar .decrement-arrow,
+.mfx-scroll-pane .scroll-bar .increment-arrow {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+.mfx-scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12;
+    -fx-pref-height: 12;
+    -fx-padding: 5 0.5 5 0.5;
+}
+
+.mfx-scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12;
+    -fx-pref-height: 12;
+    -fx-padding: 0.5 5 0.5 5;
+}
+
+.mfx-scroll-pane .scroll-bar:horizontal .thumb,
+.mfx-scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: -thumb-color;
+    -fx-background-insets: 2.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+.mfx-scroll-pane .scroll-bar:horizontal .thumb:hover,
+.mfx-scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: -thumb-hover-color;
+    -fx-background-insets: 1.5, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+/* CHECKBOXES */
+.mfx-checkbox {
+    -mfx-main: #3F51B5;
+    -mfx-secondary: #424242;
+    -fx-font-family: "Rubik";
+    -fx-font-size: 9pt;
+    -fx-text-fill: black;
+}
+
+.mfx-checkbox .box {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2;
+    -fx-border-color: -mfx-secondary;
+    -fx-border-radius: 2;
+    -fx-border-width: 1.5;
+    -fx-padding: 2;
+}
+
+.mfx-checkbox .box .mark {
+    visibility: hidden;
+    -mfx-color: white;
+    -mfx-description: "fas-check";
+    -mfx-size: 12;
+}
+
+.mfx-checkbox .ripple-container {
+    -fx-padding: 4;
+}
+
+.mfx-checkbox .ripple-container .mfx-ripple-generator {
+    -mfx-animation-speed: 1.5;
+    -mfx-ripple-color: derive(-mfx-main, 110%);
+    -mfx-ripple-radius: 16;
+}
+
+.mfx-checkbox:selected .box,
+.mfx-checkbox:indeterminate .box {
+    -fx-background-color: -mfx-main;
+    -fx-border-color: -mfx-main;
+}
+
+.mfx-checkbox:selected .box .mark {
+    visibility: visible;
+}
+
+.mfx-checkbox:selected:disabled .box,
+.mfx-checkbox:indeterminate:disabled .box {
+    -fx-background-color: -mfx-secondary;
+    -fx-border-color: -mfx-secondary;
+}
+
+.mfx-checkbox:indeterminate .box .mark {
+    visibility: visible;
+    -mfx-description: "fas-minus";
+}
+
+/* Radio Button */
+.mfx-radio-button {
+    -mfx-main: #3F51B5;
+    -mfx-secondary: #424242;
+    -fx-font-family: "Rubik";
+    -fx-font-size: 9pt;
+    -fx-text-fill: black;
+    -fx-cursor: HAND;
+}
+
+.mfx-radio-button .radio {
+    -fx-stroke-width: 2.0;
+    -fx-fill: transparent;
+    -fx-stroke: -mfx-secondary;
+}
+
+.mfx-radio-button .dot {
+    -fx-fill: -mfx-main;
+}
+
+.mfx-radio-button .mfx-ripple-generator {
+    -mfx-animation-speed: 2;
+    -mfx-ripple-color: derive(-mfx-main, 110%);
+    -mfx-ripple-radius: 8;
+}
+
+.mfx-radio-button:selected .radio {
+    -fx-stroke: -mfx-main;
+}
+
+.mfx-radio-button:disabled:selected .radio {
+    -fx-stroke: -mfx-secondary;
+}
+
+.mfx-radio-button:disabled:selected .dot {
+    -fx-fill: -mfx-secondary;
+}
+
+.spinner {
+    -fx-focus-color: transparent;      /* Elimina el borde azul del foco */
+    -fx-faint-focus-color: transparent; /* Elimina el borde tenue del foco */
+    -fx-border-color: transparent;     /* Elimina el borde adicional */
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: transparent; /* Fondo transparente para los botones */
+    -fx-border-color: transparent;     /* Borde transparente para los botones */
+    -fx-focus-color: transparent;      /* Sin foco para los botones */
+    -fx-padding: 2px;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-border-color: transparent;    /* Borde transparente */
+    -fx-padding: 0;                   /* Sin relleno */
+    -fx-focus-color: transparent;     /* Elimina el borde al hacer foco */
+    -fx-faint-focus-color: transparent; /* Elimina el foco tenue */
+}
+
+.spinner .content {
+    -fx-text-fill: #000000; /* Color del texto */
+    -fx-font-size: 10px;    /* Tamaño del texto */
+    -fx-padding: 10;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-border-radius: 10px;
+}
+
+
+/* Estilo específico para cuando se guarda el PDF */
+.spinner.transparent-style {
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: transparent;
+}
+
+/* Oculta las flechitas (botones de subir y bajar) */
+.spinner.transparent-style .increment-arrow-button,
+.spinner.transparent-style .decrement-arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-opacity: 0;
+}
+
+/* Ajusta el cuadro de texto interno del Spinner */
+.spinner.transparent-style .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Elimina cualquier borde extra en el contenedor del spinner */
+.spinner.transparent-style .arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.mfx-button {
+    -fx-background-color: #3F51B5;
+    -fx-text-fill: white;
+    -fx-font-family: "Rubik Medium";
+    -fx-font-size: 10pt;
+}
+
+/* Buttons */
+.mfx-button {
+    -fx-font-family: "Rubik";
+    -fx-text-fill: white;
+}
+
+.mfx-button:armed,
+.mfx-button:hover,
+.mfx-button:focused,
+.mfx-button {
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0px;
+}
+
+.mfx-button,
+.mfx-button:armed,
+.mfx-button:focused {
+    -fx-background-color: #6673b6;
+}
+
+.personalized-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-border-color: #3f51b5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0.3, 0, 3);
+}
+
+.personalized-button:hover {
+    -fx-background-color: rgba(197, 202, 233, 0.8);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0.3, 0, 3);
+    -fx-cursor: hand;
+}
+
+.personalized-button:pressed {
+    -fx-background-color: #9fa8da;
+    -fx-effect: none;
+}

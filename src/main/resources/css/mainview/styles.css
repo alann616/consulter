@@ -1,12 +1,47 @@
-@import "DefaultTheme.css";
+@import "../DefaultTheme.css";
+@import "../clinical-history.css";
 
-/* FRAME PRINCIPAL */
+/*
+* Definicion de variables de color
+*/
+
 .root {
-    -fx-background-color: white;
+    -light-surface: #EFEDF4;
+    -light-surface-container: #E7E0E8;
+    -text-on-surface: #1B1B21;
 }
 
-.surface {
-    -fx-background-color: #FFFFFF;
+/* FRAME PRINCIPAL */
+
+.root {
+    -fx-background-color: -light-surface-container;
+}
+
+.headline-large {
+    -fx-text-fill: -text-on-surface;
+    -fx-font-family: "Noto Serif Display ExtraBold";
+    -fx-font-size: 22pt;
+    -fx-font-smoothing-type: LCD;
+}
+
+.title-small {
+    -fx-text-fill: -text-on-surface;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 22px;
+}
+
+.split-pane{
+    -fx-background-color: -light-surface;
+    -fx-background-radius: 10px 0 0 0;
+    -fx-border-radius: 10px 0 0 0;
+}
+
+.split-pane:horizontal .split-pane-divider {
+    -fx-background-color: red;
+}
+
+.split-pane:horizontal .split-pane-divider .horizontal-grabber {
+    -fx-color-label-visible: true;
 }
 
 .details-label {
@@ -47,26 +82,26 @@
     -fx-graphic-text-gap: 8;
 }
 
-.split-pane {
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: #cdcdcd;
-    -fx-border-radius: 10px 0 0 0;
-    -fx-background-radius: 10px 0 0 0;
-    -fx-padding: 0;
-}
+/*.split-pane {*/
+/*    -fx-background-color: #FFFFFF;*/
+/*    -fx-border-color: #cdcdcd;*/
+/*    -fx-border-radius: 10px 0 0 0;*/
+/*    -fx-background-radius: 10px 0 0 0;*/
+/*    -fx-padding: 0;*/
+/*}*/
 
-.split-pane-divider {
-    -fx-background-color: rgba(197, 202, 233, 0.4);
-    -fx-border-color: rgba(205, 205, 205, 0);
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-}
+/*.split-pane-divider {*/
+/*    -fx-background-color: rgba(197, 202, 233, 0.4);*/
+/*    -fx-border-color: rgba(205, 205, 205, 0);*/
+/*    -fx-border-radius: 10px;*/
+/*    -fx-background-radius: 10px;*/
+/*}*/
 
-.split-pane-divider:hover {
-    -fx-background-color: #b0bec5;
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
-}
+/*.split-pane-divider:hover {*/
+/*    -fx-background-color: #b0bec5;*/
+/*    -fx-background-radius: 0;*/
+/*    -fx-border-radius: 0;*/
+/*}*/
 
 .menu-button {
     -fx-background-color: transparent;
@@ -156,11 +191,11 @@
     -fx-font-size: 14px;
 }
 
-#lblUser {
-    -fx-font-family: "Nunito Black";
-    -fx-font-size: 18px;
-    -fx-text-fill: #1a2226;
-}
+/*#lblUser { juegos magisteriales deportivos y culturales*/
+/*    -fx-font-family: "Nunito Black";*/
+/*    -fx-font-size: 18px;*/
+/*    -fx-text-fill: #1a2226;*/
+/*}*/
 
 #txtSearch {
     -fx-background-color: rgba(255, 255, 255, 0);
