@@ -4,9 +4,7 @@ import com.alann616.consulter.model.doctordocs.EvolutionNote;
 import com.alann616.consulter.service.EvolutionNoteService;
 import com.alann616.consulter.service.PatientService;
 import com.alann616.consulter.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,9 +21,34 @@ public class EvolutionNoteResource {
         this.patientService = patientService;
     }
 
-
     @GetMapping("/all")
     public List<EvolutionNote> getAllEvolutionNotes() {
         return evolutionNoteService.getAllEvolutionNotes();
+    }
+
+    @GetMapping("/by-patient")
+    public List<EvolutionNote> getEvolutionNotesByPatient(Long patientId) {
+        return evolutionNoteService.getEvolutionNotesByPatientId(patientId);
+    }
+
+    @GetMapping("/{id}")
+    public EvolutionNote getEvolutionNoteById(@PathVariable Long id) {
+        return evolutionNoteService.getEvolutionNoteById(id);
+    }
+
+    @PostMapping("/create")
+    public EvolutionNote createEvolutionNote(EvolutionNote evolutionNote) {
+        return evolutionNoteService.saveEvolutionNote(evolutionNote);
+    }
+
+    @PutMapping("/update")
+    public EvolutionNote updateEvolutionNote(EvolutionNote evolutionNote) {
+        return evolutionNoteService.saveEvolutionNote(evolutionNote);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEvolutionNoteById(@PathVariable Long id) {
+        EvolutionNote note = evolutionNoteService.getEvolutionNoteById(id);
+        evolutionNoteService.deleteEvolutionNote(id);
     }
 }

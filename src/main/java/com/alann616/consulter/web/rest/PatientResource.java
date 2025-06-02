@@ -41,6 +41,7 @@ public class PatientResource {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PostMapping("/create")
     public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
         patient.setPatientId(null); // Asegurarse de que el ID sea nulo para la creación
         Patient savedPatient = patientService.savePatient(patient);
@@ -48,6 +49,7 @@ public class PatientResource {
         return new ResponseEntity<>(savedPatient, HttpStatus.CREATED);
     }
 
+    @PutMapping("/update/{id}")
     public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
         try {
             Patient existingPatient = patientService.getPatientByIdOrThrow(id);
@@ -68,7 +70,7 @@ public class PatientResource {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public  ResponseEntity<Void> deletePatient(@PathVariable Long id) {
         try {
             patientService.getPatientByIdOrThrow(id);

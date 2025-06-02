@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum DocumentType {
+    PRESCRIPTION("Receta"),
     CLINICAL_HISTORY("Historia Clínica"),
     EVOLUTION_NOTE("Nota de Evolución");
 
