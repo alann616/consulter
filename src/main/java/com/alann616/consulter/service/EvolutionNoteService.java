@@ -1,7 +1,12 @@
 package com.alann616.consulter.service;
 
+import com.alann616.consulter.dto.EvolutionNoteDTO;
+import com.alann616.consulter.model.Patient;
+import com.alann616.consulter.model.User;
 import com.alann616.consulter.model.doctordocs.EvolutionNote;
 import com.alann616.consulter.repository.EvolutionNoteRepository;
+import com.alann616.consulter.repository.PatientRepository; // <-- Import PatientRepository
+import com.alann616.consulter.repository.UserRepository; // <-- Import UserRepository
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,81 +16,78 @@ import java.util.List;
 
 @Service
 public class EvolutionNoteService {
-    EvolutionNoteRepository evolutionNoteRepository;
+    private final EvolutionNoteRepository evolutionNoteRepository;
+    private final PatientRepository patientRepository; // <-- Add PatientRepository
+    private final UserRepository userRepository; // <-- Add UserRepository
 
-    public EvolutionNoteService(EvolutionNoteRepository evolutionNoteRepository) {
+    // MODIFIED CONSTRUCTOR
+    public EvolutionNoteService(EvolutionNoteRepository evolutionNoteRepository,
+                                PatientRepository patientRepository,
+                                UserRepository userRepository) {
         this.evolutionNoteRepository = evolutionNoteRepository;
+        this.patientRepository = patientRepository;
+        this.userRepository = userRepository;
     }
 
-    /**
-     * Obtiene todas las notas de evolución.
-     * @return Lista de todas las notas de evolución.
-     */
-    public List<EvolutionNote> getAllEvolutionNotes() {
-        return evolutionNoteRepository.findAll();
-    }
+    // ... (Your existing methods like getAllEvolutionNotes, etc. remain the same) ...
+    public List<EvolutionNote> getAllEvolutionNotes() { return evolutionNoteRepository.findAll(); }
+    public List<EvolutionNote> getEvolutionNotesByPatientId(Long patientId) { return evolutionNoteRepository.findByPatientPatientId(patientId); }
+    public EvolutionNote getEvolutionNoteById(Long id) { return evolutionNoteRepository.findById(id).orElseThrow(() -> new RuntimeException("Note not found")); }
+    public void deleteEvolutionNote(Long id) { evolutionNoteRepository.deleteById(id); }
 
-    /**
-     * Obtiene todas las notas de evolución de un paciente específico.
-     * @param patientId ID del paciente.
-     * @return Lista de notas de evolución del paciente.
-     */
-    public List<EvolutionNote> getEvolutionNotesByPatientId(Long patientId) {
-        return evolutionNoteRepository.findByPatientPatientId(patientId);
-    }
 
-    /**
-     * Obtiene una nota de evolución por su ID.
-     * @param id ID de la nota de evolución.
-     * @return Nota de evolución encontrada.
-     * @throws RuntimeException si no se encuentra la nota de evolución.
-     */
-    public EvolutionNote getEvolutionNoteById(Long id) {
-        return evolutionNoteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Nota de evolución no encontrada con ID: " + id));
-    }
-
-    /**
-     * Guarda una nota de evolución nueva o actualiza una existente.
-     * Si la nota de evolución tiene un ID, se actualiza; si no, se crea una nueva.
-     * @param evolutionNote Nota de evolución a guardar.
-     * @return Nota de evolución guardada (con su ID si es nueva).
-     */
+    // NEW METHOD TO HANDLE THE DTO
     @Transactional
-    public EvolutionNote saveEvolutionNote(EvolutionNote evolutionNote) {
-        if (evolutionNote.getTimestamp() == null) { // Asegurar timestamp si no viene del cliente
-            evolutionNote.setTimestamp(LocalDateTime.now());
+    public EvolutionNote saveEvolutionNoteFromDTO(EvolutionNoteDTO dto) {
+        // 1. Fetch the related User and Patient objects from the database using the IDs
+        User doctor = userRepository.findById(dto.getDoctorLicense())
+                .orElseThrow(() -> new RuntimeException("Doctor not found with license: " + dto.getDoctorLicense()));
+
+        Patient patient = patientRepository.findById(dto.getPatientId())
+                .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + dto.getPatientId()));
+
+        // 2. Create a new EvolutionNote entity and map the fields from the DTO
+        EvolutionNote note = new EvolutionNote();
+        note.setDoctor(doctor); // Set the full object
+        note.setPatient(patient); // Set the full object
+
+        // Map all other fields from DTO to the entity
+        note.setWeight(dto.getWeight());
+        note.setHeight(dto.getHeight());
+        note.setBodyTemp(dto.getBodyTemp());
+        note.setOxygenSaturation(dto.getOxygenSaturation());
+        note.setHeartRate(dto.getHeartRate());
+        note.setSystolicBP(dto.getSystolicBP());
+        note.setDiastolicBP(dto.getDiastolicBP());
+        note.setTreatment(dto.getTreatment());
+        note.setDiagnosticImpression(dto.getDiagnosticImpression());
+        note.setInstructions(dto.getInstructions());
+        note.setRespiratoryRate(dto.getRespiratoryRate());
+        note.setCurrentCondition(dto.getCurrentCondition());
+        note.setGeneralInspection(dto.getGeneralInspection());
+        note.setPrognosis(dto.getPrognosis());
+        note.setTreatmentPlan(dto.getTreatmentPlan());
+        note.setLaboratoryResults(dto.getLaboratoryResults());
+        note.setDocumentType(dto.getDocumentType());
+
+        // Set the timestamp
+        if (dto.getTimestamp() == null) {
+            note.setTimestamp(LocalDateTime.now());
+        } else {
+            note.setTimestamp(dto.getTimestamp());
         }
-        // Si es una nueva nota (sin ID), o si el documentName no está seteado aún.
-        boolean isNew = evolutionNote.getDocumentId() == null;
 
-        EvolutionNote savedNote = evolutionNoteRepository.save(evolutionNote);
+        // 3. Save the fully constructed entity
+        EvolutionNote savedNote = evolutionNoteRepository.save(note);
 
-        if (isNew || savedNote.getDocumentName() == null || savedNote.getDocumentName().isEmpty()) {
-            // Generar documentName después del primer guardado para tener el ID
-            String documentName = String.format("NotaEvolucion_%d_%s_%s_%s",
-                    savedNote.getDocumentId(),
-                    savedNote.getTimestamp().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")),
-                    savedNote.getPatient().getName().replaceAll("\\s+", ""),
-                    savedNote.getPatient().getLastName().replaceAll("\\s+", "")
-            );
-            savedNote.setDocumentName(documentName);
-            return evolutionNoteRepository.save(savedNote); // Guardar de nuevo con el nombre
-        }
-        return savedNote; // Si es actualización y ya tiene nombre, solo devuelve la nota guardada.
-    }
+        // Generate and set the document name after saving to get the ID
+        String documentName = String.format("NotaEvolucion_%d_%s",
+                savedNote.getDocumentId(),
+                savedNote.getTimestamp().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"))
+        );
+        savedNote.setDocumentName(documentName);
 
-    /**
-     * Elimina una nota de evolución por su ID.
-     * @param id ID de la nota de evolución a eliminar.
-     */
-    public void deleteEvolutionNote(Long id) {
-        if (!evolutionNoteRepository.existsById(id)) {
-            throw new RuntimeException("Nota de evolución no encontrada con ID: " + id);
-        }
-
-        evolutionNoteRepository.deleteById(id);
-        System.out.println("Nota de evolución eliminada con ID: " + id);
+        // Save again to update the document name
+        return evolutionNoteRepository.save(savedNote);
     }
 }
-

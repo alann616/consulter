@@ -1,5 +1,6 @@
 package com.alann616.consulter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -18,6 +19,7 @@ public abstract class Document {
 
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
+    @JsonIgnoreProperties({"evolutionNotes", "clinicalHistories"})
     private Patient patient;
 
     @Column(name = "document_name")

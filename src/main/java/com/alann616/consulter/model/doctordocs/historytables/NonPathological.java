@@ -1,6 +1,7 @@
 package com.alann616.consulter.model.doctordocs.historytables;
 
 import com.alann616.consulter.model.doctordocs.ClinicalHistory;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -54,6 +55,7 @@ public class NonPathological {
 
     @ToString.Exclude
     @OneToOne(mappedBy = "nonPathological")
+    @JsonBackReference
     private ClinicalHistory clinicalHistory;
 
     @Column(name = "timestamp", columnDefinition = "TIMESTAMP")

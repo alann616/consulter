@@ -1,9 +1,8 @@
 package com.alann616.consulter.web.rest;
 
+import com.alann616.consulter.dto.EvolutionNoteDTO; // <-- Import the DTO
 import com.alann616.consulter.model.doctordocs.EvolutionNote;
 import com.alann616.consulter.service.EvolutionNoteService;
-import com.alann616.consulter.service.PatientService;
-import com.alann616.consulter.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,22 +11,19 @@ import java.util.List;
 @RequestMapping("/api/evolution-notes")
 public class EvolutionNoteResource {
     private final EvolutionNoteService evolutionNoteService;
-    private final UserService userService;
-    private final PatientService patientService;
 
-    public EvolutionNoteResource(EvolutionNoteService evolutionNoteService, UserService userService, PatientService patientService) {
+    public EvolutionNoteResource(EvolutionNoteService evolutionNoteService) {
         this.evolutionNoteService = evolutionNoteService;
-        this.userService = userService;
-        this.patientService = patientService;
     }
 
+    // ... (Your GET and DELETE methods remain the same) ...
     @GetMapping("/all")
     public List<EvolutionNote> getAllEvolutionNotes() {
         return evolutionNoteService.getAllEvolutionNotes();
     }
 
     @GetMapping("/by-patient")
-    public List<EvolutionNote> getEvolutionNotesByPatient(Long patientId) {
+    public List<EvolutionNote> getEvolutionNotesByPatient(@RequestParam Long patientId) {
         return evolutionNoteService.getEvolutionNotesByPatientId(patientId);
     }
 
@@ -36,19 +32,21 @@ public class EvolutionNoteResource {
         return evolutionNoteService.getEvolutionNoteById(id);
     }
 
+
+    // MODIFIED METHOD
     @PostMapping("/create")
-    public EvolutionNote createEvolutionNote(EvolutionNote evolutionNote) {
-        return evolutionNoteService.saveEvolutionNote(evolutionNote);
+    public EvolutionNote createEvolutionNote(@RequestBody EvolutionNoteDTO noteDTO) { // <-- Use the DTO
+        return evolutionNoteService.saveEvolutionNoteFromDTO(noteDTO); // <-- Call a new service method
     }
 
+    // It's good practice to have a separate DTO for updates too, but for now this will work.
     @PutMapping("/update")
-    public EvolutionNote updateEvolutionNote(EvolutionNote evolutionNote) {
-        return evolutionNoteService.saveEvolutionNote(evolutionNote);
+    public EvolutionNote updateEvolutionNote(@RequestBody EvolutionNoteDTO noteDTO) {
+        return evolutionNoteService.saveEvolutionNoteFromDTO(noteDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteEvolutionNoteById(@PathVariable Long id) {
-        EvolutionNote note = evolutionNoteService.getEvolutionNoteById(id);
         evolutionNoteService.deleteEvolutionNote(id);
     }
 }

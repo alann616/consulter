@@ -6,10 +6,12 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Year;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class PatientService {
     private final PatientRepository patientRepository;
 
@@ -56,6 +58,10 @@ public class PatientService {
     @Transactional
     @CacheEvict(value = "patients", allEntries = true)
     public Patient savePatient(Patient patient) {
+        // Si es un paciente nuevo (no tiene ID de la BD), le generamos su publicId.
+        if (patient.getPatientId() == null) {
+            patient.setPublicId(generateNextPublicId());
+        }
         return patientRepository.save(patient);
     }
 
@@ -72,5 +78,27 @@ public class PatientService {
 
         patientRepository.deleteById(id);
         System.out.println("Paciente eliminado con ID: " + id);
+    }
+
+    /**
+     * Genera el siguiente ID de paciente en el formato PAC-AÑO-000001.
+     * @return El siguiente ID público disponible.
+     */
+    private String generateNextPublicId() {
+        int year = Year.now().getValue();
+        String pattern = "PAC-" + year + "-%";
+        Optional<String> lastPublicIdOpt = patientRepository.findTopByPublicIdStartingWithOrderByPublicIdDesc(pattern);
+
+        int nextSequence = 1;
+        if (lastPublicIdOpt.isPresent()) {
+            String lastId = lastPublicIdOpt.get();
+            // Extraemos el número de secuencia del ID (ej: de "PAC-2025-000001" extraemos "000001")
+            String sequenceStr = lastId.substring(lastId.lastIndexOf('-') + 1);
+            int lastSequence = Integer.parseInt(sequenceStr);
+            nextSequence = lastSequence + 1;
+        }
+
+        // Formateamos el nuevo número de secuencia a 6 dígitos con ceros a la izquierda.
+        return String.format("PAC-%d-%06d", year, nextSequence);
     }
 }

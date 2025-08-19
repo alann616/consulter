@@ -41,12 +41,23 @@ public class PatientResource {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
     @PostMapping("/create")
     public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
-        patient.setPatientId(null); // Asegurarse de que el ID sea nulo para la creación
+        // Asegurarse de que el ID sea nulo para la creación.
+        patient.setPatientId(null);
+
+        // 1. Se guarda el paciente. El objeto 'savedPatient' podría no tener
+        // los valores generados por la BD como 'createdAt'.
         Patient savedPatient = patientService.savePatient(patient);
 
-        return new ResponseEntity<>(savedPatient, HttpStatus.CREATED);
+        // --- CORRECCIÓN DEFINITIVA ---
+        // 2. Volvemos a solicitar el paciente desde la base de datos usando su nuevo ID
+        // para asegurarnos de que tenemos todos los datos actualizados, incluyendo 'createdAt'.
+        Patient freshPatient = patientService.getPatientByIdOrThrow(savedPatient.getPatientId());
+
+        // 3. Devolvemos el objeto "fresco" y completo.
+        return new ResponseEntity<>(freshPatient, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
